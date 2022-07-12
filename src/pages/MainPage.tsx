@@ -1,8 +1,12 @@
 import React from 'react'
+import Navigation from '../components/Navigation';
 
 const MainPage = () => {
   return (
-    <div>MainPage</div>
+    <div
+      className='ld:container mx-auto bg-black h-screen'>
+      <Navigation />
+    </div>
   )
 }
 
