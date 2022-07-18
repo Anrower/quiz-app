@@ -5,8 +5,6 @@ const rootReducer = combineReducers({
   settings: settingsReducer
 })
 
-export function setupStore() {
-  return configureStore({
-    reducer: rootReducer
-  })
-}
+export const store = configureStore({
+  reducer: rootReducer
+})

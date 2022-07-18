@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Navigation = () => {
@@ -9,8 +8,8 @@ const Navigation = () => {
           Logo
         </p>
         <div className='flex gap-2 h-50px text-lg text-slate-50'>
-          <Link to="auth">Auth</Link>
-          <Link to="setting">Setting</Link>
+          {/* <Link to="auth">Auth</Link> */}
+          <Link className='' to="setting">Setting</Link>
         </div>
       </nav>
     </div>
