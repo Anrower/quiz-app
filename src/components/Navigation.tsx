@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom'
+import './navigation.css'
 
-const Navigation = () => {
+interface NavProps {
+  context: 'mainPage' | 'categoriesPage' | 'settingPage',
+}
+
+const Navigation = (props: NavProps) => {
+  const { context } = props;
   return (
     <div>
-      <nav className='flex justify-between px-5 h-[50px] items-center'>
-        <p className='text-lgtext-slate-50'>
-          Logo
-        </p>
-        <div className='flex gap-2 h-50px text-lg text-slate-50'>
-          {/* <Link to="auth">Auth</Link> */}
-          <Link className='' to="setting">Setting</Link>
+      <nav className='flex justify-between p-5 h-100 items-center'>
+        <div className='logo' />
+        <div className='flex gap-2 text-lg text-slate-50'>
+          {context === ('mainPage' || 'categoriesPage') ?
+            <Link className='settings_icon' to='setting'></Link> :
+            <Link className='close' to='/'></Link>
+          }
         </div>
       </nav>
     </div>

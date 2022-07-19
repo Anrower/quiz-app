@@ -9,8 +9,8 @@ import SettingPage from './pages/SettingPage';
 function App() {
   return (
     <div className='bg-black mx-auto'>
-      <div className="max-w-7xl mx-auto">
-        <Routes >
+      <div className="max-w-7xl mx-auto min-h-screen">
+        <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/auth' element={<AuthPage />} />
           <Route path='/setting' element={<SettingPage />} />

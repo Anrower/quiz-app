@@ -1,6 +1,6 @@
 export interface ISetting {
-  id: number,
-  volume: number | boolean,
-  timeGame: boolean,
+  volumeRange: string,
+  volumeToggle: boolean,
+  gameTimerToggle: boolean,
   timeAnswer: number
 }
