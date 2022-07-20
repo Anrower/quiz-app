@@ -5,12 +5,16 @@ import VolumeRange from "../components/ui/VolumeRange";
 import GameTimeSwitcher from "../components/ui/GameTimeSwitcher";
 import './settingPage.css'
 import { RootState } from "../store";
-import { updateVolumeRange, updateVolumeSwitch } from "../store/slices/settingSlice";
+import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer, updateTimerSwitch } from "../store/slices/settingSlice";
+import PrimaryBtn from "../components/ui/PrimaryBtn";
+
 
 const SettingPage = () => {
 
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const isVolumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
+  const isTimeSwitcherValue = useSelector<RootState, boolean>((state) => state.settings.setting.gameTimerOff);
+  const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswer);
 
   const [isActiveSoundBtn, setisActiveSoundBtn] = useState(isVolumeOffValue)
   const textStyle = 'text-3xl text-white font-bold';
@@ -26,6 +30,16 @@ const SettingPage = () => {
     setisActiveSoundBtn(false)
     dispatch(updateVolumeSwitch(isActiveSoundBtn));
     dispatch(updateVolumeRange('40'));
+  }
+
+  const plusTimeHandler = () => {
+    console.log('add 5')
+    dispatch(increaseTimeAnswer())
+  }
+
+  const minusTimeHandler = () => {
+    console.log('remove 5')
+    dispatch(decreaseTimeAnswer())
   }
 
   return (
@@ -63,13 +77,19 @@ const SettingPage = () => {
           <div className="flex gap-4 items-center">
             <GameTimeSwitcher />
           </div>
-
         </div>
         <div className="timeToAnswer flex flex-col gap-4">
           <p className={textStyle}>Time to answer:</p>
           <div className="flex gap-4 items-center">
             <div className='flex gap-6'>
-              <span className='text-2xl text-white'>value</span>
+              <PrimaryBtn title='-'
+                classes={'round_btn '}
+                onClick={minusTimeHandler}
+              />
+              <span className='text-2xl text-white'>{timeAnswerValue}s</span>
+              <PrimaryBtn title='+'
+                classes={'round_btn '}
+                onClick={plusTimeHandler} />
             </div>
           </div>
 

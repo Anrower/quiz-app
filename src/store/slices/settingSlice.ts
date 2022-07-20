@@ -25,11 +25,13 @@ export const settingSlice = createSlice({
       state.setting.volumeOff = action.payload;
     },
     updateTimerSwitch(state, action: PayloadAction<boolean>) {
-
       state.setting.gameTimerOff = action.payload
     },
-    updateTimeAnswer(state, action: PayloadAction<number>) {
-      state.setting.timeAnswer = action.payload
+    increaseTimeAnswer(state) {
+      state.setting.timeAnswer = state.setting.timeAnswer + 5
+    },
+    decreaseTimeAnswer(state) {
+      state.setting.timeAnswer = state.setting.timeAnswer - 5
     },
   }
 })
@@ -39,5 +41,6 @@ export const {
   updateVolumeRange,
   updateVolumeSwitch,
   updateTimerSwitch,
-  updateTimeAnswer
+  increaseTimeAnswer,
+  decreaseTimeAnswer
 } = settingSlice.actions
