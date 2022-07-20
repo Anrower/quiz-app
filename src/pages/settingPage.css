@@ -20,9 +20,18 @@
   transition: all 0.25s ease;
 }
 
+.sound-btn_active {
+  background: #1976d2;
+}
+
 .sound_on:hover,
 .sound_off:hover {
   background: white;
+}
+
+.sound_on:active,
+.sound_off:active {
+  background: #1976d2;
 }
 
 /*? Rounded Slider*/

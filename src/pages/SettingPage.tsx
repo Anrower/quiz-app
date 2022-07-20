@@ -1,20 +1,39 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../components/Navigation"
 import ColorSlider from "../components/ui/VolumeRange";
 import './settingPage.css'
 import { RootState } from "../store";
-import { updateVolumeRange } from "../store/slices/settingSlice";
+import { updateVolumeRange, updateVolumeOff } from "../store/slices/settingSlice";
 
 const SettingPage = () => {
+  const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const volumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
 
+  const [activeSoundOffBtn, setActiveSoundOffBtn] = useState(volumeOffValue)
+  const [volumeRange, setVolumeRange] = useState(volumeRangeValue);
 
-  const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange)
   const textStyle = 'text-3xl text-white font-bold';
 
   const dispatch = useDispatch();
 
   const volumeValueHandler = (volume: string) => {
-    dispatch(updateVolumeRange(volume))
+    setVolumeRange(volume);
+    dispatch(updateVolumeRange(volumeRange));
+  }
+
+  const soundOffHandler = () => {
+    setActiveSoundOffBtn(true)
+    dispatch(updateVolumeOff(activeSoundOffBtn));
+    setVolumeRange('0');
+    dispatch(updateVolumeRange(volumeRange));
+  }
+
+  const soundOnHandler = () => {
+    setActiveSoundOffBtn(false)
+    dispatch(updateVolumeOff(activeSoundOffBtn));
+    setVolumeRange('40');
+    dispatch(updateVolumeRange(volumeRange));
   }
 
   return (
@@ -24,13 +43,27 @@ const SettingPage = () => {
         <div className="volume flex flex-col gap-4">
           <label>
             <span className={textStyle}>Volume:</span>
-            <span className='text-2xl text-white ml-4 text-center'>{volumeRangeValue}
+            <span className='text-2xl text-white ml-4 text-center'>
+              {volumeRange}
             </span>
-            <ColorSlider defaultValue={volumeRangeValue} onChange={volumeValueHandler} />
+            <ColorSlider value={volumeRange} onChange={volumeValueHandler} />
           </label>
           <div className="flex justify-between">
-            <input className="sound_off" type='button'></input>
-            <input className="sound_on" type='button'></input>
+            <input
+              className={
+                `sound_off ${activeSoundOffBtn ?
+                  'sound-btn_active ' :
+                  ''}`
+              }
+              type='button'
+              onClick={soundOffHandler}></input>
+            <input className={
+              `sound_off ${activeSoundOffBtn ?
+                '' :
+                'sound-btn_active'}`
+            }
+              type='button'
+              onClick={soundOnHandler}></input>
           </div>
         </div>
         <div className="time flex flex-col gap-4">
@@ -54,7 +87,7 @@ const SettingPage = () => {
 
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

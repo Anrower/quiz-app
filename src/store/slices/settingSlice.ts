@@ -7,8 +7,8 @@ interface SettingState {
 const initialState: SettingState = {
   setting: {
     volumeRange: '40',
-    volumeToggle: true,
-    gameTimerToggle: true,
+    volumeOff: false,
+    gameTimerOff: false,
     timeAnswer: 20
   }
 }
@@ -20,11 +20,11 @@ export const settingSlice = createSlice({
     updateVolumeRange(state, action: PayloadAction<string>) {
       state.setting.volumeRange = action.payload
     },
-    updateVolumeToggle(state, action: PayloadAction<boolean>) {
-      state.setting.volumeToggle = action.payload
+    updateVolumeOff(state, action: PayloadAction<boolean>) {
+      state.setting.volumeOff = action.payload;
     },
     toggleGameTimer(state, action: PayloadAction<boolean>) {
-      state.setting.gameTimerToggle = action.payload
+      state.setting.gameTimerOff = action.payload
     },
     updateTimeAnswer(state, action: PayloadAction<number>) {
       state.setting.timeAnswer = action.payload
@@ -35,7 +35,7 @@ export const settingSlice = createSlice({
 export default settingSlice.reducer
 export const {
   updateVolumeRange,
-  updateVolumeToggle,
+  updateVolumeOff,
   toggleGameTimer,
   updateTimeAnswer
 } = settingSlice.actions
