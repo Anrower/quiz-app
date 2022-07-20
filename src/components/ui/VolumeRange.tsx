@@ -1,27 +1,28 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
-interface Iprops {
-  value: string,
-  onChange: (volume: string) => void,
-}
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
+import { updateVolumeRange } from '../../store/slices/settingSlice'
 
 function valuetext(value: number) {
   return `${value}`;
 }
 
-export default function ColorSlider(props: Iprops) {
+export default function VolumeRange() {
 
-  const { value, onChange } = props
+  const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const dispatch = useDispatch();
+
   return (
     <Box sx={{ width: 500 }}>
       <Slider
-        value={Number(value)}
+        value={Number(volumeRangeValue)}
         aria-label="Volume"
-        defaultValue={Number(value)}
+        defaultValue={Number(volumeRangeValue)}
         getAriaValueText={valuetext}
         color="primary"
-        onChange={(e) => onChange((e.target as HTMLTextAreaElement).value)}
+        onChange={(e) => dispatch(updateVolumeRange((e.target as HTMLTextAreaElement).value))}
       />
     </Box>
   );

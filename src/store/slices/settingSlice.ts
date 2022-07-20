@@ -18,12 +18,14 @@ export const settingSlice = createSlice({
   initialState,
   reducers: {
     updateVolumeRange(state, action: PayloadAction<string>) {
+      console.log(action.payload)
       state.setting.volumeRange = action.payload
     },
-    updateVolumeOff(state, action: PayloadAction<boolean>) {
+    updateVolumeSwitch(state, action: PayloadAction<boolean>) {
       state.setting.volumeOff = action.payload;
     },
-    toggleGameTimer(state, action: PayloadAction<boolean>) {
+    updateTimerSwitch(state, action: PayloadAction<boolean>) {
+
       state.setting.gameTimerOff = action.payload
     },
     updateTimeAnswer(state, action: PayloadAction<number>) {
@@ -35,7 +37,7 @@ export const settingSlice = createSlice({
 export default settingSlice.reducer
 export const {
   updateVolumeRange,
-  updateVolumeOff,
-  toggleGameTimer,
+  updateVolumeSwitch,
+  updateTimerSwitch,
   updateTimeAnswer
 } = settingSlice.actions

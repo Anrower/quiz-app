@@ -1,39 +1,31 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../components/Navigation"
-import ColorSlider from "../components/ui/VolumeRange";
+import VolumeRange from "../components/ui/VolumeRange";
+import GameTimeSwitcher from "../components/ui/GameTimeSwitcher";
 import './settingPage.css'
 import { RootState } from "../store";
-import { updateVolumeRange, updateVolumeOff } from "../store/slices/settingSlice";
+import { updateVolumeRange, updateVolumeSwitch } from "../store/slices/settingSlice";
 
 const SettingPage = () => {
+
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
-  const volumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
+  const isVolumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
 
-  const [activeSoundOffBtn, setActiveSoundOffBtn] = useState(volumeOffValue)
-  const [volumeRange, setVolumeRange] = useState(volumeRangeValue);
-
+  const [isActiveSoundBtn, setisActiveSoundBtn] = useState(isVolumeOffValue)
   const textStyle = 'text-3xl text-white font-bold';
-
   const dispatch = useDispatch();
 
-  const volumeValueHandler = (volume: string) => {
-    setVolumeRange(volume);
-    dispatch(updateVolumeRange(volumeRange));
-  }
-
   const soundOffHandler = () => {
-    setActiveSoundOffBtn(true)
-    dispatch(updateVolumeOff(activeSoundOffBtn));
-    setVolumeRange('0');
-    dispatch(updateVolumeRange(volumeRange));
+    setisActiveSoundBtn(true)
+    dispatch(updateVolumeSwitch(isActiveSoundBtn));
+    dispatch(updateVolumeRange('0'));
   }
 
   const soundOnHandler = () => {
-    setActiveSoundOffBtn(false)
-    dispatch(updateVolumeOff(activeSoundOffBtn));
-    setVolumeRange('40');
-    dispatch(updateVolumeRange(volumeRange));
+    setisActiveSoundBtn(false)
+    dispatch(updateVolumeSwitch(isActiveSoundBtn));
+    dispatch(updateVolumeRange('40'));
   }
 
   return (
@@ -44,21 +36,21 @@ const SettingPage = () => {
           <label>
             <span className={textStyle}>Volume:</span>
             <span className='text-2xl text-white ml-4 text-center'>
-              {volumeRange}
+              {volumeRangeValue}
             </span>
-            <ColorSlider value={volumeRange} onChange={volumeValueHandler} />
+            <VolumeRange />
           </label>
           <div className="flex justify-between">
             <input
               className={
-                `sound_off ${activeSoundOffBtn ?
+                `sound_off ${isActiveSoundBtn ?
                   'sound-btn_active ' :
                   ''}`
               }
               type='button'
               onClick={soundOffHandler}></input>
             <input className={
-              `sound_off ${activeSoundOffBtn ?
+              `sound_on ${isActiveSoundBtn ?
                 '' :
                 'sound-btn_active'}`
             }
@@ -69,11 +61,7 @@ const SettingPage = () => {
         <div className="time flex flex-col gap-4">
           <p className={textStyle}>Time game:</p>
           <div className="flex gap-4 items-center">
-            <p className='text-2xl text-white'>value</p>
-            <label className='switch flex flex-col'>
-              <input type="checkbox" />
-              <span className="slider round"></span>
-            </label>
+            <GameTimeSwitcher />
           </div>
 
         </div>
