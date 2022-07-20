@@ -33,12 +33,10 @@ const SettingPage = () => {
   }
 
   const plusTimeHandler = () => {
-    console.log('add 5')
     dispatch(increaseTimeAnswer())
   }
 
   const minusTimeHandler = () => {
-    console.log('remove 5')
     dispatch(decreaseTimeAnswer())
   }
 

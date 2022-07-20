@@ -18,7 +18,6 @@ export const settingSlice = createSlice({
   initialState,
   reducers: {
     updateVolumeRange(state, action: PayloadAction<string>) {
-      console.log(action.payload)
       state.setting.volumeRange = action.payload
     },
     updateVolumeSwitch(state, action: PayloadAction<boolean>) {

@@ -32,3 +32,30 @@
   transition: all .2s ease;
   margin: 0 1rem;
 }
+
+.home,
+.categoriesPage {
+  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.125rem;
+  color: rgba(159, 159, 159, 1);
+  transition: all .2s ease;
+}
+
+.categoriesPage {
+  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.125rem;
+  color: #1976d2;
+  transition: all .2s ease;
+}
+
+.home:hover,
+.categoriesPage:hover {
+  color: #fff;
+}
+
+.home:active,
+.categoriesPage:active {
+  color: #1976d2;
+}

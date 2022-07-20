@@ -4,6 +4,7 @@ import AuthPage from './pages/AuthPage';
 import GamePage from './pages/GamePage';
 import MainPage from './pages/MainPage';
 import SettingPage from './pages/SettingPage';
+import CategoriesPage from './pages/CategoriesPage';
 
 
 function App() {
@@ -12,9 +13,10 @@ function App() {
       <div className="max-w-7xl mx-auto min-h-screen">
         <Routes>
           <Route path='/' element={<MainPage />} />
-          <Route path='/auth' element={<AuthPage />} />
-          <Route path='/setting' element={<SettingPage />} />
-          <Route path='/game' element={<GamePage />} />
+          <Route path='categories' element={<CategoriesPage />} />
+          <Route path='auth' element={<AuthPage />} />
+          <Route path='setting' element={<SettingPage />} />
+          <Route path='game' element={<GamePage />} />
         </Routes>
       </div>
 

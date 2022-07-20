@@ -12,7 +12,7 @@ const MainPage = () => {
       <h1 className='font-bold text-9xl leading-normal text-white text-center mt-60
       '>Art Quiz</h1>
       <div className='flex items-center mx-auto justify-center mt-40'>
-        <Link to='game'>
+        <Link to='categories'>
           <PrimaryBtn title='Start Quiz' classes={''} />
         </Link>
       </div>
