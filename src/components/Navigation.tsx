@@ -1,12 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './navigation.css'
-
 interface NavProps {
   context: 'mainPage' | 'categoriesPage' | 'settingPage',
 }
 
 const Navigation = (props: NavProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { context } = props;
   return (
@@ -15,17 +14,14 @@ const Navigation = (props: NavProps) => {
         <div className='logo' />
         <div className='flex gap-10 items-center'>
           {(context === 'mainPage') ?
-            <Link className='settings_icon' to='setting' /> :
+            <NavLink className='settings_icon' to='/setting' /> :
             (context === 'categoriesPage') ?
               <>
-                <Link className='categoriesPage' to='' >Categories</Link>
-                {navigate('/categoriesPage')}
-                <Link className='home' to='/' >Home</Link>
-                {navigate('/')}
-                <Link className='settings_icon' to='' />
-                {navigate('/setting')}
+                <NavLink className='categoriesPage' to='/categories' >Categories</NavLink>
+                <NavLink className='home' to='/' >Home</NavLink>
+                <NavLink className='settings_icon' to='/setting' />
               </> :
-              <Link className='close' to='/' />
+              <NavLink className='close' to='/' />
           }
         </div>
       </nav>

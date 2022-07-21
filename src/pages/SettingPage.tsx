@@ -5,7 +5,7 @@ import VolumeRange from "../components/ui/VolumeRange";
 import GameTimeSwitcher from "../components/ui/GameTimeSwitcher";
 import './settingPage.css'
 import { RootState } from "../store";
-import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer, updateTimerSwitch } from "../store/slices/settingSlice";
+import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer } from "../store/slices/settingSlice";
 import PrimaryBtn from "../components/ui/PrimaryBtn";
 
 
@@ -13,7 +13,6 @@ const SettingPage = () => {
 
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const isVolumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
-  const isTimeSwitcherValue = useSelector<RootState, boolean>((state) => state.settings.setting.gameTimerOff);
   const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswer);
 
   const [isActiveSoundBtn, setisActiveSoundBtn] = useState(isVolumeOffValue)
@@ -37,6 +36,9 @@ const SettingPage = () => {
   }
 
   const minusTimeHandler = () => {
+    if (timeAnswerValue <= 0) {
+      return
+    }
     dispatch(decreaseTimeAnswer())
   }
 
@@ -60,7 +62,8 @@ const SettingPage = () => {
                   ''}`
               }
               type='button'
-              onClick={soundOffHandler}></input>
+              onClick={soundOffHandler}>
+            </input>
             <input className={
               `sound_on ${isActiveSoundBtn ?
                 '' :

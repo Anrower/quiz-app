@@ -1,4 +1,4 @@
-import './primary_btn.css';
+import './primaryBtn.css';
 
 interface buttonProps {
   title: string,

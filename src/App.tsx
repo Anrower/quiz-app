@@ -12,14 +12,13 @@ function App() {
     <div className='bg-black mx-auto'>
       <div className="max-w-7xl mx-auto min-h-screen">
         <Routes>
-          <Route path='/' element={<MainPage />} />
-          <Route path='categories' element={<CategoriesPage />} />
-          <Route path='auth' element={<AuthPage />} />
+          <Route path='/' element={<MainPage />}></Route>
           <Route path='setting' element={<SettingPage />} />
-          <Route path='game' element={<GamePage />} />
+          <Route path='categories' element={<CategoriesPage />}></Route>
+          <Route path='auth' element={<AuthPage />} />
+          <Route path='game' element={<GamePage />} ></Route>
         </Routes>
       </div>
-
     </div>
 
   );

@@ -4,3 +4,7 @@ export interface ISetting {
   gameTimerOff: boolean,
   timeAnswer: number
 }
+
+export interface Igenre {
+  activeGenre: string,
+}
