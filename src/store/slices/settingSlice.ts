@@ -9,7 +9,7 @@ const initialState: SettingState = {
     volumeRange: '40',
     volumeOff: false,
     gameTimerOff: false,
-    timeAnswer: 20
+    timeAnswer: 40
   }
 }
 

@@ -1,0 +1,45 @@
+.timer {
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.timer_line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 712px;
+  height: 6px;
+  background-color: gray;
+  border-radius: 4px;
+}
+
+.current_time {
+  width: 0%;
+  height: 6px;
+  background-color: blue;
+  border-radius: 4px;
+  animation-name: fillingLine;
+  animation-timing-function: linear;
+  animation-fill-mode: forward;
+}
+
+@keyframes fillingLine {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.timer_seconds>span {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 28px;
+  text-align: center;
+  color: #FFFFFF;
+}

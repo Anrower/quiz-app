@@ -8,3 +8,7 @@ export interface ISetting {
 export interface Igenre {
   activeGenre: string,
 }
+
+export interface Itimer {
+  timerActive: boolean
+}

@@ -16,7 +16,7 @@ function App() {
           <Route path='setting' element={<SettingPage />} />
           <Route path='categories' element={<CategoriesPage />}></Route>
           <Route path='auth' element={<AuthPage />} />
-          <Route path='game' element={<GamePage />} ></Route>
+          <Route path='/categories/game' element={<GamePage />} ></Route>
         </Routes>
       </div>
     </div>

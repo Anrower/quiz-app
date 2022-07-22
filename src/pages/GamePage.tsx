@@ -1,8 +1,13 @@
-import React from 'react'
+import Timer from '../components/ui/Timer'
+import './gamePage.css'
 
 const GamePage = () => {
   return (
-    <div>GamePage</div>
+    <div className='game'>
+      {/* <Timer /> */}
+      {/* <Question> */}
+      <Timer />
+    </div>
   )
 }
 
