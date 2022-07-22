@@ -8,6 +8,9 @@ import artist from '../../images/pictures/artist.jpg'
 import nude from '../../images/pictures/107.jpg'
 import surrealism from '../../images/pictures/108.jpg'
 
+// const getImage = async (val: string) => {
+//   return import(`../../images/pictures/${val}.jpg`)
+// };
 
 interface Iprops {
   title: string,
@@ -34,6 +37,7 @@ const getImg = (value: string) => {
 export default function CategoriesCard(props: Iprops) {
   const dispatch = useDispatch();
   const { title } = props
+  const img = getImg(title);
   return (
     //
     <NavLink to='game' onClick={() => dispatch(updateActiveGenre(title))} >
@@ -44,7 +48,7 @@ export default function CategoriesCard(props: Iprops) {
             <span>0</span>/<span>10</span>
           </p>
         </div>
-        <img className='card_image' src={getImg(title)} alt={title} />
+        <img className='card_image' src={img} alt={title} />
       </div>
     </ NavLink>
   );

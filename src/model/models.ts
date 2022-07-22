@@ -12,3 +12,10 @@ export interface Igenre {
 export interface Itimer {
   timerActive: boolean
 }
+
+export interface pictureJsonType {
+  author: string,
+  name: string,
+  year: string,
+  imageNum: string
+}
