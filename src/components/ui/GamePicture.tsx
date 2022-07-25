@@ -1,13 +1,14 @@
-import portrait from '../../images/pictures/4.jpg'
 import './gamePicture.css'
-
-
-
-const GamePicture = () => {
-
-  return (
-    <img className='game_picture' src={portrait} alt="portrait" />
-  )
+interface Iprops {
+  path: string,
+  alt: string
 }
 
-export default GamePicture
+export const Image = (props: Iprops) => {
+
+  const { path, alt } = props
+
+  return (
+    <img className='game_picture' src={require(`../../images/pictures/${path}.jpg`)} alt={alt} />
+  );
+};

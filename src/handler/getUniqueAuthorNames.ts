@@ -12,23 +12,42 @@ export const getAuthorsNames = () => {
   return getUniqueAuthorNames(data);
 }
 
-// export const getArrayData = () => {
-//   const dataTransform = (json: pictureJsonType[]) => {
-//     return json
-//   }
-//   return dataTransform(data)
-// }
-
-export const getRandomAuthor = () => {
-  const getRandomAuthorName = (arr: Array<string>) => {
-    const max = arr.length;
+export const getRandomData = () => {
+  const dataTransform = (json: pictureJsonType[]) => {
+    const max = data.length;
     const randomValue = Math.floor(Math.random() * max)
-    return arr[randomValue];
+    return json[randomValue];
   }
-  return getRandomAuthorName(getAuthorsNames())
+  return dataTransform(data)
 }
 
-export const getfilterByAuthorName = () => {
+export const getRandomAuthor = () => {
+  const getRandomAuthorName = (obj: pictureJsonType) => {
+    return obj.author
+  }
+  return getRandomAuthorName(getRandomData())
+}
+
+export const get4UniqAuthor = () => {
+
+  const createUniqAuthorArr = (authors: string[]) => {
+    let copy = [...authors]
+    let arr = []
+    while (arr.length < 4) {
+      const randomnumber = Math.floor(Math.random() * copy.length)
+      let removed = copy.splice(randomnumber, 1);
+      arr.push(...removed)
+    }
+    return arr;
+  }
+  return createUniqAuthorArr(getAuthorsNames())
+}
+
+// const readyArray = [45, 12, 54, 23];
+// readyArray.splice(4, 0, 60); // first argument it's index place
+// readyArray
+
+export const getfilterByAuthorName = (author: string) => {
   const filterByAuthorName = (author: string, data: pictureJsonType[]) => {
     let result = []
     for (let i = 0; i < data.length; i++) {
@@ -38,7 +57,7 @@ export const getfilterByAuthorName = () => {
     }
     return result
   }
-  return filterByAuthorName(getRandomAuthor(), data)
+  return filterByAuthorName(author, data)
 }
 
 export const getAllPictureByAuthor = () => {

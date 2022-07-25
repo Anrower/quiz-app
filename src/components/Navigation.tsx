@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './navigation.css'
 interface NavProps {
   context: 'mainPage' | 'categoriesPage' | 'settingPage',

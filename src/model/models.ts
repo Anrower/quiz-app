@@ -19,3 +19,8 @@ export interface pictureJsonType {
   year: string,
   imageNum: string
 }
+
+export interface IGamge {
+  author: string,
+  isCorrectAnswer: boolean,
+}

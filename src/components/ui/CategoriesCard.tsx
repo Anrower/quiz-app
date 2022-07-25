@@ -8,10 +8,6 @@ import artist from '../../images/pictures/artist.jpg'
 import nude from '../../images/pictures/107.jpg'
 import surrealism from '../../images/pictures/108.jpg'
 
-// const getImage = async (val: string) => {
-//   return import(`../../images/pictures/${val}.jpg`)
-// };
-
 interface Iprops {
   title: string,
   onClick?: () => void,
