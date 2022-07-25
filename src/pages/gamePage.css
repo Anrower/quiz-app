@@ -2,6 +2,8 @@
   max-width: 826px;
   margin: 0 auto;
   height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 .game_question {

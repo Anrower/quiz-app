@@ -1,8 +1,9 @@
 import './primaryBtn.css';
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { RootState } from "../../store";
 import { updateAuthor, updateCorrectAnswer } from "../../store/slices/gameSlice"
-
+import PopUp from '../../components/ui/popUp/PopUp';
 interface buttonProps {
   title: string,
   // classes: string,
@@ -12,6 +13,8 @@ interface buttonProps {
 
 const AnswerBtn = (props: buttonProps) => {
 
+  const [open, setOpen] = useState(false);
+
   const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.author);
   const dispatch = useDispatch()
 
@@ -20,9 +23,11 @@ const AnswerBtn = (props: buttonProps) => {
       console.log('You are right')
       dispatch(updateAuthor(''))
       dispatch(updateCorrectAnswer(true))
+      setOpen(!open)
     } else {
       console.log('Sorry you are wrong')
       dispatch(updateAuthor(''))
+      setOpen(!open)
     }
   }
 
@@ -30,11 +35,16 @@ const AnswerBtn = (props: buttonProps) => {
   const defaultClasses: string = 'default_btn answer_btn '
 
   return (
-    <button
-      className={defaultClasses}
-      onClick={() => checkAnswer(title)}>
-      {title}
-    </button >
+    <>
+      {!open ?
+        <button
+          className={defaultClasses}
+          onClick={() => checkAnswer(title)}>
+          {title}
+        </button > :
+        <PopUp />}
+    </>
+
   )
 }
 
