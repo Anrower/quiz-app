@@ -20,7 +20,12 @@ export interface pictureJsonType {
   imageNum: string
 }
 
+
 export interface IGamge {
   author: string,
   isCorrectAnswer: boolean,
+  answerBtns: string[],
+  correctInfo: pictureJsonType,
+  round: number,
+  popUpIsOpen: boolean,
 }

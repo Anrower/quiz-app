@@ -1,33 +1,36 @@
+import { useState } from 'react';
 import './primaryBtn.css';
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import { RootState } from "../../store";
-import { updateAuthor, updateCorrectAnswer } from "../../store/slices/gameSlice"
 import PopUp from '../../components/ui/popUp/PopUp';
+import { togglePopup } from '../../store/slices/gameSlice';
+import { toggleTimerActive } from "../../store/slices/timerSlice";
 interface buttonProps {
   title: string,
-  // classes: string,
-  // onClick?: () => ReactComponentElement,
 }
 
 
 const AnswerBtn = (props: buttonProps) => {
 
-  const [open, setOpen] = useState(false);
-
-  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.author);
   const dispatch = useDispatch()
+
+  const [isWrong, setIsWrong] = useState(false)
+
+  const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
+  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.author);
+
 
   const checkAnswer = (title: string) => {
     if (title === rightAnswerValue) {
       console.log('You are right')
-      dispatch(updateAuthor(''))
-      dispatch(updateCorrectAnswer(true))
-      setOpen(!open)
+      dispatch(toggleTimerActive(false))
+      dispatch(togglePopup(true))
     } else {
       console.log('Sorry you are wrong')
-      dispatch(updateAuthor(''))
-      setOpen(!open)
+      setIsWrong(true)
+      dispatch(toggleTimerActive(false))
+
+      dispatch(togglePopup(true))
     }
   }
 
@@ -36,13 +39,13 @@ const AnswerBtn = (props: buttonProps) => {
 
   return (
     <>
-      {!open ?
+      {!popUpIsOpen ?
         <button
           className={defaultClasses}
           onClick={() => checkAnswer(title)}>
           {title}
         </button > :
-        <PopUp />}
+        <PopUp isWrong={isWrong} />}
     </>
 
   )

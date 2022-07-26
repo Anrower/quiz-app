@@ -17,10 +17,11 @@
 .game_picture_wrapper {
   position: relative;
   margin-top: 44px;
-  background-color: white;
+  background-color: #000;
   width: 825px;
   height: 498px;
   z-index: 2;
+  border-radius: 20px;
 }
 
 .right-answer_tab {

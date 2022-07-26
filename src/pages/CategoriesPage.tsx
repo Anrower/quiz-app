@@ -14,7 +14,7 @@ const CategoriesPage = () => {
         <div className='categories_cards'>
           {categoriesArr.map(jenre => {
             return (
-              <CategoriesCard title={jenre} />
+              <CategoriesCard title={jenre} key={jenre} />
             )
           })}
         </div>

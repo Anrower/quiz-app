@@ -9,10 +9,64 @@
 }
 
 .pop-up_body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: top;
   position: absolute;
   width: 522px;
   height: 689px;
-  top: 120px;
-  left: 350px;
+  top: 10%;
+  left: calc((100vw - 522px)/2);
   background-color: white;
+  border-radius: 20px;
+}
+
+.pop-up_image_wrapper {
+  position: relative;
+  width: 462px;
+  height: 416px;
+  border-radius: 20px;
+  margin: 30px auto;
+}
+
+.pop-up_answer-indicator {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  left: 10px;
+  bottom: 5px;
+  background-repeat: no-repeat;
+}
+
+.pop-up_wrong-answer {
+  background-image: url(../../../images/ui_styles/Wrong_answer.svg);
+}
+
+.pop-up_right-answer {
+  background-image: url(../../../images/ui_styles/Right_answer.svg);
+}
+
+.pop-up_image-name {
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  text-align: center;
+  color: #010101;
+}
+
+.pop-up_image-info {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: center;
+  color: #010101;
+}
+
+.pop-up_btn-wrapper {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
 }

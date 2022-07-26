@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IGamge } from './../../model/models';
+import { IGamge, pictureJsonType } from './../../model/models';
 
 interface GameState {
   game: IGamge
@@ -7,8 +7,17 @@ interface GameState {
 
 const initialState: GameState = {
   game: {
+    round: 1,
     author: '',
     isCorrectAnswer: false,
+    answerBtns: ['', '', '', ''],
+    correctInfo: {
+      author: '',
+      name: '',
+      year: '',
+      imageNum: ''
+    },
+    popUpIsOpen: false,
   }
 }
 
@@ -21,12 +30,26 @@ export const gameSlice = createSlice({
     },
     updateCorrectAnswer(state, action: PayloadAction<boolean>) {
       state.game.isCorrectAnswer = action.payload
-    }
-
+    },
+    updateAnswerBtns(state, action: PayloadAction<string[]>) {
+      state.game.answerBtns = action.payload
+    },
+    updateCorrectInfo(state, action: PayloadAction<pictureJsonType>) {
+      state.game.correctInfo = { ...action.payload }
+    },
+    nextRound(state) {
+      state.game.round += 1
+    },
+    resetRound(state, action: PayloadAction<number>) {
+      state.game.round = action.payload
+    },
+    togglePopup(state, action: PayloadAction<boolean>) {
+      state.game.popUpIsOpen = action.payload
+    },
   }
 })
 
 export default gameSlice.reducer
 export const {
-  updateAuthor, updateCorrectAnswer
+  updateAuthor, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, togglePopup
 } = gameSlice.actions

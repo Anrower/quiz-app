@@ -33,3 +33,18 @@
 .answer_btn {
   width: 400px;
 }
+
+.pop-up_btn {
+  color: #000;
+
+  background-color: rgb(59 130 246 / 0.5);
+}
+
+.pop-up_btn:hover {
+  background-color: gray;
+}
+
+.pop-up_btn:active {
+  background-color: #000;
+  color: #fff;
+}
