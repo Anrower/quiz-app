@@ -9,9 +9,9 @@ const initialState: SettingState = {
     volumeRange: '40',
     volumeOff: false,
     showTimer: true,
-    timeAnswerSec: 20,
+    timeAnswerSec: 40,
     timerActive: true,
-    timerCurrentSec: 20,
+    timerCurrentSec: 40,
   }
 }
 
@@ -27,12 +27,15 @@ export const settingSlice = createSlice({
     },
     updateTimerSwitch(state, action: PayloadAction<boolean>) {
       state.setting.showTimer = action.payload
+
     },
     increaseTimeAnswer(state) {
       state.setting.timeAnswerSec = state.setting.timeAnswerSec + 5
+      state.setting.timerCurrentSec += 5
     },
     decreaseTimeAnswer(state) {
       state.setting.timeAnswerSec = state.setting.timeAnswerSec - 5
+      state.setting.timerCurrentSec -= 5
     },
     toggleTimerActive(state, action: PayloadAction<boolean>) {
       state.setting.timerActive = action.payload

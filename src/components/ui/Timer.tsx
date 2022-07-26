@@ -15,7 +15,6 @@ export default function Timer() {
   const timerActive = useSelector<RootState, boolean>((state) => state.settings.setting.timerActive);
   const timerCurrentSec = useSelector<RootState, number>((state) => state.settings.setting.timerCurrentSec);
 
-
   React.useEffect(() => {
     const updateTimer = () => {
       dispatch(decrementTimerCurrentSec())
