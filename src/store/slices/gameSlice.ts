@@ -30,6 +30,7 @@ export const gameSlice = createSlice({
     },
     updateCorrectAnswer(state, action: PayloadAction<boolean>) {
       state.game.isCorrectAnswer = action.payload
+      state.game.popUpIsOpen = true
     },
     updateAnswerBtns(state, action: PayloadAction<string[]>) {
       state.game.answerBtns = action.payload
@@ -43,7 +44,7 @@ export const gameSlice = createSlice({
     resetRound(state, action: PayloadAction<number>) {
       state.game.round = action.payload
     },
-    togglePopup(state, action: PayloadAction<boolean>) {
+    openPopup(state, action: PayloadAction<boolean>) {
       state.game.popUpIsOpen = action.payload
     },
   }
@@ -51,5 +52,5 @@ export const gameSlice = createSlice({
 
 export default gameSlice.reducer
 export const {
-  updateAuthor, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, togglePopup
+  updateAuthor, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup
 } = gameSlice.actions

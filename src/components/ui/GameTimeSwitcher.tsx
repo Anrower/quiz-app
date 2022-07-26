@@ -8,7 +8,7 @@ import { updateTimerSwitch } from '../../store/slices/settingSlice'
 
 export default function ControlledSwitches() {
 
-  const isGameTimeOff = useSelector<RootState, boolean>((state) => state.settings.setting.gameTimerOff);
+  const showTimer = useSelector<RootState, boolean>((state) => state.settings.setting.showTimer);
   const dispatch = useDispatch();
 
   return (
@@ -19,7 +19,7 @@ export default function ControlledSwitches() {
         }
       }}
       color={'primary'}
-      checked={isGameTimeOff}
+      checked={showTimer}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         dispatch(updateTimerSwitch(e.target.checked))
       }

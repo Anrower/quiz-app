@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAuthor, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound } from '../store/slices/gameSlice';
 import { RootState } from "../store";
 import './gamePage.css'
+import '../components/navigation.css'
 import { get4UniqAuthor, getfilterByAuthorName } from '../handler/getUniqueAuthorNames';
 import AnswerBtn from '../components/ui/AnswerBtn';
+import { dividerClasses } from '@mui/material';
 
 
 
@@ -32,11 +34,16 @@ const GamePage = () => {
   const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
   const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
   const answerBtns = useSelector<RootState, string[]>((state) => state.game.game.answerBtns);
+  const showTimer = useSelector<RootState, boolean>((state) => state.settings.setting.showTimer);
 
   // newGameSession()
   return (
     <div className='game'>
-      <Timer />
+      {
+        showTimer ?
+          <Timer /> :
+          <div className='timer_plug close'></div>
+      }
       <h3 className='game_question'>Who is the author of this picture?</h3>
       <div className='game_picture_wrapper'>
         <Image path={image} alt={pictureName} />

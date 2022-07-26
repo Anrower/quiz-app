@@ -13,7 +13,7 @@ const SettingPage = () => {
 
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const isVolumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
-  const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswer);
+  const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
 
   const [isActiveSoundBtn, setisActiveSoundBtn] = useState(isVolumeOffValue)
   const textStyle = 'text-3xl text-white font-bold';
