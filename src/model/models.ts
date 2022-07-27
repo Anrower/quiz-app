@@ -20,10 +20,12 @@ export interface pictureJsonType {
 
 
 export interface IGamge {
+  roundTab: number[],
   author: string,
   isCorrectAnswer: boolean,
   answerBtns: string[],
   correctInfo: pictureJsonType,
   round: number,
   popUpIsOpen: boolean,
+  timerAnimation: 'running' | 'paused'
 }

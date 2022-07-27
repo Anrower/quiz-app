@@ -24,7 +24,7 @@
   border-radius: 20px;
 }
 
-.right-answer_tab {
+.answer_tabs {
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -41,7 +41,7 @@
   background-color: gray;
 }
 
-.answered_tab {
+.right_answered_tab {
   background-color: #1976d2;
 }
 

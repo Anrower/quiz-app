@@ -3,8 +3,8 @@ import { Image } from '../GamePicture'
 import PrimaryBtn from '../PrimaryBtn'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-
-
+import { nextRound } from '../../../store/slices/gameSlice';
+import { openPopup } from '../../../store/slices/gameSlice';
 
 
 const PopUp = () => {
@@ -19,6 +19,10 @@ const PopUp = () => {
   const wrongStyle = 'pop-up_answer-indicator  pop-up_wrong-answer'
   const rightStyle = 'pop-up_answer-indicator pop-up_right-answer'
 
+  const clickHandler = () => {
+    dispatch(openPopup(false))
+    dispatch(nextRound())
+  }
 
   return (
     <div className='pop-up'>
@@ -32,7 +36,7 @@ const PopUp = () => {
             <span>{year}</span>
           </p>
           <div className='pop-up_btn-wrapper'>
-            <PrimaryBtn title='Next' classes='pop-up_btn' />
+            <PrimaryBtn title='Next' classes='pop-up_btn' onClick={clickHandler} />
           </div>
         </div>
       </div>
