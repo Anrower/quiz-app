@@ -3,13 +3,13 @@ import { Image } from '../GamePicture'
 import PrimaryBtn from '../PrimaryBtn'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { nextRound } from '../../../store/slices/gameSlice';
-import { openPopup } from '../../../store/slices/gameSlice';
-
+import { nextRound, openPopup, updateTimerAnimation } from '../../../store/slices/gameSlice';
+import { toggleTimerActive, updateTimerCurrentSec } from '../../../store/slices/settingSlice';
 
 const PopUp = () => {
   const dispatch = useDispatch()
 
+  const timerAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
   const imageNum = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
   const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
   const author = useSelector<RootState, string>((state) => state.game.game.correctInfo.author);
@@ -21,6 +21,9 @@ const PopUp = () => {
 
   const clickHandler = () => {
     dispatch(openPopup(false))
+    dispatch(updateTimerCurrentSec(timerAnswerValue))
+    dispatch(updateTimerAnimation('running'))
+    dispatch(toggleTimerActive(true))
     dispatch(nextRound())
   }
 

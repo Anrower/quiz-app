@@ -4,7 +4,7 @@ import '../navigation.css'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { toggleTimerActive, decrementTimerCurrentSec } from "../../store/slices/settingSlice";
-import { updateTimerAnimation, openPopup } from "../../store/slices/gameSlice";
+import { updateTimerAnimation, updateCorrectAnswer, openPopup } from "../../store/slices/gameSlice";
 // import { useCheckAnswer } from "../../handler/handler"
 
 export default function Timer() {
@@ -17,15 +17,22 @@ export default function Timer() {
   const isTimerAnimation = useSelector<RootState, string>((state) => state.game.game.timerAnimation);
   const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
 
+
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
     const updateTimer = () => {
       dispatch(decrementTimerCurrentSec())
     }
     if (timerCurrentSec > 0 && timerActive) {
-      setTimeout(updateTimer, 1000);
+      timer = setTimeout(updateTimer, 1000);
     } else {
       dispatch(updateTimerAnimation('paused'))
       dispatch(toggleTimerActive(false))
+      dispatch(updateCorrectAnswer(false))
+      dispatch(openPopup(true))
+    }
+    return () => {
+      clearTimeout(timer)
     }
   }, [dispatch, timerActive, timerCurrentSec, popUpIsOpen]);
 

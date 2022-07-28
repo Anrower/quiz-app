@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { Image } from '../components/ui/GamePicture';
 import Timer from '../components/ui/Timer'
 import { useDispatch, useSelector } from "react-redux";
-import { updateAuthor, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup, updateTimerAnimation } from '../store/slices/gameSlice';
-import { toggleTimerActive, updateTimerCurrentSec } from "../store/slices/settingSlice"
+import { updateAuthor, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup } from '../store/slices/gameSlice';
+import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
 import './gamePage.css'
 import '../components/navigation.css'
@@ -17,21 +17,6 @@ const GamePage = () => {
   const tab_btn = 'tab_btn';
   const answered_tab = tab_btn + ' right_answered_tab';
 
-  useEffect(() => {
-    //!Получаем 4 кнопки с именами авторов и диспатчим кнопки ответов
-    const tempArrBtn = [...get4UniqAuthor()]
-    dispatch(updateAnswerBtns(tempArrBtn))
-
-    const ranVal = Math.floor(Math.random() * tempArrBtn.length)
-    //!Выбираем рандомного автора в качестве правильного ответа и диспатчим данные 
-    const tempDataByAuthor = getfilterByAuthorName(tempArrBtn[ranVal])
-    const correctAnwser = tempDataByAuthor[0].author
-    const correctData = tempDataByAuthor[0];
-
-    dispatch(updateAuthor(correctAnwser))
-    dispatch(updateCorrectInfo(correctData))
-  }, [dispatch])
-
   const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
   const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
   const answerBtns = useSelector<RootState, string[]>((state) => state.game.game.answerBtns);
@@ -40,15 +25,10 @@ const GamePage = () => {
   const round = useSelector<RootState, number>((state) => state.game.game.round);
   const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.author);
   const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
-  const timerAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
 
   useEffect(() => {
-    if (round > 1) {
-
-      dispatch(updateTimerCurrentSec(timerAnswerValue))
-      dispatch(updateTimerAnimation('running'))
-      dispatch(toggleTimerActive(true))
-
+    if (round) {
+      //!Получаем 4 кнопки с именами авторов и диспатчим кнопки ответов
       const tempArrBtn = [...get4UniqAuthor()]
       dispatch(updateAnswerBtns(tempArrBtn))
 
@@ -61,8 +41,7 @@ const GamePage = () => {
       dispatch(updateAuthor(correctAnwser))
       dispatch(updateCorrectInfo(correctData))
     }
-  }, [round, dispatch, timerAnswerValue])
-
+  }, [dispatch, round])
 
   const checkAnswer = (answer: string | null) => {
     dispatch(toggleTimerActive(false));
