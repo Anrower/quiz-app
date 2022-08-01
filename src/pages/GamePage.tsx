@@ -7,11 +7,27 @@ import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
 import './gamePage.css'
 import '../components/navigation.css'
-import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear } from '../handler/handler';
+import Audio from 'ts-audio';
+import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear }
+  from '../handler/handler';
 import AnswerBtn from '../components/ui/AnswerBtn';
 import PopUp from '../components/ui/popUp/PopUp';
-
+import wrongMusic from '../sounds/wrong.mp3'
+import rightMusic from '../sounds/right.mp3'
 const GamePage = () => {
+
+  const wrongSound = Audio({
+    file: wrongMusic,
+    loop: false,
+    volume: 0.6,
+  });
+
+  const rightSound = Audio({
+    file: rightMusic,
+    loop: false,
+    volume: 0.6,
+  })
+
 
   const dispatch = useDispatch();
   const tab_btn = 'tab_btn';
@@ -64,8 +80,10 @@ const GamePage = () => {
     dispatch(toggleTimerActive(false));
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
+      rightSound.play()
     } else {
       dispatch(updateCorrectAnswer(false));
+      wrongSound.play();
     }
     dispatch(openPopup(true));
   }
