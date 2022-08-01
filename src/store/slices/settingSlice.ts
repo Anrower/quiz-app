@@ -9,9 +9,9 @@ const initialState: SettingState = {
     volumeRange: '40',
     volumeOff: false,
     showTimer: true,
-    timeAnswerSec: 15,
+    timeAnswerSec: 100,
     timerActive: true,
-    timerCurrentSec: 15,
+    timerCurrentSec: 100,
   }
 }
 

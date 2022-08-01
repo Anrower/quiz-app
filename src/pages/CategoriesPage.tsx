@@ -5,7 +5,7 @@ import CategoriesCard from '../components/ui/CategoriesCard';
 
 const CategoriesPage = () => {
 
-  const categoriesArr = ['Portrait', 'Landscape', 'Artist', 'Nude', 'Surrealism']
+  const categoriesArr = ['artist', 'year',]
 
   return (
     <div className="categories">

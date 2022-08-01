@@ -7,7 +7,11 @@ interface GenreState {
 
 const initialState: GenreState = {
   genre: {
-    activeGenre: '',
+    activeGenre: 'artist',
+    genreStat: {
+      artist: 0,
+      year: 0,
+    }
   }
 }
 
@@ -17,11 +21,14 @@ export const genreSlice = createSlice({
   reducers: {
     updateActiveGenre(state, action: PayloadAction<string>) {
       state.genre.activeGenre = action.payload
-    }
+    },
+    updateGenreStat(state, action: PayloadAction<object>) {
+      state.genre.genreStat = action.payload
+    },
   }
 })
 
 export default genreSlice.reducer
 export const {
-  updateActiveGenre
+  updateActiveGenre, updateGenreStat
 } = genreSlice.actions

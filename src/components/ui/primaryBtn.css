@@ -25,9 +25,7 @@
 }
 
 .default_btn:active {
-  background-color: rgb(59 130 246 / 0.5);
-  color: #fff;
-  border: rgb(59 130 246 / 0.5);
+  background: #FFBCA2;
 }
 
 .answer_btn {
@@ -35,16 +33,26 @@
 }
 
 .pop-up_btn {
+  border: 1px solid #000;
   color: #000;
-
-  background-color: rgb(59 130 246 / 0.5);
 }
 
 .pop-up_btn:hover {
-  background-color: gray;
+  background-color: #000;
+  color: #fff;
 }
 
 .pop-up_btn:active {
-  background-color: #000;
-  color: #fff;
+  border: none;
+  background: #FFBCA2;
+  color: #000;
+}
+
+.pop-up_btn_active {
+  border: none;
+  background: #FFBCA2;
+}
+
+.pop-up_btn-short {
+  width: 210px;
 }

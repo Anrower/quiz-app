@@ -17,8 +17,8 @@ const Navigation = (props: NavProps) => {
             <NavLink className='settings_icon' to='/setting' /> :
             (context === 'categoriesPage') ?
               <>
-                <NavLink className='categoriesPage' to='/categories' >Categories</NavLink>
-                <NavLink className='home' to='/' >Home</NavLink>
+                <NavLink className='categoriesPage' to='/categories' >Категории</NavLink>
+                <NavLink className='home' to='/' >Домой</NavLink>
                 <NavLink className='settings_icon' to='/setting' />
               </> :
               <NavLink className='close' to='/' />

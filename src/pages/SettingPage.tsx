@@ -48,7 +48,7 @@ const SettingPage = () => {
       <div className='flex flex-col mt-32 ml-28 max-w-lg gap-20'>
         <div className="volume flex flex-col gap-4">
           <label>
-            <span className={textStyle}>Volume:</span>
+            <span className={textStyle}>Звук:</span>
             <span className='text-2xl text-white ml-4 text-center'>
               {volumeRangeValue}
             </span>
@@ -74,13 +74,13 @@ const SettingPage = () => {
           </div>
         </div>
         <div className="time flex flex-col gap-4">
-          <p className={textStyle}>Time game:</p>
+          <p className={textStyle}>Время игры:</p>
           <div className="flex gap-4 items-center">
             <GameTimeSwitcher />
           </div>
         </div>
         <div className="timeToAnswer flex flex-col gap-4">
-          <p className={textStyle}>Time to answer:</p>
+          <p className={textStyle}>Время ответа:</p>
           <div className="flex gap-4 items-center">
             <div className='flex gap-6'>
               <PrimaryBtn title='-'

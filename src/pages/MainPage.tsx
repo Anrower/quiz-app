@@ -13,7 +13,7 @@ const MainPage = () => {
       '>Art Quiz</h1>
       <div className='flex items-center mx-auto justify-center mt-40'>
         <Link to='categories'>
-          <PrimaryBtn title='Start Quiz' classes={''} />
+          <PrimaryBtn title='Начать Викторину' classes={''} />
         </Link>
       </div>
     </div >

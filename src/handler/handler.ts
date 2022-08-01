@@ -16,6 +16,17 @@ export const getAuthorsNames = () => {
   return getUniqueAuthorNames(data);
 }
 
+export const getYear = () => {
+  const getUniqueYear = (json: pictureJsonType[]) => {
+    let result = json.map(function (el) {
+      return el.year
+    });
+    const uniqueNames = new Set(result)
+    return Array.from(uniqueNames);
+  }
+  return getUniqueYear(data);
+}
+
 export const getRandomData = () => {
   const dataTransform = (json: pictureJsonType[]) => {
     const max = data.length;
@@ -47,6 +58,21 @@ export const get4UniqAuthor = () => {
   return createUniqAuthorArr(getAuthorsNames())
 }
 
+export const get4UniqYear = () => {
+
+  const createUniqYearArr = (year: string[]) => {
+    let copy = [...year]
+    let arr = []
+    while (arr.length < 4) {
+      const randomnumber = Math.floor(Math.random() * copy.length)
+      let removed = copy.splice(randomnumber, 1);
+      arr.push(...removed)
+    }
+    return arr;
+  }
+  return createUniqYearArr(getYear())
+}
+
 // const readyArray = [45, 12, 54, 23];
 // readyArray.splice(4, 0, 60); // first argument it's index place
 // readyArray
@@ -64,9 +90,22 @@ export const getfilterByAuthorName = (author: string) => {
   return filterByAuthorName(author, data)
 }
 
+export const getfilterByYear = (year: string) => {
+  const filterByYear = (year: string, data: pictureJsonType[]) => {
+    let result = []
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].year === year) {
+        result.push(data[i])
+      };
+    }
+    return result
+  }
+  return filterByYear(year, data)
+}
+
 export const useCheckAnswer = (answer: string | null) => {
   const dispatch = useDispatch()
-  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.author);
+  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.rightAnswer);
   if (rightAnswerValue === answer) {
     dispatch(updateCorrectAnswer(true))
     dispatch(toggleTimerActive(false))

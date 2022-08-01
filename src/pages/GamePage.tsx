@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { Image } from '../components/ui/GamePicture';
 import Timer from '../components/ui/Timer'
 import { useDispatch, useSelector } from "react-redux";
-import { updateAuthor, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup } from '../store/slices/gameSlice';
+import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup } from '../store/slices/gameSlice';
 import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
 import './gamePage.css'
 import '../components/navigation.css'
-import { get4UniqAuthor, getfilterByAuthorName } from '../handler/handler';
+import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear } from '../handler/handler';
 import AnswerBtn from '../components/ui/AnswerBtn';
 import PopUp from '../components/ui/popUp/PopUp';
 
@@ -23,11 +23,12 @@ const GamePage = () => {
   const showTimer = useSelector<RootState, boolean>((state) => state.settings.setting.showTimer);
   const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
   const round = useSelector<RootState, number>((state) => state.game.game.round);
-  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.author);
+  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.rightAnswer);
   const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
+  const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
 
   useEffect(() => {
-    if (round) {
+    if (round && activeGenre === 'artist') {
       //!Получаем 4 кнопки с именами авторов и диспатчим кнопки ответов
       const tempArrBtn = [...get4UniqAuthor()]
       dispatch(updateAnswerBtns(tempArrBtn))
@@ -38,14 +39,29 @@ const GamePage = () => {
       const correctAnwser = tempDataByAuthor[0].author
       const correctData = tempDataByAuthor[0];
 
-      dispatch(updateAuthor(correctAnwser))
+      dispatch(updateRightAnswer(correctAnwser))
+      dispatch(updateCorrectInfo(correctData))
+    } else {
+      const tempArrBtn = [...get4UniqYear()]
+      dispatch(updateAnswerBtns(tempArrBtn))
+
+      const ranVal = Math.floor(Math.random() * tempArrBtn.length)
+      //!Выбираем рандомного автора в качестве правильного ответа и диспатчим данные 
+      const tempDataByAuthor = getfilterByYear(tempArrBtn[ranVal])
+      const correctAnwser = tempDataByAuthor[0].year
+      const correctData = tempDataByAuthor[0];
+
+      dispatch(updateRightAnswer(correctAnwser))
       dispatch(updateCorrectInfo(correctData))
     }
-  }, [dispatch, round])
 
-  const checkAnswer = (answer: string | null) => {
+
+
+  }, [dispatch, round, activeGenre])
+
+
+  const checkAnswer = (answer: string) => {
     dispatch(toggleTimerActive(false));
-
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
     } else {
@@ -66,7 +82,10 @@ const GamePage = () => {
           <Timer /> :
           <div className='timer_plug close'></div>
       }
-      <h3 className='game_question'>Who is the author of this picture?</h3>
+
+      <h3 className='game_question'>{activeGenre === 'artist' ?
+        'Кто автор этой Картины?' :
+        'В каком году была нарисова эта картина?'}</h3>
       <div className='game_picture_wrapper'>
         <Image path={image} alt={pictureName} />
         <div className='answer_tabs'>

@@ -8,8 +8,9 @@ interface GameState {
 const initialState: GameState = {
   game: {
     roundTab: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    roundAnswers: [],
     round: 1,
-    author: '',
+    rightAnswer: '',
     isCorrectAnswer: false,
     answerBtns: ['', '', '', ''],
     correctInfo: {
@@ -27,8 +28,8 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    updateAuthor(state, action: PayloadAction<string>) {
-      state.game.author = action.payload
+    updateRightAnswer(state, action: PayloadAction<string>) {
+      state.game.rightAnswer = action.payload
     },
     updateCorrectAnswer(state, action: PayloadAction<boolean>) {
       state.game.isCorrectAnswer = action.payload
@@ -43,8 +44,8 @@ export const gameSlice = createSlice({
       state.game.roundTab[state.game.round - 1] = 1
       state.game.round += 1
     },
-    resetRound(state, action: PayloadAction<number>) {
-      state.game.round = action.payload
+    resetRound(state) {
+      state.game = initialState.game
     },
     openPopup(state, action: PayloadAction<boolean>) {
       state.game.popUpIsOpen = action.payload
@@ -52,10 +53,13 @@ export const gameSlice = createSlice({
     updateTimerAnimation(state, action: PayloadAction<'running' | 'paused'>) {
       state.game.timerAnimation = action.payload
     },
+    updateRoundAnswer(state, action: PayloadAction<boolean>) {
+      state.game.roundAnswers.push(action.payload)
+    },
   }
 })
 
 export default gameSlice.reducer
 export const {
-  updateAuthor, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation
+  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer
 } = gameSlice.actions

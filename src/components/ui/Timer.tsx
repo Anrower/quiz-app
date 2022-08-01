@@ -4,7 +4,7 @@ import '../navigation.css'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { toggleTimerActive, decrementTimerCurrentSec } from "../../store/slices/settingSlice";
-import { updateTimerAnimation, updateCorrectAnswer, openPopup } from "../../store/slices/gameSlice";
+import { updateTimerAnimation, updateCorrectAnswer, openPopup, updateRoundAnswer } from "../../store/slices/gameSlice";
 // import { useCheckAnswer } from "../../handler/handler"
 
 export default function Timer() {
@@ -25,11 +25,14 @@ export default function Timer() {
     }
     if (timerCurrentSec > 0 && timerActive) {
       timer = setTimeout(updateTimer, 1000);
-    } else {
-      dispatch(updateTimerAnimation('paused'))
+    } else if (timerCurrentSec === 0) {
       dispatch(toggleTimerActive(false))
-      dispatch(updateCorrectAnswer(false))
+      dispatch(updateTimerAnimation('paused'))
+      dispatch(updateCorrectAnswer(false));
       dispatch(openPopup(true))
+    } else {
+      dispatch(toggleTimerActive(false))
+      dispatch(updateTimerAnimation('paused'))
     }
     return () => {
       clearTimeout(timer)
