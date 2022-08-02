@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup } from '../store/slices/gameSlice';
 import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
+import Loader from '../components/ui/loader/Loader';
 import './gamePage.css'
 import '../components/navigation.css'
 import Audio, { AudioType } from 'ts-audio';
@@ -98,25 +99,26 @@ const GamePage = () => {
   if (!rightAnswerValue) {
     return null;
   }
+  console.log(image);
 
   return (
     <div className='game' key={round}>
       {
         popUpIsOpen ?
-          <PopUp /> : <div className='timer_plug close'></div>
+          <PopUp /> : null
       }
-
       {
         showTimer ?
           <Timer /> :
           <div className='timer_plug close'></div>
       }
-
       <h3 className='game_question'>{activeGenre === 'artist' ?
         'Кто автор этой Картины?' :
         'В каком году была нарисова эта картина?'}</h3>
       <div className='game_picture_wrapper'>
-        <Image path={image} alt={pictureName} />
+        {!image && !pictureName ? <Loader /> :
+          <Image path={image} alt={pictureName} />
+        }
         <div className='answer_tabs'>
           {answerTabs.map((el, i) =>
             <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
