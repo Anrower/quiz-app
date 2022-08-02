@@ -1,5 +1,3 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace"
-
 export interface ISetting {
   volumeRange: string,
   isSound: boolean,
@@ -7,8 +5,8 @@ export interface ISetting {
   timeAnswerSec: number,
   timerActive: boolean,
   timerCurrentSec: number,
+  soundBtnActiveClass: string,
 }
-
 export interface Igenre {
   activeGenre: string,
   genreStat: {
@@ -20,7 +18,6 @@ export interface Igenre {
     year?: number,
   }
 }
-
 export interface pictureJsonType {
   author: string,
   name: string,
@@ -38,8 +35,8 @@ export interface IGamge {
   popUpIsOpen: boolean,
   timerAnimation: 'running' | 'paused'
 }
-
 export interface IpopUp {
   resultText: string,
-  resultAnswer: string | ReactJSXElement
+  resultAnswer: string,
+  isQuit: boolean,
 }

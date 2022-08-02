@@ -4,11 +4,10 @@ import '../navigation.css'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { toggleTimerActive, decrementTimerCurrentSec } from "../../store/slices/settingSlice";
-import { updateTimerAnimation, updateCorrectAnswer, openPopup, updateRoundAnswer } from "../../store/slices/gameSlice";
-// import { useCheckAnswer } from "../../handler/handler"
+import { updateTimerAnimation, updateCorrectAnswer, openPopup } from "../../store/slices/gameSlice";
+import { updateIsQuitState } from "../../store/slices/popUpSlice";
 
 export default function Timer() {
-  // return null
   const dispatch = useDispatch();
 
   const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
@@ -39,12 +38,19 @@ export default function Timer() {
     }
   }, [dispatch, timerActive, timerCurrentSec, popUpIsOpen]);
 
+  const exitGameHandler = () => {
+    dispatch(toggleTimerActive(false))
+    dispatch(updateTimerAnimation('paused'))
+    dispatch(updateIsQuitState(true))
+    dispatch(openPopup(true))
+  }
+
 
   const curTime = <div style={{ animationDuration: `${timeAnswerValue}s`, animationPlayState: `${isTimerAnimation}` }} className="current_time"></div>
 
   return (
     <div className="timer">
-      <div className="close"></div>
+      <div className="close" onClick={exitGameHandler}></div>
       <div className="timer_line">
         {curTime}
       </div>

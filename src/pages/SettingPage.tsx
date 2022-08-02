@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../components/Navigation"
 import VolumeRange from "../components/ui/VolumeRange";
@@ -8,19 +7,15 @@ import { RootState } from "../store";
 import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer } from "../store/slices/settingSlice";
 import PrimaryBtn from "../components/ui/PrimaryBtn";
 
-
 const SettingPage = () => {
 
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
   const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
+  const soundBtnActive = useSelector<RootState, string>((state) => state.settings.setting.soundBtnActiveClass);
 
   const textStyle = 'text-3xl text-white font-bold';
   const dispatch = useDispatch();
-
-  useEffect(() => {
-  }, [volumeRangeValue, isSound, timeAnswerValue])
-
 
   const soundOffHandler = () => {
     dispatch(updateVolumeSwitch(false));
@@ -31,7 +26,6 @@ const SettingPage = () => {
     dispatch(updateVolumeSwitch(true));
     dispatch(updateVolumeRange('40'));
   }
-
 
   const plusTimeHandler = () => {
     dispatch(increaseTimeAnswer())
@@ -60,15 +54,15 @@ const SettingPage = () => {
             <input
               className={
                 `sound_off ${!isSound ?
-                  'sound-btn_active ' :
+                  soundBtnActive :
                   ''}`
               }
               type='button'
-              onChange={soundOffHandler}>
+              onClick={soundOffHandler}>
             </input>
             <input className={
               `sound_on ${isSound ?
-                'sound-btn_active' :
+                soundBtnActive :
                 ''}`
             }
               type='button'

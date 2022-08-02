@@ -29,6 +29,7 @@ const GamePage = () => {
   const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.rightAnswer);
   const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
+  const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
 
   useEffect(() => {
     if (round && activeGenre === 'artist') {
@@ -80,11 +81,17 @@ const GamePage = () => {
     dispatch(toggleTimerActive(false));
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
-      playSound(rightSound)
+      if (isSound) {
+        playSound(rightSound)
+      }
+
     } else {
       dispatch(updateCorrectAnswer(false));
-      playSound(wrongSound);
+      if (isSound) {
+        playSound(wrongSound);
+      }
     }
+
     dispatch(openPopup(true));
   }
 

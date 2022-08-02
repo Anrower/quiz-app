@@ -8,6 +8,7 @@ const initialState: PopUpState = {
   popUp: {
     resultText: '',
     resultAnswer: '',
+    isQuit: false,
   }
 }
 
@@ -18,13 +19,16 @@ export const popUpSlice = createSlice({
     updateResulText(state, action: PayloadAction<string>) {
       state.popUp.resultText = action.payload
     },
-    updateResultAnswer(state, action: PayloadAction<string | JSX.Element>) {
+    updateResultAnswer(state, action: PayloadAction<string>) {
       state.popUp.resultAnswer = action.payload
+    },
+    updateIsQuitState(state, action: PayloadAction<boolean>) {
+      state.popUp.isQuit = action.payload
     },
   }
 })
 
 export default popUpSlice.reducer
 export const {
-  updateResulText, updateResultAnswer
+  updateResulText, updateResultAnswer, updateIsQuitState
 } = popUpSlice.actions

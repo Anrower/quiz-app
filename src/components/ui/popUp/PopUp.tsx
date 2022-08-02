@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound } from '../../../store/slices/gameSlice';
 import { toggleTimerActive, updateTimerCurrentSec } from '../../../store/slices/settingSlice';
-import { updateResulText, updateResultAnswer } from '../../../store/slices/popUpSlice';
+import { updateResulText, updateResultAnswer, updateIsQuitState } from '../../../store/slices/popUpSlice';
 import { updateGenreStat } from '../../../store/slices/genreSlice';
 import grandResult_img from "../../../images/ui_styles/grand_result.svg"
 import gameOver_img from "../../../images/ui_styles/game_over.svg"
@@ -29,6 +29,8 @@ const PopUp = () => {
   const resultText = useSelector<RootState, string>((state) => state.popup.popUp.resultText);
   const resultAnswer = useSelector<RootState, string | JSX.Element>((state) => state.popup.popUp.resultAnswer);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
+  const isQuitState = useSelector<RootState, boolean>((state) => state.popup.popUp.isQuit);
+
   let genreStat = useSelector<RootState, object>((state) => state.genre.genre.genreStat);
 
   useEffect(() => {
@@ -39,7 +41,6 @@ const PopUp = () => {
   const rightStyle = 'pop-up_answer-indicator pop-up_right-answer'
 
   const clickNext = () => {
-    console.log('clac')
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(updateTimerAnimation('running'))
@@ -71,6 +72,18 @@ const PopUp = () => {
     dispatch(toggleTimerActive(true))
     dispatch(resetRound())
     navigate('/categories')
+  }
+
+  const quitNoHandler = () => {
+    dispatch(openPopup(false))
+    dispatch(updateTimerAnimation('running'))
+    dispatch(toggleTimerActive(true))
+    dispatch(updateIsQuitState(false))
+  }
+
+  const quitYesHandler = () => {
+    playAgainNo()
+    dispatch(updateIsQuitState(false))
   }
 
   const rightAnswerCount = roundAnswers.map((el) => el ? 1 : 0)
@@ -148,21 +161,31 @@ const PopUp = () => {
               }
             </div>
           </> :
+          isQuitState ?
+            <>
+              <p className='pop-up_result_image-info'>
+                Вы дейстивтельно хотите выйти из игры?
+              </p>
+              <div className='pop-up_result_btn-wrapper'>
+                <PrimaryBtn title='Нет' classes='pop-up_btn pop-up_btn-short' onClick={quitNoHandler} />
+                <PrimaryBtn title='Да' classes='pop-up_btn pop-up_btn-short pop-up_btn_active' onClick={quitYesHandler} />
+              </div>
+            </> :
 
-          <>
-            <div className='pop-up_image_wrapper'>
-              <Image path={imageNum} alt={pictureName} />
-            </div>
-            <div className={isCorrect ? rightStyle : wrongStyle}></div>
-            <h3 className='pop-up_image-name'>{pictureName}</h3>
-            <p className='pop-up_image-info'>
-              {author},
-              <span>{year}</span>
-            </p>
-            <div className='pop-up_btn-wrapper'>
-              <PrimaryBtn title='Дальше' classes='pop-up_btn' onClick={clickNext} />
-            </div>
-          </>}
+            <>
+              <div className='pop-up_image_wrapper'>
+                <Image path={imageNum} alt={pictureName} />
+              </div>
+              <div className={isCorrect ? rightStyle : wrongStyle}></div>
+              <h3 className='pop-up_image-name'>{pictureName}</h3>
+              <p className='pop-up_image-info'>
+                {author},
+                <span>{year}</span>
+              </p>
+              <div className='pop-up_btn-wrapper'>
+                <PrimaryBtn title='Дальше' classes='pop-up_btn' onClick={clickNext} />
+              </div>
+            </>}
       </div>
     </div >
   )

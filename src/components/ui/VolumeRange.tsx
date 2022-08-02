@@ -20,6 +20,7 @@ export default function VolumeRange() {
       dispatch(updateVolumeSwitch(false));
       dispatch(updateVolumeRange(value))
     } else {
+      dispatch(updateVolumeSwitch(true));
       dispatch(updateVolumeRange(value))
     }
   }
@@ -32,7 +33,6 @@ export default function VolumeRange() {
         defaultValue={Number(volumeRangeValue)}
         getAriaValueText={valuetext}
         color="primary"
-        // onChange={(e) => dispatch(updateVolumeRange((e.target as HTMLTextAreaElement).value))}
         onChange={(e) => updateRangeHandler(e)}
       />
     </Box>

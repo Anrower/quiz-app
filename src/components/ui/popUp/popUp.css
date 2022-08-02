@@ -10,7 +10,7 @@
 
 .pop-up_body {
   display: flex;
-  min-height: 565px;
+  /* min-height: 565px; */
   flex-direction: column;
   position: absolute;
   width: 500px;
@@ -81,7 +81,7 @@
 }
 
 .pop-up_result_image-info {
-  margin-top: 40px;
+  margin: 30px 20px 0;
   font-style: normal;
   font-weight: 400;
   font-size: 42px;
@@ -97,7 +97,7 @@
 }
 
 .pop-up_result_btn-wrapper {
-  margin: auto 10px;
+  margin: 20px;
   display: flex;
   justify-content: space-around;
 }

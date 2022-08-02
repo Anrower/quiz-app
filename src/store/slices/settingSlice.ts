@@ -12,6 +12,7 @@ const initialState: SettingState = {
     timeAnswerSec: 100,
     timerActive: true,
     timerCurrentSec: 100,
+    soundBtnActiveClass: 'sound-btn_active'
   }
 }
 
