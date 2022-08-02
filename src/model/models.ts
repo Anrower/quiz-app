@@ -2,7 +2,7 @@ import { ReactJSXElement } from "@emotion/react/types/jsx-namespace"
 
 export interface ISetting {
   volumeRange: string,
-  volumeOff: boolean,
+  isSound: boolean,
   showTimer: boolean,
   timeAnswerSec: number,
   timerActive: boolean,

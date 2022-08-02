@@ -7,7 +7,7 @@ interface SettingState {
 const initialState: SettingState = {
   setting: {
     volumeRange: '40',
-    volumeOff: false,
+    isSound: true,
     showTimer: true,
     timeAnswerSec: 100,
     timerActive: true,
@@ -23,7 +23,7 @@ export const settingSlice = createSlice({
       state.setting.volumeRange = action.payload
     },
     updateVolumeSwitch(state, action: PayloadAction<boolean>) {
-      state.setting.volumeOff = action.payload;
+      state.setting.isSound = action.payload;
     },
     updateTimerSwitch(state, action: PayloadAction<boolean>) {
       state.setting.showTimer = action.payload

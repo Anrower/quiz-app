@@ -39,7 +39,7 @@ export default function CategoriesCard(props: Iprops) {
         <div className='card_header'>
           <h3>{title}</h3>
           <p className='card_stats'>
-            <span>{0 && genreStat[title as ObjectKey]}</span>/<span>10</span>
+            <span>{0 || genreStat[title as ObjectKey]}</span>/<span>10</span>
           </p>
         </div>
         <img className='card_image' src={img} alt={title} />

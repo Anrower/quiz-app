@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../components/Navigation"
 import VolumeRange from "../components/ui/VolumeRange";
@@ -12,24 +12,26 @@ import PrimaryBtn from "../components/ui/PrimaryBtn";
 const SettingPage = () => {
 
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
-  const isVolumeOffValue = useSelector<RootState, boolean>((state) => state.settings.setting.volumeOff);
+  const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
   const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
 
-  const [isActiveSoundBtn, setisActiveSoundBtn] = useState(isVolumeOffValue)
   const textStyle = 'text-3xl text-white font-bold';
   const dispatch = useDispatch();
 
+  useEffect(() => {
+  }, [volumeRangeValue, isSound, timeAnswerValue])
+
+
   const soundOffHandler = () => {
-    setisActiveSoundBtn(true)
-    dispatch(updateVolumeSwitch(isActiveSoundBtn));
+    dispatch(updateVolumeSwitch(false));
     dispatch(updateVolumeRange('0'));
   }
 
   const soundOnHandler = () => {
-    setisActiveSoundBtn(false)
-    dispatch(updateVolumeSwitch(isActiveSoundBtn));
+    dispatch(updateVolumeSwitch(true));
     dispatch(updateVolumeRange('40'));
   }
+
 
   const plusTimeHandler = () => {
     dispatch(increaseTimeAnswer())
@@ -57,17 +59,17 @@ const SettingPage = () => {
           <div className="flex justify-between">
             <input
               className={
-                `sound_off ${isActiveSoundBtn ?
+                `sound_off ${!isSound ?
                   'sound-btn_active ' :
                   ''}`
               }
               type='button'
-              onClick={soundOffHandler}>
+              onChange={soundOffHandler}>
             </input>
             <input className={
-              `sound_on ${isActiveSoundBtn ?
-                '' :
-                'sound-btn_active'}`
+              `sound_on ${isSound ?
+                'sound-btn_active' :
+                ''}`
             }
               type='button'
               onClick={soundOnHandler}></input>

@@ -7,7 +7,7 @@ import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
 import './gamePage.css'
 import '../components/navigation.css'
-import Audio from 'ts-audio';
+import Audio, { AudioType } from 'ts-audio';
 import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear }
   from '../handler/handler';
 import AnswerBtn from '../components/ui/AnswerBtn';
@@ -15,19 +15,6 @@ import PopUp from '../components/ui/popUp/PopUp';
 import wrongMusic from '../sounds/wrong.mp3'
 import rightMusic from '../sounds/right.mp3'
 const GamePage = () => {
-
-  const wrongSound = Audio({
-    file: wrongMusic,
-    loop: false,
-    volume: 0.6,
-  });
-
-  const rightSound = Audio({
-    file: rightMusic,
-    loop: false,
-    volume: 0.6,
-  })
-
 
   const dispatch = useDispatch();
   const tab_btn = 'tab_btn';
@@ -70,20 +57,33 @@ const GamePage = () => {
       dispatch(updateRightAnswer(correctAnwser))
       dispatch(updateCorrectInfo(correctData))
     }
-
-
-
   }, [dispatch, round, activeGenre])
 
 
+  const playSound = (sound: AudioType) => {
+    sound.play()
+  }
+
   const checkAnswer = (answer: string) => {
+    const wrongSound = Audio({
+      file: wrongMusic,
+      loop: false,
+      volume: 0.6,
+      preload: true,
+    });
+    const rightSound = Audio({
+      file: rightMusic,
+      loop: false,
+      volume: 0.6,
+      preload: true,
+    })
     dispatch(toggleTimerActive(false));
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
-      rightSound.play()
+      playSound(rightSound)
     } else {
       dispatch(updateCorrectAnswer(false));
-      wrongSound.play();
+      playSound(wrongSound);
     }
     dispatch(openPopup(true));
   }
