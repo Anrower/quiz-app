@@ -29,6 +29,7 @@ export default function Timer() {
       dispatch(updateTimerAnimation('paused'))
       dispatch(updateCorrectAnswer(false));
       dispatch(openPopup(true))
+
     } else {
       dispatch(toggleTimerActive(false))
       dispatch(updateTimerAnimation('paused'))

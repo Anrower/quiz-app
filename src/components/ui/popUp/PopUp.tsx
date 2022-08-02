@@ -14,7 +14,7 @@ import congrats_img from "../../../images/ui_styles/congratulations.svg"
 import { useEffect } from 'react';
 
 const PopUp = () => {
-
+  // return null
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -90,7 +90,6 @@ const PopUp = () => {
     .reduce<number>((acc, cur) => acc + cur, 0);
 
   const updateGenStat = () => {
-
     type ObjectKey = keyof typeof genreStat;
     const genreStatResult = {
       ...genreStat, [activeGenre as ObjectKey]: rightAnswerCount
