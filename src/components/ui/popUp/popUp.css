@@ -142,3 +142,42 @@
     text-decoration: uppercase;
   }
 }
+
+@media only screen and (max-width: 519px) {
+  .pop-up_body {
+    width: 300px;
+    top: 10%;
+    left: calc((100vw - 300px)/2);
+    border-radius: 30px;
+  }
+
+  .pop-up_image_wrapper {
+    margin: 15px auto 0;
+    position: relative;
+    width: 270px;
+  }
+
+  .pop-up_answer-indicator {
+    top: 215px;
+    left: 25px;
+  }
+
+  .pop-up_result-img {
+    margin: 10px auto;
+  }
+
+  .pop-up_result_image-name {
+    font-size: 35px;
+    line-height: 20px;
+  }
+
+  .pop-up_result_image-info {
+    margin-top: 20px;
+    font-size: 40px;
+    line-height: 20px;
+  }
+
+  .pop-up_result_image-info>span {
+    font-size: 40px;
+  }
+}

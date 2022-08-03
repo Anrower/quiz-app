@@ -36,3 +36,25 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media only screen and (max-width: 519px) {
+  .card {
+    max-width: 150px;
+    z-index: 2;
+  }
+
+  .card_header {
+    font-size: 17px;
+    line-height: 15px;
+  }
+
+  .card_stats {
+    color: #1976d2;
+  }
+
+  .card_image {
+    width: 150px;
+    height: 184px;
+    margin-top: 1rem;
+  }
+}

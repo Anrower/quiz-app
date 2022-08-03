@@ -104,3 +104,49 @@
     width: 210px;
   }
 }
+
+@media only screen and (max-width: 519px) {
+  .default_btn {
+    font-family: 'inherit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 10px;
+    width: 240px;
+    height: 48px;
+    border-radius: 48px;
+  }
+
+  .round_btn {
+    font-size: 24px;
+    line-height: 28px;
+    width: 2.125rem;
+    height: 2.125rem;
+    border-radius: 50%;
+  }
+
+  .pop-up_btn {
+    border: 1px solid #000;
+    color: #000;
+  }
+
+  .pop-up_btn:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .pop-up_btn:active {
+    border: none;
+    background: #FFBCA2;
+    color: #000;
+  }
+
+  .pop-up_btn_active {
+    border: none;
+    background: #FFBCA2;
+  }
+
+  .pop-up_btn-short {
+    width: 120px;
+  }
+}

@@ -43,3 +43,14 @@
   text-align: center;
   color: #FFFFFF;
 }
+
+@media only screen and (max-width: 519px) {
+  .timer {
+    padding: 0.25rem 1rem 0;
+    gap: 0.5rem;
+  }
+
+  .timer_line {
+    width: 240px;
+  }
+}

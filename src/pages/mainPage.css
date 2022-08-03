@@ -23,3 +23,18 @@
     margin-top: 10rem
   }
 }
+
+@media only screen and (max-width: 519px) {
+  .mainPage {
+    background-image: url('../images/ui_styles/main_bg_520.jpg');
+  }
+
+  .main_text {
+    margin-top: 8rem;
+    font-size: 5rem;
+  }
+
+  .main_button {
+    margin-top: 10rem
+  }
+}
