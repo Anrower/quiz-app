@@ -12,12 +12,12 @@ import grandResult_img from "../../../images/ui_styles/grand_result.svg"
 import gameOver_img from "../../../images/ui_styles/game_over.svg"
 import congrats_img from "../../../images/ui_styles/congratulations.svg"
 import { useCallback, useEffect } from 'react';
+import Audio from 'ts-audio';
+import clickMusic from '../../../sounds/click.mp3'
 
 const PopUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
 
   const round = useSelector<RootState, number>((state) => state.game.game.round);
   const timerAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
@@ -31,8 +31,13 @@ const PopUp = () => {
   const resultAnswer = useSelector<RootState, string | JSX.Element>((state) => state.popup.popUp.resultAnswer);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
   const isQuitState = useSelector<RootState, boolean>((state) => state.popup.popUp.isQuit);
+  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
 
   let genreStat = useSelector<RootState, object>((state) => state.genre.genre.genreStat);
+
+  const getVolumeValue = () => {
+    return Number(volumeValue) / 100
+  }
 
   useEffect(() => {
     dispatch(updateRoundAnswer(isCorrect))
@@ -41,7 +46,15 @@ const PopUp = () => {
   const wrongStyle = 'pop-up_answer-indicator  pop-up_wrong-answer'
   const rightStyle = 'pop-up_answer-indicator pop-up_right-answer'
 
+  const clickSound = Audio({
+    file: clickMusic,
+    loop: false,
+    volume: getVolumeValue(),
+    preload: true,
+  });
+
   const clickNext = () => {
+    clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(updateTimerAnimation('running'))
@@ -54,6 +67,7 @@ const PopUp = () => {
   }
 
   const playAgainYes = () => {
+    clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(updateTimerAnimation('running'))
@@ -62,6 +76,7 @@ const PopUp = () => {
   }
 
   const playAgainNo = () => {
+    clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(updateTimerAnimation('running'))
@@ -71,6 +86,7 @@ const PopUp = () => {
   }
 
   const playNextQuiz = () => {
+    clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(updateTimerAnimation('running'))
@@ -80,6 +96,7 @@ const PopUp = () => {
   }
 
   const quitNoHandler = () => {
+    clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerAnimation('running'))
     dispatch(toggleTimerActive(true))
@@ -87,6 +104,7 @@ const PopUp = () => {
   }
 
   const quitYesHandler = () => {
+    clickSound.play()
     playAgainNo()
     dispatch(updateIsQuitState(false))
   }

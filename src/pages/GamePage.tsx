@@ -6,7 +6,6 @@ import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAn
 import { updateIsQuitState } from "../store/slices/popUpSlice";
 import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
-import { resetRound } from '../store/slices/gameSlice';
 import Loader from '../components/ui/loader/Loader';
 import './gamePage.css'
 import '../components/navigation.css'
@@ -17,6 +16,8 @@ import AnswerBtn from '../components/ui/AnswerBtn';
 import PopUp from '../components/ui/popup/PopUp';
 import wrongMusic from '../sounds/wrong.mp3'
 import rightMusic from '../sounds/right.mp3'
+import clickMusic from '../sounds/click.mp3'
+
 const GamePage = () => {
 
   const dispatch = useDispatch();
@@ -98,6 +99,13 @@ const GamePage = () => {
       volume: getVolumeValue(),
       preload: true,
     })
+    const clickSound = Audio({
+      file: clickMusic,
+      loop: false,
+      volume: getVolumeValue(),
+      preload: true,
+    });
+    playSound(clickSound)
     dispatch(toggleTimerActive(false));
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
