@@ -168,13 +168,13 @@
 
   .pop-up_result_image-name {
     font-size: 35px;
-    line-height: 20px;
+    line-height: 30px;
   }
 
   .pop-up_result_image-info {
-    margin-top: 20px;
-    font-size: 40px;
-    line-height: 20px;
+    margin: 10px;
+    font-size: 30px;
+    line-height: 30px;
   }
 
   .pop-up_result_image-info>span {

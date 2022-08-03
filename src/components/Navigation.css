@@ -86,11 +86,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .categories-link_mobile,
 .home-link_mobile,
-.galery-link_mobile {
+.galery-link_mobile,
+.setting-link_mobile,
+.setting-link_mobile_active,
+.categories-link_mobile_active,
+.home-link_mobile_active,
+.galery-link_mobile_active {
   width: 28px;
   height: 28px;
 }
@@ -100,7 +106,7 @@
 }
 
 .categories-link_mobile {
-  background-image: url(../images/ui_styles/category-link_mobile_active.svg);
+  background-image: url(../images/ui_styles/category-link_mobile.svg);
 }
 
 .home-link_mobile {
@@ -110,6 +116,27 @@
 .galery-link_mobile {
   background-image: url(../images/ui_styles/galery-link_mobile.svg);
 }
+
+.setting-link_mobile {
+  background-image: url(../images/ui_styles/setting-link_mobile.svg);
+}
+
+.setting-link_mobile_active {
+  background-image: url(../images/ui_styles/setting-link_mobile_active.svg);
+}
+
+.galery-link_mobile_active {
+  background-image: url(../images/ui_styles/galery-link_mobile_active.svg);
+}
+
+.categories-link_mobile_active {
+  background-image: url(../images/ui_styles/category-link_mobile_active.svg);
+}
+
+.home-link_mobile_active {
+  background-image: url(../images/ui_styles/home-link_mobile_active.svg);
+}
+
 
 @media only screen and (max-width: 799px) {
   .navigation_links {

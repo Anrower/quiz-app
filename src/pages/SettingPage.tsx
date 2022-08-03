@@ -6,6 +6,7 @@ import './settingPage.css'
 import { RootState } from "../store";
 import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer } from "../store/slices/settingSlice";
 import PrimaryBtn from "../components/ui/PrimaryBtn";
+import MobileNavigation from "../components/MobileNavigation";
 
 const SettingPage = () => {
 
@@ -36,6 +37,9 @@ const SettingPage = () => {
     }
     dispatch(decreaseTimeAnswer())
   }
+
+  const hasWindow = typeof window !== 'undefined';
+  const windowWidth = hasWindow ? window.innerWidth : 520;
 
   return (
     <div className="setting_page">
@@ -91,6 +95,7 @@ const SettingPage = () => {
 
         </div>
       </div>
+      {windowWidth <= 519 ? <MobileNavigation context={'settingPage'} /> : null}
     </div >
   )
 }

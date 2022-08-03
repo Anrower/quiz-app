@@ -17,6 +17,7 @@
   width: 2.125rem;
   height: 2.125rem;
   border-radius: 50%;
+
 }
 
 .default_btn:hover {
@@ -108,16 +109,18 @@
 @media only screen and (max-width: 519px) {
   .default_btn {
     font-family: 'inherit';
+    padding: 8px;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 10px;
-    width: 240px;
-    height: 48px;
+    font-size: 15px;
+    line-height: 20px;
+    width: 190px;
+    height: 58px;
     border-radius: 48px;
   }
 
   .round_btn {
+    padding: 0;
     font-size: 24px;
     line-height: 28px;
     width: 2.125rem;
