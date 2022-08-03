@@ -35,6 +35,9 @@ const GamePage = () => {
 
 
   useEffect(() => {
+    if (round === 11) {
+      dispatch(openPopup(true));
+    }
     if (round && activeGenre === 'artist') {
       //!Получаем 4 кнопки с именами авторов и диспатчим кнопки ответов
       const tempArrBtn = [...get4UniqAuthor()]
@@ -101,7 +104,7 @@ const GamePage = () => {
         playSound(wrongSound);
       }
     }
-    if (round < 11) {
+    if (round <= 10) {
       dispatch(openPopup(true));
     }
   }
@@ -109,7 +112,6 @@ const GamePage = () => {
   if (!rightAnswerValue) {
     return null;
   }
-  console.log(image);
 
   return (
     <div className='game' key={round}>

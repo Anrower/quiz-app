@@ -73,17 +73,17 @@
 
 .pop-up_result_image-name {
   font-weight: 500;
-  font-size: 50px;
+  font-size: 58px;
   line-height: 39px;
   text-align: center;
   color: #010101;
 }
 
 .pop-up_result_image-info {
-  margin: 30px 20px 0;
+  margin: 15px 20px;
   font-style: normal;
   font-weight: 400;
-  font-size: 42px;
+  font-size: 35px;
   line-height: 50px;
   text-align: center;
   color: #010101;
@@ -124,15 +124,15 @@
 
   .pop-up_result_image-name {
     font-weight: 500;
-    font-size: 45px;
+    font-size: 50px;
     line-height: 35px;
     text-align: center;
     color: #010101;
   }
 
   .pop-up_result_image-info {
-    margin-top: 10px;
-    font-size: 32px;
+    margin-top: 20px;
+    font-size: 30px;
     line-height: 40px;
   }
 
