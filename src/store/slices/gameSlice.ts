@@ -8,8 +8,8 @@ interface GameState {
 const initialState: GameState = {
   game: {
     roundTab: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    roundAnswers: [true, true, true, true, true, true, true, true],
-    round: 9,
+    roundAnswers: [],
+    round: 1,
     rightAnswer: '',
     isCorrectAnswer: false,
     answerBtns: ['', '', '', ''],

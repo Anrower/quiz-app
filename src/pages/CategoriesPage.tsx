@@ -1,10 +1,17 @@
 
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Navigation from '../components/Navigation';
 import CategoriesCard from '../components/ui/CategoriesCard';
+import { resetRound } from '../store/slices/gameSlice';
 import "./categoriesPage.css"
 
-
 const CategoriesPage = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(resetRound())
+  }, [dispatch])
 
   const categoriesArr = ['artist', 'year',]
 

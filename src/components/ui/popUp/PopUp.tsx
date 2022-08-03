@@ -17,6 +17,8 @@ const PopUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+
   const round = useSelector<RootState, number>((state) => state.game.game.round);
   const timerAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
   const imageNum = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);

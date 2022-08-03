@@ -6,6 +6,7 @@ import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAn
 import { updateIsQuitState } from "../store/slices/popUpSlice";
 import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
+import { resetRound } from '../store/slices/gameSlice';
 import Loader from '../components/ui/loader/Loader';
 import './gamePage.css'
 import '../components/navigation.css'
@@ -32,13 +33,15 @@ const GamePage = () => {
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
   const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
   const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
-
+  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
 
   useEffect(() => {
+
     if (round === 11) {
       dispatch(openPopup(true));
     }
     if (round && activeGenre === 'artist') {
+
       //!Получаем 4 кнопки с именами авторов и диспатчим кнопки ответов
       const tempArrBtn = [...get4UniqAuthor()]
       dispatch(updateAnswerBtns(tempArrBtn))
@@ -73,6 +76,10 @@ const GamePage = () => {
     dispatch(openPopup(true))
   }
 
+  const getVolumeValue = () => {
+    return Number(volumeValue) / 100
+  }
+
 
   const playSound = (sound: AudioType) => {
     sound.play()
@@ -82,13 +89,13 @@ const GamePage = () => {
     const wrongSound = Audio({
       file: wrongMusic,
       loop: false,
-      volume: 0.6,
+      volume: getVolumeValue(),
       preload: true,
     });
     const rightSound = Audio({
       file: rightMusic,
       loop: false,
-      volume: 0.6,
+      volume: getVolumeValue(),
       preload: true,
     })
     dispatch(toggleTimerActive(false));
