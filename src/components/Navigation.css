@@ -60,7 +60,23 @@
   color: #fff;
 }
 
-
 .active {
   color: #1976d2;
+}
+
+@media only screen and (max-width: 799px) {
+  .navigation_links {
+    gap: 1.5rem;
+  }
+
+  .home,
+  .categoriesPage {
+    font-size: 1.2rem;
+    line-height: 0.5rem;
+  }
+
+  .categoriesPage {
+    font-size: 1.2rem;
+    line-height: 0.5rem;
+  }
 }

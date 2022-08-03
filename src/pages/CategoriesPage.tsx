@@ -1,6 +1,7 @@
 
 import Navigation from '../components/Navigation';
 import CategoriesCard from '../components/ui/CategoriesCard';
+import "./categoriesPage.css"
 
 
 const CategoriesPage = () => {
@@ -10,7 +11,7 @@ const CategoriesPage = () => {
   return (
     <div className="categories">
       < Navigation context={'categoriesPage'} />
-      <div className='flex flex-col mt-32 ml-28 max-w-7xl gap-20'>
+      <div className='flex flex-col mt-32 max-w-7xl gap-20'>
         <div className='categories_cards'>
           {categoriesArr.map(jenre => {
             return (

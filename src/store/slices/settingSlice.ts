@@ -8,10 +8,10 @@ const initialState: SettingState = {
   setting: {
     volumeRange: '40',
     isSound: true,
-    showTimer: true,
-    timeAnswerSec: 100,
-    timerActive: true,
-    timerCurrentSec: 100,
+    showTimer: false,
+    timeAnswerSec: 20,
+    timerActive: false,
+    timerCurrentSec: 20,
     soundBtnActiveClass: 'sound-btn_active'
   }
 }

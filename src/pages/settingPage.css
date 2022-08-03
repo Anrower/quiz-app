@@ -1,35 +1,99 @@
-.sound_off {
-  mask: url(../images/ui_styles/sound_off.svg);
-  display: block;
-  width: 2rem;
-  height: 1.5rem;
-  background: rgba(159, 159, 159, 1);
-  mask-size: cover;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
+ .setting_page {
+   max-width: 1200px;
+   margin: 0 auto;
+   min-height: 100vh;
+ }
 
-.sound_on {
-  mask: url(../images/ui_styles/sound_on.svg);
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
-  mask-size: cover;
-  background: rgba(159, 159, 159, 1);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
+ .text_style {
+   font-size: 1.875rem;
+   line-height: 2.25rem;
+   color: #fff;
+   font-style: bold;
+   margin-right: 0.75rem;
+ }
 
-.sound-btn_active {
-  background: #1976d2;
-}
+ .text_style_value {
+   font-size: 1.5rem;
+   line-height: 2rem;
+   color: #fff;
+ }
 
-.sound_on:hover,
-.sound_off:hover {
-  background: white;
-}
+ .sound_off {
+   mask: url(../images/ui_styles/sound_off.svg);
+   display: block;
+   width: 2rem;
+   height: 1.5rem;
+   background: rgba(159, 159, 159, 1);
+   mask-size: cover;
+   cursor: pointer;
+   transition: all 0.25s ease;
+ }
 
-.sound_on:active,
-.sound_off:active {
-  background: #1976d2;
-}
+ .sound_on {
+   mask: url(../images/ui_styles/sound_on.svg);
+   display: block;
+   width: 1.5rem;
+   height: 1.5rem;
+   mask-size: cover;
+   background: rgba(159, 159, 159, 1);
+   cursor: pointer;
+   transition: all 0.25s ease;
+ }
+
+ .sound-btn_active {
+   background: #1976d2;
+ }
+
+ .sound_on:hover,
+ .sound_off:hover {
+   background: white;
+ }
+
+ .sound_on:active,
+ .sound_off:active {
+   background: #1976d2;
+ }
+
+ .setting_btn {
+   align-items: center;
+ }
+
+
+ @media only screen and (max-width: 799px) {
+   .setting_content {
+     max-width: 450px;
+     margin: 50px auto;
+   }
+
+   .text_style {
+     font-size: 1.5rem;
+     line-height: 1.75rem;
+   }
+
+   .text_style_value {
+     font-size: 1.25rem;
+     line-height: 1.5rem;
+   }
+
+   .volume {
+     gap: 0
+   }
+
+   .sound-btn_active {
+     background: #1976d2;
+   }
+
+   .sound_on:hover,
+   .sound_off:hover {
+     background: #1976d2;
+   }
+
+   .sound_on:active,
+   .sound_off:active {
+     background: #1976d2;
+   }
+
+   .setting_btn {
+     align-items: center;
+   }
+ }

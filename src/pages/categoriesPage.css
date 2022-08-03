@@ -1,0 +1,20 @@
+@media only screen and (min-width: 800px) {
+  .categories {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  .categories_cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  .categories {
+    min-height: 100vh;
+  }
+}

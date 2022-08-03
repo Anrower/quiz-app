@@ -1,7 +1,25 @@
 .mainPage {
-  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
   background-image: url('../images/ui_styles/main_bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0% 0%
+}
+
+
+@media only screen and (max-width: 799px) {
+  .mainPage {
+    background-image: url('../images/ui_styles/main_bg_768.jpg');
+  }
+
+  .main_text {
+    margin-top: 14rem;
+    font-size: 5rem;
+  }
+
+  .main_button {
+    margin-top: 10rem
+  }
 }

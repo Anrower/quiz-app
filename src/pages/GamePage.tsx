@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { Image } from '../components/ui/GamePicture';
 import Timer from '../components/ui/Timer'
 import { useDispatch, useSelector } from "react-redux";
-import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup } from '../store/slices/gameSlice';
+import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup, updateTimerAnimation } from '../store/slices/gameSlice';
+import { updateIsQuitState } from "../store/slices/popUpSlice";
 import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
 import Loader from '../components/ui/loader/Loader';
@@ -21,8 +22,6 @@ const GamePage = () => {
   const tab_btn = 'tab_btn';
   const answered_tab = tab_btn + ' right_answered_tab';
 
-  const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
-  const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
   const answerBtns = useSelector<RootState, string[]>((state) => state.game.game.answerBtns);
   const showTimer = useSelector<RootState, boolean>((state) => state.settings.setting.showTimer);
   const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
@@ -31,6 +30,9 @@ const GamePage = () => {
   const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
+  const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
+  const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
+
 
   useEffect(() => {
     if (round && activeGenre === 'artist') {
@@ -60,6 +62,13 @@ const GamePage = () => {
       dispatch(updateCorrectInfo(correctData))
     }
   }, [dispatch, round, activeGenre])
+
+  const exitGameHandler = () => {
+    dispatch(toggleTimerActive(false))
+    dispatch(updateTimerAnimation('paused'))
+    dispatch(updateIsQuitState(true))
+    dispatch(openPopup(true))
+  }
 
 
   const playSound = (sound: AudioType) => {
@@ -92,8 +101,9 @@ const GamePage = () => {
         playSound(wrongSound);
       }
     }
-
-    dispatch(openPopup(true));
+    if (round < 11) {
+      dispatch(openPopup(true));
+    }
   }
 
   if (!rightAnswerValue) {
@@ -110,7 +120,7 @@ const GamePage = () => {
       {
         showTimer ?
           <Timer /> :
-          <div className='timer_plug close'></div>
+          <div className='timer_plug close' onClick={exitGameHandler}></div>
       }
       <h3 className='game_question'>{activeGenre === 'artist' ?
         'Кто автор этой Картины?' :

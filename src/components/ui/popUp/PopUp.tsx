@@ -4,7 +4,7 @@ import { Image } from '../GamePicture'
 import PrimaryBtn from '../PrimaryBtn'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound } from '../../../store/slices/gameSlice';
+import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound, updateCorrectAnswer } from '../../../store/slices/gameSlice';
 import { toggleTimerActive, updateTimerCurrentSec } from '../../../store/slices/settingSlice';
 import { updateResulText, updateResultAnswer, updateIsQuitState } from '../../../store/slices/popUpSlice';
 import { updateGenreStat } from '../../../store/slices/genreSlice';
@@ -34,6 +34,7 @@ const PopUp = () => {
   let genreStat = useSelector<RootState, object>((state) => state.genre.genre.genreStat);
 
   useEffect(() => {
+    dispatch(updateCorrectAnswer(isCorrect))
     dispatch(updateRoundAnswer(isCorrect))
   }, [dispatch, isCorrect])
 
@@ -86,22 +87,27 @@ const PopUp = () => {
     dispatch(updateIsQuitState(false))
   }
 
-  const rightAnswerCount = roundAnswers.map((el) => el ? 1 : 0)
-    .reduce<number>((acc, cur) => acc + cur, 0);
+  const calcRightAnswer = () => {
+    const rightAnswerCount = roundAnswers.map((el) => el ? 1 : 0)
+      .reduce<number>((acc, cur) => acc + cur, 0);
+    return rightAnswerCount
+  }
+
 
   const updateGenStat = () => {
     type ObjectKey = keyof typeof genreStat;
     const genreStatResult = {
-      ...genreStat, [activeGenre as ObjectKey]: rightAnswerCount
+      ...genreStat, [activeGenre as ObjectKey]: calcRightAnswer()
     }
     dispatch(updateGenreStat(genreStatResult))
     return
   }
 
   useEffect(() => {
+    updateGenStat()
     if (round === 10) {
-      updateGenStat()
-      switch (rightAnswerCount) {
+      console.log(calcRightAnswer())
+      switch (calcRightAnswer()) {
         case 10:
           dispatch(updateResulText('Grand result'))
           dispatch(updateResultAnswer('Congratsulations'))
@@ -112,7 +118,7 @@ const PopUp = () => {
           return
         default:
           dispatch(updateResulText('Congratulations!'))
-          dispatch(updateResultAnswer(`${rightAnswerCount}`))
+          dispatch(updateResultAnswer(`${calcRightAnswer()}`))
           return
       }
     }
@@ -127,29 +133,27 @@ const PopUp = () => {
             <div className='pop-up_image_wrapper'>
               <img
                 className='pop-up_result-img'
-                src={rightAnswerCount === 0 ?
+                src={calcRightAnswer() === 0 ?
                   gameOver_img :
-                  rightAnswerCount === 10 ?
+                  calcRightAnswer() === 10 ?
                     grandResult_img :
                     congrats_img}
                 alt={resultText} />
             </div>
             <h3 className='pop-up_result_image-name'>{resultText}</h3>
             <p className='pop-up_result_image-info'>
-              {rightAnswerCount === 0 ?
+              {calcRightAnswer() === 0 || calcRightAnswer() === 10 ?
                 resultAnswer :
-                rightAnswerCount === 10 ?
-                  resultAnswer :
-                  <span >{resultAnswer}/10</span>
+                <span >{resultAnswer}/10</span>
               }
             </p>
             <div className='pop-up_result_btn-wrapper'>
-              {rightAnswerCount === 0 ?
+              {calcRightAnswer() === 0 ?
                 <>
                   <PrimaryBtn title='Нет' classes='pop-up_btn pop-up_btn-short' onClick={playAgainNo} />
                   <PrimaryBtn title='Да' classes='pop-up_btn pop-up_btn-short pop-up_btn_active' onClick={playAgainYes} />
                 </> :
-                rightAnswerCount === 10 ?
+                calcRightAnswer() === 10 ?
                   <>
                     <PrimaryBtn title='Дальше' classes='pop-up_btn pop-up_btn_active' onClick={playNextQuiz} />
                   </> :

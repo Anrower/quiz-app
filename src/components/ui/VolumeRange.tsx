@@ -14,6 +14,7 @@ export default function VolumeRange() {
   const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const dispatch = useDispatch();
 
+
   const updateRangeHandler = (e: Event) => {
     const value = String((e.target as HTMLTextAreaElement).value)
     if (value === '0') {
@@ -26,7 +27,7 @@ export default function VolumeRange() {
   }
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ width: '100%' }}>
       <Slider
         value={Number(volumeRangeValue)}
         aria-label="Volume"

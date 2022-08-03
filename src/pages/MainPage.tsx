@@ -5,15 +5,13 @@ import './mainPage.css';
 
 const MainPage = () => {
   return (
-    <div
-      className="mainPage"
-    >
+    <div className="mainPage">
       < Navigation context={'mainPage'} />
-      <h1 className='font-bold text-9xl leading-normal text-white text-center mt-60
+      <h1 className='main_text font-bold text-9xl leading-normal text-white text-center mt-60
       '>Art Quiz</h1>
-      <div className='flex items-center mx-auto justify-center mt-40'>
+      <div className='main_button flex items-center mx-auto justify-center mt-40'>
         <Link to='categories'>
-          <PrimaryBtn title='Начать Викторину' classes={''} />
+          <PrimaryBtn title='Начать' classes={''} />
         </Link>
       </div>
     </div >
