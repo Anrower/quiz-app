@@ -16,15 +16,17 @@ const Navigation = (props: NavProps) => {
       <nav className='flex justify-between p-5 h-100 items-center'>
         <div className='logo' />
         <div className='navigation_links flex gap-10 items-center'>
-          {(context === 'mainPage') ?
-            <NavLink className='settings_icon' to='/setting' /> :
-            (context === 'categoriesPage') ?
-              <>
-                <NavLink className='categoriesPage' to='/categories' >Категории</NavLink>
-                <NavLink className='home' to='/' >Домой</NavLink>
-                <NavLink className='settings_icon' to='/setting' />
-              </> :
-              <NavLink className='close' to='/' />
+          {(windowWidth < 520) ?
+            null :
+            (context === 'mainPage') ?
+              <NavLink className='settings_icon' to='/setting' /> :
+              (context === 'categoriesPage') ?
+                <>
+                  <NavLink className='categoriesPage' to='/categories' >Категории</NavLink>
+                  <NavLink className='home' to='/' >Домой</NavLink>
+                  <NavLink className='settings_icon' to='/setting' />
+                </> :
+                <NavLink className='close' to='/' />
           }
         </div>
       </nav>
