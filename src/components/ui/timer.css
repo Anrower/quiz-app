@@ -1,5 +1,5 @@
 .timer {
-  padding: 2rem;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,6 +24,16 @@
   animation-name: fillingLine;
   animation-timing-function: linear;
   animation-fill-mode: forward;
+}
+
+.blink {
+  animation: blink2 1s linear infinite;
+}
+
+@keyframes blink2 {
+  100% {
+    color: #cc3300;
+  }
 }
 
 @keyframes fillingLine {
@@ -51,7 +61,7 @@
   }
 
   .timer_line {
-    width: 415px;
+    width: 400px;
   }
 }
 

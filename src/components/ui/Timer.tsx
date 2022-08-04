@@ -56,7 +56,7 @@ export default function Timer() {
         {curTime}
       </div>
       <div className="timer_seconds">
-        <span>{timerCurrentSec}</span>
+        <span className={timerCurrentSec <= 5 ? 'blink' : undefined}>{timerCurrentSec}</span>
       </div>
     </div>
   );
