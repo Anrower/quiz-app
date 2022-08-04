@@ -7,6 +7,7 @@ interface GameState {
 
 const initialState: GameState = {
   game: {
+    isReady: false,
     roundTab: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     roundAnswers: [],
     round: 1,
@@ -56,10 +57,13 @@ export const gameSlice = createSlice({
     updateRoundAnswer(state, action: PayloadAction<boolean>) {
       state.game.roundAnswers.push(action.payload)
     },
+    updateIsReady(state, action: PayloadAction<boolean>) {
+      state.game.isReady = action.payload
+    },
   }
 })
 
 export default gameSlice.reducer
 export const {
-  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer
+  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer, updateIsReady
 } = gameSlice.actions

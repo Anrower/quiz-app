@@ -4,7 +4,7 @@ import { Image } from '../GamePicture'
 import PrimaryBtn from '../PrimaryBtn'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound } from '../../../store/slices/gameSlice';
+import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound, updateIsReady } from '../../../store/slices/gameSlice';
 import { toggleTimerActive, updateTimerCurrentSec } from '../../../store/slices/settingSlice';
 import { updateResulText, updateResultAnswer, updateIsQuitState } from '../../../store/slices/popUpSlice';
 import { updateGenreStat } from '../../../store/slices/genreSlice';
@@ -40,7 +40,9 @@ const PopUp = () => {
   }
 
   useEffect(() => {
-    dispatch(updateRoundAnswer(isCorrect))
+    dispatch(updateTimerAnimation('paused'));
+    dispatch(toggleTimerActive(false));
+    dispatch(updateRoundAnswer(isCorrect));
   }, [dispatch, isCorrect])
 
   const wrongStyle = 'pop-up_answer-indicator  pop-up_wrong-answer'
@@ -63,6 +65,7 @@ const PopUp = () => {
     if (round < 11) {
       dispatch(nextRound())
     }
+    dispatch(updateIsReady(false))
     return
   }
 

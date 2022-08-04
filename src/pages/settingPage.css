@@ -82,8 +82,9 @@
 
   @media only screen and (max-width: 519px) {
     .setting_content {
+      align-items: stretch;
       max-width: 300px;
-      margin: 40px auto;
+      margin: 20px auto;
       gap: 40px;
     }
 

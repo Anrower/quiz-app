@@ -60,14 +60,14 @@
   justify-content: space-around;
 }
 
-@media only screen and (max-width: 865px) {
+@media only screen and (max-width: 769px) {
   .answers_btn {
-    padding: 0 20px;
+    padding: 0 40px;
     margin: 30px 0px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-evenly;
+    gap: 15px;
+    justify-content: center;
   }
 
   .game_question {
@@ -84,28 +84,28 @@
   }
 }
 
-@media only screen and (max-width: 519px) {
+@media only screen and (max-width: 550px) {
   .game {
     padding: 10px 0;
   }
 
   .game_question {
-    margin-top: 20px;
-    font-size: 28px;
-    line-height: 15px;
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 20px;
   }
 
   .answers_btn {
     padding: 0 10px;
-    margin: 30px 0 20px;
+    margin: 20px 0 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 
   .game_picture_wrapper {
-    margin: 40px auto;
+    margin: 30px auto;
     display: flex;
     width: 308px;
     background-color: #000;

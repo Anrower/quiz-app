@@ -25,6 +25,7 @@ export interface pictureJsonType {
   imageNum: string
 }
 export interface IGamge {
+  isReady: boolean,
   roundTab: number[],
   roundAnswers: boolean[],
   rightAnswer: string,

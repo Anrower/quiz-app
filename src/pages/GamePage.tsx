@@ -1,8 +1,13 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { Image } from '../components/ui/GamePicture';
 import Timer from '../components/ui/Timer'
 import { useDispatch, useSelector } from "react-redux";
-import { updateRightAnswer, updateAnswerBtns, updateCorrectInfo, updateCorrectAnswer, openPopup, updateTimerAnimation } from '../store/slices/gameSlice';
+import {
+  updateRightAnswer, updateAnswerBtns,
+  updateCorrectInfo, updateCorrectAnswer,
+  openPopup, updateTimerAnimation, updateIsReady
+} from '../store/slices/gameSlice';
 import { updateIsQuitState } from "../store/slices/popUpSlice";
 import { toggleTimerActive } from "../store/slices/settingSlice"
 import { RootState } from "../store";
@@ -17,6 +22,7 @@ import PopUp from '../components/ui/popup/PopUp';
 import wrongMusic from '../sounds/wrong.mp3'
 import rightMusic from '../sounds/right.mp3'
 import clickMusic from '../sounds/click.mp3'
+
 
 const GamePage = () => {
 
@@ -35,6 +41,7 @@ const GamePage = () => {
   const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
   const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
   const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const isReady = useSelector<RootState, boolean>((state) => state.game.game.isReady);
 
   useEffect(() => {
 
@@ -68,6 +75,9 @@ const GamePage = () => {
       dispatch(updateRightAnswer(correctAnwser))
       dispatch(updateCorrectInfo(correctData))
     }
+    setTimeout(() => {
+      dispatch(updateIsReady(true))
+    }, 300)
   }, [dispatch, round, activeGenre])
 
   const exitGameHandler = () => {
@@ -106,7 +116,6 @@ const GamePage = () => {
       preload: true,
     });
     playSound(clickSound)
-    dispatch(toggleTimerActive(false));
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
       if (isSound) {
@@ -142,20 +151,23 @@ const GamePage = () => {
       <h3 className='game_question'>{activeGenre === 'artist' ?
         'Кто автор этой Картины?' :
         'В каком году была нарисова эта картина?'}</h3>
+
       <div className='game_picture_wrapper'>
-        {!image && !pictureName ? <Loader /> :
-          <Image path={image} alt={pictureName} />
+        {isReady ?
+          <>
+            <Image path={image} alt={pictureName} />
+            <div className='answer_tabs'>
+              {answerTabs.map((el, i) =>
+                <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
+              )}
+            </div>
+          </> :
+          <Loader />
         }
-        <div className='answer_tabs'>
-          {answerTabs.map((el, i) =>
-            <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
-          )}
-        </div>
       </div>
       <div className='answers_btn'>
         {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
       </div>
-
     </div>
   )
 }

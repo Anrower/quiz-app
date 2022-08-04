@@ -11,6 +11,7 @@
   color: #fff;
   transition: all .2s ease;
   cursor: pointer;
+  padding: 5px;
 }
 
 .round_btn {
@@ -58,17 +59,12 @@
   width: 210px;
 }
 
-@media only screen and (max-width: 799px) {
+@media only screen and (max-width: 768px) {
   .default_btn {
-    font-family: 'inherit';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 20px;
-    color: #fff;
-    width: 268px;
+    font-size: 15px;
+    line-height: 15px;
+    width: 220px;
     height: 56px;
-    border: 1px solid #FFFFFF;
     border-radius: 56px;
   }
 
@@ -114,7 +110,7 @@
     font-weight: 500;
     font-size: 15px;
     line-height: 20px;
-    width: 190px;
+    width: 165px;
     height: 58px;
     border-radius: 48px;
   }

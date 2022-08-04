@@ -16,7 +16,7 @@ const Navigation = (props: NavProps) => {
       <nav className='flex justify-between p-5 h-100 items-center'>
         <div className='logo' />
         <div className='navigation_links flex gap-10 items-center'>
-          {(context === 'mainPage' || windowWidth <= 519) ?
+          {(context === 'mainPage') ?
             <NavLink className='settings_icon' to='/setting' /> :
             (context === 'categoriesPage') ?
               <>

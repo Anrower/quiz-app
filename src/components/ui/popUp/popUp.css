@@ -160,6 +160,7 @@
   .pop-up_answer-indicator {
     top: 215px;
     left: 25px;
+    transform: scale(0.8, 0.8);
   }
 
   .pop-up_result-img {
@@ -178,6 +179,30 @@
   }
 
   .pop-up_result_image-info>span {
-    font-size: 40px;
+    font-size: 30px;
+  }
+
+  .pop-up_wrong-answer {
+    transform: scale(0.7, 0.7);
+  }
+
+  .pop-up_right-answer {
+    transform: scale(0.7, 0.7);
+  }
+
+  .pop-up_image-name {
+    font-size: 25px;
+    line-height: 25px;
+  }
+
+  .pop-up_image-info {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .pop-up_result_btn-wrapper {
+    margin: 10px 10px 20px;
+    display: flex;
+    justify-content: space-around;
   }
 }
