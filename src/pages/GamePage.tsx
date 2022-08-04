@@ -77,7 +77,7 @@ const GamePage = () => {
     }
     setTimeout(() => {
       dispatch(updateIsReady(true))
-    }, 400)
+    }, 450)
   }, [dispatch, round, activeGenre])
 
   const exitGameHandler = () => {
@@ -162,7 +162,6 @@ const GamePage = () => {
             <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
           )}
         </div>
-
       </div>
       <div className='answers_btn'>
         {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
