@@ -148,24 +148,28 @@ const GamePage = () => {
           <Timer /> :
           <div className='timer_plug close' onClick={exitGameHandler}></div>
       }
-      <h3 className='game_question'>{activeGenre === 'artist' ?
-        'Кто автор этой Картины?' :
-        'В каком году была нарисова эта картина?'}</h3>
+      <div className='game_content_wrapper'>
+        <div className='game_content'>
+          <h3 className='game_question'>{activeGenre === 'artist' ?
+            'Кто автор этой Картины?' :
+            'В каком году была нарисова эта картина?'}</h3>
 
-      <div className='game_picture_wrapper'>
-        <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
-          <Loader />
+          <div className='game_picture_wrapper'>
+            <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
+              <Loader />
+            </div>
+            <Image path={image} alt={pictureName} />
+            <div style={isReady ? { opacity: '1' } : { opacity: "0" }}
+              className='answer_tabs' >
+              {answerTabs.map((el, i) =>
+                <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
+              )}
+            </div>
+          </div>
+          <div className='answers_btn'>
+            {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
+          </div>
         </div>
-        <Image path={image} alt={pictureName} />
-        <div style={isReady ? { opacity: '1' } : { opacity: "0" }}
-          className='answer_tabs' >
-          {answerTabs.map((el, i) =>
-            <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
-          )}
-        </div>
-      </div>
-      <div className='answers_btn'>
-        {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
       </div>
     </div>
   )
