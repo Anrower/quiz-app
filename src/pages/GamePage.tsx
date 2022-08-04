@@ -77,7 +77,7 @@ const GamePage = () => {
     }
     setTimeout(() => {
       dispatch(updateIsReady(true))
-    }, 550)
+    }, 480)
   }, [dispatch, round, activeGenre])
 
   const exitGameHandler = () => {
