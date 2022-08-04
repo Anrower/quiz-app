@@ -1,5 +1,5 @@
 .timer {
-  padding-top: 2rem;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 712px;
+  width: 600px;
   height: 6px;
   background-color: gray;
   border-radius: 4px;
@@ -42,6 +42,17 @@
   line-height: 28px;
   text-align: center;
   color: #FFFFFF;
+}
+
+@media only screen and (max-width: 769px) {
+  .timer {
+    padding: 0.5rem 1rem 0;
+    gap: 0.5rem;
+  }
+
+  .timer_line {
+    width: 415px;
+  }
 }
 
 @media only screen and (max-width: 519px) {

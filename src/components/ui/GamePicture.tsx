@@ -2,7 +2,6 @@ import './gamePicture.css'
 interface Iprops {
   path: string,
   alt: string,
-  style?: any,
 }
 
 export const Image = (props: Iprops) => {

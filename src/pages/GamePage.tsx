@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateRightAnswer, updateAnswerBtns,
   updateCorrectInfo, updateCorrectAnswer,
-  openPopup, updateTimerAnimation, updateIsReady
+  openPopup, updateTimerAnimation, updateIsReady,
 } from '../store/slices/gameSlice';
 import { updateIsQuitState } from "../store/slices/popUpSlice";
 import { toggleTimerActive } from "../store/slices/settingSlice"
@@ -153,17 +153,16 @@ const GamePage = () => {
         'В каком году была нарисова эта картина?'}</h3>
 
       <div className='game_picture_wrapper'>
-        {isReady ?
-          <>
-            <Image style={isReady ? { opacity: '1' } : { opacity: '0' }} path={image} alt={pictureName} />
-            <div className='answer_tabs'>
-              {answerTabs.map((el, i) =>
-                <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
-              )}
-            </div>
-          </> :
+        <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
           <Loader />
-        }
+        </div>
+        <Image path={image} alt={pictureName} />
+        <div className='answer_tabs'>
+          {answerTabs.map((el, i) =>
+            <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
+          )}
+        </div>
+
       </div>
       <div className='answers_btn'>
         {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}

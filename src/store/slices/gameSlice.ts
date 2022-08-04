@@ -65,5 +65,5 @@ export const gameSlice = createSlice({
 
 export default gameSlice.reducer
 export const {
-  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer, updateIsReady
+  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer, updateIsReady,
 } = gameSlice.actions
