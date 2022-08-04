@@ -40,8 +40,8 @@
 .answer_tabs {
   display: flex;
   justify-content: space-between;
-  position: fixed;
-  top: 615px;
+  position: absolute;
+  bottom: 10px;
   width: 300px;
   height: 27px;
   background-color: rgba(128, 128, 128, 0.4);
@@ -70,6 +70,12 @@
   justify-content: space-around;
 }
 
+@media only screen and (max-width: 875px) {
+  .answers_btn {
+    justify-content: center;
+  }
+}
+
 @media only screen and (max-width: 769px) {
   .answers_btn {
     padding: 0 40px;
@@ -78,10 +84,6 @@
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
-  }
-
-  .answer_tabs {
-    top: 555px
   }
 
   .game_question {
@@ -127,7 +129,6 @@
   }
 
   .answer_tabs {
-    top: 395px;
     width: 250px;
     height: 23px;
     background-color: rgba(128, 128, 128, 0.4);
