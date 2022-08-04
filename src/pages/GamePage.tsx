@@ -77,7 +77,7 @@ const GamePage = () => {
     }
     setTimeout(() => {
       dispatch(updateIsReady(true))
-    }, 300)
+    }, 250)
   }, [dispatch, round, activeGenre])
 
   const exitGameHandler = () => {
@@ -155,7 +155,7 @@ const GamePage = () => {
       <div className='game_picture_wrapper'>
         {isReady ?
           <>
-            <Image path={image} alt={pictureName} />
+            <Image style={isReady ? { opacity: '1' } : { opacity: '0' }} path={image} alt={pictureName} />
             <div className='answer_tabs'>
               {answerTabs.map((el, i) =>
                 <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
