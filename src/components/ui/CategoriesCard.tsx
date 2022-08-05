@@ -5,7 +5,8 @@ import { NavLink } from 'react-router-dom';
 import artist from '../../images/pictures/artist.jpg'
 import year from '../../images/pictures/108.jpg'
 import { RootState } from "../../store";
-import { getTenUniqData, createAuthorAnswerBtns } from '../../handler/dataWorker'
+import { updateAllRoundsData } from '../../store/slices/gameSlice'
+import { getTenUniqData } from '../../handler/dataWorker'
 
 interface Iprops {
   title: string,
@@ -50,21 +51,20 @@ export default function CategoriesCard(props: Iprops) {
   const createGame = () => {
     dispatch(updateActiveGenre(title))
     const data = getTenUniqData()
-    const rightAnswerValue = data[0].author
-    const Btns = createAuthorAnswerBtns(rightAnswerValue)
+    dispatch(updateAllRoundsData(data))
   }
 
   return (
-    // <NavLink to='game' onClick={createGame} >
-    <div className='card' onClick={createGame}>
-      <div className='card_header'>
-        <h3>{getRusTitle(title)}</h3>
-        <p className='card_stats'>
-          <span>{genreStats}</span>/<span>10</span>
-        </p>
+    <NavLink to='game' onClick={createGame} >
+      <div className='card' onClick={createGame}>
+        <div className='card_header'>
+          <h3>{getRusTitle(title)}</h3>
+          <p className='card_stats'>
+            <span>{genreStats}</span>/<span>10</span>
+          </p>
+        </div>
+        <img className='card_image' style={genreStats === 0 ? { filter: 'grayscale(100%)' } : {}} src={img} alt={title} />
       </div>
-      <img className='card_image' style={genreStats === 0 ? { filter: 'grayscale(100%)' } : {}} src={img} alt={title} />
-    </div>
-    // </ NavLink>
+    </ NavLink>
   );
 }

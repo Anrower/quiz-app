@@ -1,9 +1,9 @@
 import { pictureJsonType } from '../model/models';
 import data from '../picture.json';
-const temp = [...data]
+// const parse: pictureJsonType[] = JSON.parse(data)
+const temp: pictureJsonType[] = [...data]
 
 export const getTenUniqData = () => {
-  // const temp = [...data];
   const gameContainer = []
   while (gameContainer.length < 10) {
     const randomnumber = Math.floor(Math.random() * temp.length)
@@ -22,10 +22,19 @@ const createGameAuthor = () => {
 }
 
 const getUniqueAuthorNames = () => {
-  let result = data.map(function (el) {
+  let result = temp.map(function (el) {
     return el.author
   });
+  // const uniqVal: string[] = []
+  // while (result.length !== 181) {
+  //   const tem: any = result.pop()
+  //   if (uniqVal.indexOf(tem) === -1) {
+  //     uniqVal.push(tem);
+  //   }
+  // }
+  // console.log(uniqVal)
   const uniqueNames = new Set(result)
+  // console.log(result)
   return Array.from(uniqueNames);
 }
 
@@ -40,10 +49,12 @@ function shuffle(array: string[]) {
 
 export const createAuthorAnswerBtns = (exception: string) => {
   const result: string[] = [];
-  const uniqAuthors = getUniqueAuthorNames();
+  let uniqAuthors = getUniqueAuthorNames();
   const exeptPosition = uniqAuthors.indexOf(exception);
   const removeExteption = uniqAuthors.splice(exeptPosition, 1)
-  result.push(...removeExteption)
+  console.log(`Кого нужно убрат из массива${removeExteption}`)
+  result.push(exception)
+
   while (result.length < 4) {
     const randomnumber = Math.floor(Math.random() * uniqAuthors.length);
     let removed: string[] = uniqAuthors.splice(randomnumber, 1)

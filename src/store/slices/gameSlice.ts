@@ -7,10 +7,11 @@ interface GameState {
 
 const initialState: GameState = {
   game: {
+    allRoundsData: [],
     isReady: false,
     roundTab: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     roundAnswers: [],
-    round: 1,
+    round: 0,
     rightAnswer: '',
     isCorrectAnswer: false,
     answerBtns: ['', '', '', ''],
@@ -42,8 +43,11 @@ export const gameSlice = createSlice({
       state.game.correctInfo = { ...action.payload }
     },
     nextRound(state) {
-      state.game.roundTab[state.game.round - 1] = 1
+      state.game.roundTab[state.game.round] = 1
       state.game.round += 1
+    },
+    updateLastTab(state) {
+      state.game.roundTab[9] = 1
     },
     resetRound(state) {
       state.game = initialState.game
@@ -60,10 +64,13 @@ export const gameSlice = createSlice({
     updateIsReady(state, action: PayloadAction<boolean>) {
       state.game.isReady = action.payload
     },
+    updateAllRoundsData(state, action: PayloadAction<pictureJsonType[]>) {
+      state.game.allRoundsData = { ...action.payload }
+    },
   }
 })
 
 export default gameSlice.reducer
 export const {
-  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer, updateIsReady,
+  updateRightAnswer, updateCorrectAnswer, updateAnswerBtns, updateCorrectInfo, nextRound, resetRound, openPopup, updateTimerAnimation, updateRoundAnswer, updateIsReady, updateAllRoundsData, updateLastTab
 } = gameSlice.actions

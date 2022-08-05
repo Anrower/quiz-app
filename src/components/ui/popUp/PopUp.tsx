@@ -4,7 +4,7 @@ import { Image } from '../GamePicture'
 import PrimaryBtn from '../PrimaryBtn'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound, updateIsReady } from '../../../store/slices/gameSlice';
+import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound, updateIsReady, updateLastTab } from '../../../store/slices/gameSlice';
 import { toggleTimerActive, updateTimerCurrentSec } from '../../../store/slices/settingSlice';
 import { updateResulText, updateResultAnswer, updateIsQuitState } from '../../../store/slices/popUpSlice';
 import { updateGenreStat } from '../../../store/slices/genreSlice';
@@ -32,6 +32,7 @@ const PopUp = () => {
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
   const isQuitState = useSelector<RootState, boolean>((state) => state.popup.popUp.isQuit);
   const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
 
   let genreStat = useSelector<RootState, object>((state) => state.genre.genre.genreStat);
 
@@ -62,7 +63,7 @@ const PopUp = () => {
     dispatch(updateTimerAnimation('running'))
     dispatch(toggleTimerActive(true))
     updateGenStat()
-    if (round < 11) {
+    if (totalAnswerCount !== 9) {
       dispatch(nextRound())
     }
     dispatch(updateIsReady(false))
@@ -84,7 +85,7 @@ const PopUp = () => {
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(updateTimerAnimation('running'))
     dispatch(toggleTimerActive(true))
-    dispatch(resetRound())
+    dispatch(resetRound()) // TODO получить данные
     navigate('/')
   }
 
@@ -112,10 +113,14 @@ const PopUp = () => {
     dispatch(updateIsQuitState(false))
   }
 
+  const answerCount = (arr: boolean[] | number[]) => {  //TODO Вынести в хэндлер
+    const number = arr.map((el) => el ? 1 : 0)
+      .reduce<number>((acc, cur) => acc + cur, 0);
+    return number
+  }
 
-  const rightAnswerCount = roundAnswers.map((el) => el ? 1 : 0)
-    .reduce<number>((acc, cur) => acc + cur, 0);
-
+  const rightAnswerCount = answerCount(roundAnswers)
+  const totalAnswerCount = answerCount(answerTabs)
 
 
   const updateGenStat = useCallback(() => {
@@ -128,10 +133,8 @@ const PopUp = () => {
   }, [activeGenre, rightAnswerCount, dispatch, genreStat]);
 
   useEffect(() => {
-    if (round === 11) {
+    if (totalAnswerCount === 9) {
       updateGenStat()
-      console.log(rightAnswerCount);
-
       switch (rightAnswerCount) {
         case 10:
           dispatch(updateResulText('Grand result'))
@@ -148,12 +151,12 @@ const PopUp = () => {
       }
     }
 
-  }, [round])
+  }, [round, totalAnswerCount])
 
   return (
     <div className='pop-up'>
       <div className='pop-up_body'>
-        {round === 11 ?
+        {totalAnswerCount === 9 ?
           <>
             <div className='pop-up_image_wrapper'>
               <img
