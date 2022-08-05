@@ -1,9 +1,5 @@
 import { pictureJsonType } from '../model/models';
 import data from '../picture.json';
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
-import { updateCorrectAnswer } from '../store/slices/gameSlice';
-import { toggleTimerActive } from "../store/slices/settingSlice"
 
 export const getAuthorsNames = () => {
   const getUniqueAuthorNames = (json: pictureJsonType[]) => {
@@ -103,18 +99,6 @@ export const getfilterByYear = (year: string) => {
   return filterByYear(year, data)
 }
 
-export const useCheckAnswer = (answer: string | null) => {
-  const dispatch = useDispatch()
-  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.rightAnswer);
-  if (rightAnswerValue === answer) {
-    dispatch(updateCorrectAnswer(true))
-    dispatch(toggleTimerActive(false))
-  } else {
-    dispatch(updateCorrectAnswer(false))
-    dispatch(toggleTimerActive(false))
-  }
-  return
-}
 
 
 

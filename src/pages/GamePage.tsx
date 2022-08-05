@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect } from 'react';
 import { Image } from '../components/ui/GamePicture';
 import Timer from '../components/ui/Timer'
@@ -15,8 +14,10 @@ import Loader from '../components/ui/loader/Loader';
 import './gamePage.css'
 import '../components/navigation.css'
 import Audio, { AudioType } from 'ts-audio';
+import { getTenUniqData } from '../handler/dataWorker';
 import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear }
   from '../handler/handler';
+import { } from '../handler/dataWorker'
 import AnswerBtn from '../components/ui/AnswerBtn';
 import PopUp from '../components/ui/popup/PopUp';
 import wrongMusic from '../sounds/wrong.mp3'
@@ -30,51 +31,54 @@ const GamePage = () => {
   const tab_btn = 'tab_btn';
   const answered_tab = tab_btn + ' right_answered_tab';
 
+  //game data
   const answerBtns = useSelector<RootState, string[]>((state) => state.game.game.answerBtns);
+  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.rightAnswer);
+  const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
+  const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
+
+  //config
   const showTimer = useSelector<RootState, boolean>((state) => state.settings.setting.showTimer);
   const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
   const round = useSelector<RootState, number>((state) => state.game.game.round);
-  const rightAnswerValue = useSelector<RootState, string>((state) => state.game.game.rightAnswer);
   const popUpIsOpen = useSelector<RootState, boolean>((state) => state.game.game.popUpIsOpen);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
-  const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
-  const pictureName = useSelector<RootState, string>((state) => state.game.game.correctInfo.name);
-  const image = useSelector<RootState, string>((state) => state.game.game.correctInfo.imageNum);
-  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const isReady = useSelector<RootState, boolean>((state) => state.game.game.isReady);
+
+  //music
+  const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
+  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
 
   useEffect(() => {
 
     if (round === 11) {
       dispatch(openPopup(true));
     }
-    if (round && activeGenre === 'artist') {
 
+    if (round && activeGenre === 'artist') {
       //!Получаем 4 кнопки с именами авторов и диспатчим кнопки ответов
       const tempArrBtn = [...get4UniqAuthor()]
       dispatch(updateAnswerBtns(tempArrBtn))
-
       const ranVal = Math.floor(Math.random() * tempArrBtn.length)
       //!Выбираем рандомного автора в качестве правильного ответа и диспатчим данные 
       const tempDataByAuthor = getfilterByAuthorName(tempArrBtn[ranVal])
       const correctAnwser = tempDataByAuthor[0].author
       const correctData = tempDataByAuthor[0];
-
       dispatch(updateRightAnswer(correctAnwser))
       dispatch(updateCorrectInfo(correctData))
+
     } else {
       const tempArrBtn = [...get4UniqYear()]
       dispatch(updateAnswerBtns(tempArrBtn))
-
       const ranVal = Math.floor(Math.random() * tempArrBtn.length)
       //!Выбираем рандомного автора в качестве правильного ответа и диспатчим данные 
       const tempDataByAuthor = getfilterByYear(tempArrBtn[ranVal])
       const correctAnwser = tempDataByAuthor[0].year
       const correctData = tempDataByAuthor[0];
-
       dispatch(updateRightAnswer(correctAnwser))
       dispatch(updateCorrectInfo(correctData))
     }
+
     setTimeout(() => {
       dispatch(updateIsReady(true))
     }, 420)
