@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Image } from '../components/ui/GamePicture';
 import Timer from '../components/ui/Timer'
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateRightAnswer, updateAnswerBtns,
   updateCorrectInfo, updateCorrectAnswer,
-  openPopup, updateTimerAnimation, updateIsReady, updateLastTab,
+  openPopup, updateTimerAnimation, updateIsReady, updateAllRoundsData,
 
 } from '../store/slices/gameSlice';
 import { updateIsQuitState } from "../store/slices/popUpSlice";
@@ -15,9 +15,7 @@ import Loader from '../components/ui/loader/Loader';
 import './gamePage.css'
 import '../components/navigation.css'
 import Audio, { AudioType } from 'ts-audio';
-import { getTenUniqData, createAuthorAnswerBtns } from '../handler/dataWorker';
-import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear }
-  from '../handler/handler';
+import { getTenUniqData, createAuthorAnswerBtns, createYearAnswerBtns } from '../handler/dataWorker';
 import { } from '../handler/dataWorker'
 import AnswerBtn from '../components/ui/AnswerBtn';
 import PopUp from '../components/ui/popup/PopUp';
@@ -42,6 +40,7 @@ const GamePage = () => {
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
   const data = useSelector<RootState, pictureJsonType[]>((state) => state.game.game.allRoundsData);
 
+
   //config visual
   const showTimer = useSelector<RootState, boolean>((state) => state.settings.setting.showTimer);
   const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
@@ -52,32 +51,36 @@ const GamePage = () => {
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
   const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
 
-  useEffect(() => {
+  // const createGame = useCallback(() => {
+  //   const tenRounds = getTenUniqData()
+  //   return tenRounds
+  // }, [activeGenre, dispatch])
 
+
+  useEffect(() => {
+    // if (round === 0) {
+    //   const tenRoundsData = createGame()
+    //   dispatch(updateAllRoundsData(tenRoundsData))
+    // }
+    dispatch(updateCorrectInfo(data[round]))
     if (activeGenre === 'artist') {
-      dispatch(updateCorrectInfo(data[round]))
       const rightAuthor = data[round].author
       dispatch(updateRightAnswer(rightAuthor))
       const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
-      console.log(tempArrBtn);
       dispatch(updateAnswerBtns(tempArrBtn))
 
-
-    } else {
-      // const tempArrBtn = [...get4UniqYear()]
-      // dispatch(updateAnswerBtns(tempArrBtn))
-      // const ranVal = Math.floor(Math.random() * tempArrBtn.length)
-      // const tempDataByAuthor = getfilterByYear(tempArrBtn[ranVal])
-      // const correctAnwser = tempDataByAuthor[0].year
-      // const correctData = tempDataByAuthor[0];
-      // dispatch(updateRightAnswer(correctAnwser))
-      // dispatch(updateCorrectInfo(correctData))
+    } else if (activeGenre === 'year') {
+      const rightYear = data[round].year
+      dispatch(updateRightAnswer(rightYear))
+      const tempArrBtn = createYearAnswerBtns(rightYear)
+      dispatch(updateAnswerBtns(tempArrBtn))
     }
 
     setTimeout(() => {
       dispatch(updateIsReady(true))
     }, 420)
   }, [dispatch, round, activeGenre, data])
+
 
   const exitGameHandler = () => {
     dispatch(toggleTimerActive(false))

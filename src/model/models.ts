@@ -35,7 +35,9 @@ export interface IGamge {
   correctInfo: pictureJsonType,
   round: number,
   popUpIsOpen: boolean,
-  timerAnimation: 'running' | 'paused'
+  timerAnimation: 'running' | 'paused',
+  rightAnswerCount: number,
+  totalAnswerCount: number,
 }
 export interface IpopUp {
   resultText: string,

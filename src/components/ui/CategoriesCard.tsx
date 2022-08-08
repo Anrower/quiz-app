@@ -48,15 +48,15 @@ export default function CategoriesCard(props: Iprops) {
   const genreStats = genreStat[title as ObjectKey]
 
 
-  const createGame = () => {
+  const createGame = (title: string) => {
     dispatch(updateActiveGenre(title))
     const data = getTenUniqData()
     dispatch(updateAllRoundsData(data))
   }
 
   return (
-    <NavLink to='game' onClick={createGame} >
-      <div className='card' onClick={createGame}>
+    <NavLink to='game'>
+      <div className='card' onClick={() => createGame(title)}>
         <div className='card_header'>
           <h3>{getRusTitle(title)}</h3>
           <p className='card_stats'>

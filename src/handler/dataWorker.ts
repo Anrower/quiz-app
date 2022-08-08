@@ -1,6 +1,5 @@
 import { pictureJsonType } from '../model/models';
 import data from '../picture.json';
-// const parse: pictureJsonType[] = JSON.parse(data)
 const temp: pictureJsonType[] = [...data]
 
 export const getTenUniqData = () => {
@@ -13,29 +12,20 @@ export const getTenUniqData = () => {
   return gameContainer;
 }
 
-const createGameAuthor = () => {
-  return {
-    allRoundsData: [{}], // массив объектов с правильными данными
-    roundAnswers: ['...'], // кнопки ответов
-
-  }
-}
-
 const getUniqueAuthorNames = () => {
   let result = temp.map(function (el) {
     return el.author
   });
-  // const uniqVal: string[] = []
-  // while (result.length !== 181) {
-  //   const tem: any = result.pop()
-  //   if (uniqVal.indexOf(tem) === -1) {
-  //     uniqVal.push(tem);
-  //   }
-  // }
-  // console.log(uniqVal)
   const uniqueNames = new Set(result)
-  // console.log(result)
   return Array.from(uniqueNames);
+}
+
+const getUniqueYears = () => {
+  let result = temp.map(function (el) {
+    return el.year
+  });
+  const uniqueYear = new Set(result)
+  return Array.from(uniqueYear);
 }
 
 //!Тасование Фишера Йетса
@@ -52,7 +42,6 @@ export const createAuthorAnswerBtns = (exception: string) => {
   let uniqAuthors = getUniqueAuthorNames();
   const exeptPosition = uniqAuthors.indexOf(exception);
   const removeExteption = uniqAuthors.splice(exeptPosition, 1)
-  console.log(`Кого нужно убрат из массива${removeExteption}`)
   result.push(exception)
 
   while (result.length < 4) {
@@ -62,6 +51,22 @@ export const createAuthorAnswerBtns = (exception: string) => {
   }
   return shuffle(result);
 }
+
+export const createYearAnswerBtns = (exception: string) => {
+  const result: string[] = [];
+  let uniqYears = getUniqueYears();
+  const exeptPosition = uniqYears.indexOf(exception);
+  const removeExteption = uniqYears.splice(exeptPosition, 1)
+  result.push(exception)
+
+  while (result.length < 4) {
+    const randomnumber = Math.floor(Math.random() * uniqYears.length);
+    let removed: string[] = uniqYears.splice(randomnumber, 1)
+    result.push(...removed)
+  }
+  return shuffle(result);
+}
+
 
 
 

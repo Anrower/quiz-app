@@ -4,10 +4,11 @@ import { Image } from '../GamePicture'
 import PrimaryBtn from '../PrimaryBtn'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound, updateIsReady, updateLastTab } from '../../../store/slices/gameSlice';
+import { nextRound, openPopup, updateTimerAnimation, updateRoundAnswer, resetRound, updateIsReady, updateLastTab, updateTotalAnswerCount, updateRightAnswerCount, updateAllRoundsData } from '../../../store/slices/gameSlice';
 import { toggleTimerActive, updateTimerCurrentSec } from '../../../store/slices/settingSlice';
 import { updateResulText, updateResultAnswer, updateIsQuitState } from '../../../store/slices/popUpSlice';
-import { updateGenreStat } from '../../../store/slices/genreSlice';
+import { updateActiveGenre, updateGenreStat } from '../../../store/slices/genreSlice';
+import { getTenUniqData } from '../../../handler/dataWorker'
 import grandResult_img from "../../../images/ui_styles/grand_result.svg"
 import gameOver_img from "../../../images/ui_styles/game_over.svg"
 import congrats_img from "../../../images/ui_styles/congratulations.svg"
@@ -33,18 +34,61 @@ const PopUp = () => {
   const isQuitState = useSelector<RootState, boolean>((state) => state.popup.popUp.isQuit);
   const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
   const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
+  const rightAnswerCount = useSelector<RootState, number>((state) => state.game.game.rightAnswerCount);
+  const totalAnswerCount = useSelector<RootState, number>((state) => state.game.game.totalAnswerCount);
 
   let genreStat = useSelector<RootState, object>((state) => state.genre.genre.genreStat);
 
-  const getVolumeValue = () => {
-    return Number(volumeValue) / 100
-  }
+  const updateGenStat = useCallback(() => {
+    type ObjectKey = keyof typeof genreStat;
+    const genreStatResult = {
+      ...genreStat, [activeGenre as ObjectKey]: rightAnswerCount
+    }
+    console.log(genreStatResult);
+    dispatch(updateGenreStat(genreStatResult))
+    return
+  }, [activeGenre, rightAnswerCount, dispatch, genreStat]);
 
   useEffect(() => {
     dispatch(updateTimerAnimation('paused'));
     dispatch(toggleTimerActive(false));
     dispatch(updateRoundAnswer(isCorrect));
   }, [dispatch, isCorrect])
+
+  useEffect(() => {
+    if (round === 9) {
+      const answerCount = (arr: boolean[] | number[]) => {  //TODO Вынести в хэндлер
+        const number = arr.map((el) => el ? 1 : 0)
+          .reduce<number>((acc, cur) => acc + cur, 0);
+        return number
+      }
+      const rightAC = answerCount(roundAnswers)
+      const totalAC = answerCount(answerTabs)
+      console.log(rightAC)
+      dispatch(updateTotalAnswerCount(totalAC))
+      dispatch(updateRightAnswerCount(rightAC))
+      updateGenStat()
+      console.log(rightAnswerCount);
+      switch (rightAC) {
+        case 10:
+          dispatch(updateResulText('Grand result'))
+          dispatch(updateResultAnswer('Congratsulations'))
+          return
+        case 0:
+          dispatch(updateResulText('Game over'))
+          dispatch(updateResultAnswer('Play agin?'))
+          return
+        default:
+          dispatch(updateResulText('Congratulations!'))
+          dispatch(updateResultAnswer(`${rightAC}`))
+          return
+      }
+    }
+  }, [dispatch, round, roundAnswers, answerTabs, rightAnswerCount])
+
+  const getVolumeValue = () => {
+    return Number(volumeValue) / 100
+  }
 
   const wrongStyle = 'pop-up_answer-indicator  pop-up_wrong-answer'
   const rightStyle = 'pop-up_answer-indicator pop-up_right-answer'
@@ -77,15 +121,16 @@ const PopUp = () => {
     dispatch(updateTimerAnimation('running'))
     dispatch(toggleTimerActive(true))
     dispatch(resetRound())
+    const data = getTenUniqData()
+    dispatch(updateAllRoundsData(data))
   }
 
   const playAgainNo = () => {
     clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
-    dispatch(updateTimerAnimation('running'))
     dispatch(toggleTimerActive(true))
-    dispatch(resetRound()) // TODO получить данные
+    dispatch(resetRound())
     navigate('/')
   }
 
@@ -112,46 +157,6 @@ const PopUp = () => {
     playAgainNo()
     dispatch(updateIsQuitState(false))
   }
-
-  const answerCount = (arr: boolean[] | number[]) => {  //TODO Вынести в хэндлер
-    const number = arr.map((el) => el ? 1 : 0)
-      .reduce<number>((acc, cur) => acc + cur, 0);
-    return number
-  }
-
-  const rightAnswerCount = answerCount(roundAnswers)
-  const totalAnswerCount = answerCount(answerTabs)
-
-
-  const updateGenStat = useCallback(() => {
-    type ObjectKey = keyof typeof genreStat;
-    const genreStatResult = {
-      ...genreStat, [activeGenre as ObjectKey]: rightAnswerCount
-    }
-    dispatch(updateGenreStat(genreStatResult))
-    return
-  }, [activeGenre, rightAnswerCount, dispatch, genreStat]);
-
-  useEffect(() => {
-    if (totalAnswerCount === 9) {
-      updateGenStat()
-      switch (rightAnswerCount) {
-        case 10:
-          dispatch(updateResulText('Grand result'))
-          dispatch(updateResultAnswer('Congratsulations'))
-          return
-        case 0:
-          dispatch(updateResulText('Game over'))
-          dispatch(updateResultAnswer('Play agin?'))
-          return
-        default:
-          dispatch(updateResulText('Congratulations!'))
-          dispatch(updateResultAnswer(`${rightAnswerCount}`))
-          return
-      }
-    }
-
-  }, [round, totalAnswerCount])
 
   return (
     <div className='pop-up'>

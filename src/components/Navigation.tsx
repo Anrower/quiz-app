@@ -8,7 +8,6 @@ const Navigation = (props: NavProps) => {
   // const navigate = useNavigate();
   const hasWindow = typeof window !== 'undefined';
   const windowWidth = hasWindow ? window.innerWidth : 520;
-  console.log(windowWidth)
   const { context } = props;
 
   return (

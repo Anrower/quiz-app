@@ -1,18 +1,28 @@
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Navigation from '../components/Navigation';
 import CategoriesCard from '../components/ui/CategoriesCard';
 import MobileNavigation from '../components/MobileNavigation';
 import { resetRound } from '../store/slices/gameSlice';
+import { getTenUniqData } from '../handler/dataWorker'
+import { updateAllRoundsData } from '../store/slices/gameSlice'
 import "./categoriesPage.css"
+import { RootState } from "../store";
+import { toggleTimerActive, updateTimerCurrentSec } from '../store/slices/settingSlice';
 
 const CategoriesPage = () => {
   const dispatch = useDispatch()
+  const timerAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
 
   useEffect(() => {
+    dispatch(updateTimerCurrentSec(timerAnswerValue))
+    dispatch(toggleTimerActive(true))
     dispatch(resetRound())
+    const data = getTenUniqData()
+    dispatch(updateAllRoundsData(data))
   }, [dispatch])
+
 
   const categoriesArr = ['artist', 'year',]
 
