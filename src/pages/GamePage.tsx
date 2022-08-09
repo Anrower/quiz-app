@@ -11,7 +11,7 @@ import Audio, { AudioType } from 'ts-audio';
 import { get4UniqAuthor, getfilterByAuthorName, get4UniqYear, getfilterByYear }
   from '../handler/handler';
 import AnswerBtn from '../components/ui/AnswerBtn';
-import PopUp from '../components/ui/popUp/PopUp';
+import PopUp from '../components/ui/popup/PopUp';
 import wrongMusic from '../sounds/wrong.mp3'
 import rightMusic from '../sounds/right.mp3'
 const GamePage = () => {
@@ -101,7 +101,11 @@ const GamePage = () => {
 
   return (
     <div className='game' key={round}>
-      {popUpIsOpen ? <PopUp /> : null}
+      {
+        popUpIsOpen ?
+          <PopUp /> : <div className='timer_plug close'></div>
+      }
+
       {
         showTimer ?
           <Timer /> :
@@ -122,6 +126,7 @@ const GamePage = () => {
       <div className='answers_btn'>
         {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
       </div>
+
     </div>
   )
 }

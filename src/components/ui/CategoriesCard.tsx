@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import artist from '../../images/pictures/artist.jpg'
 import year from '../../images/pictures/108.jpg'
 import { RootState } from "../../store";
-import { valueToPercent } from '@mui/base';
 
 interface Iprops {
   title: string,

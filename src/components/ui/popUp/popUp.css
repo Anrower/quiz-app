@@ -10,7 +10,6 @@
 
 .pop-up_body {
   display: flex;
-  /* min-height: 565px; */
   flex-direction: column;
   position: absolute;
   width: 500px;
@@ -93,7 +92,7 @@
 .pop-up_result_image-info>span {
   font-weight: 700;
   font-size: 82px;
-  text-transform: uppercase;
+  text-decoration: uppercase;
 }
 
 .pop-up_result_btn-wrapper {
