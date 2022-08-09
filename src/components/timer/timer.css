@@ -1,0 +1,77 @@
+.timer {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.timer_line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  height: 6px;
+  background-color: gray;
+  border-radius: 4px;
+}
+
+.current_time {
+  width: 0%;
+  height: 6px;
+  background-color: blue;
+  border-radius: 4px;
+  animation-name: fillingLine;
+  animation-timing-function: linear;
+  animation-fill-mode: forward;
+}
+
+.blink {
+  animation: blink2 1s linear infinite;
+}
+
+@keyframes blink2 {
+  100% {
+    color: #cc3300;
+  }
+}
+
+@keyframes fillingLine {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.timer_seconds>span {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 28px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+@media only screen and (max-width: 769px) {
+  .timer {
+    padding: 0.5rem 1rem 0;
+    gap: 0.5rem;
+  }
+
+  .timer_line {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 519px) {
+  .timer {
+    padding: 0.25rem 1rem 0;
+    gap: 0.5rem;
+  }
+
+  .timer_line {
+    width: 240px;
+  }
+}

@@ -7,10 +7,16 @@ interface GenreState {
 
 const initialState: GenreState = {
   genre: {
-    activeGenre: 'artist',
+    activeGenre: '',
     genreStat: {
       artist: 0,
       year: 0,
+      romanticism: 0,
+      symbolism: 0,
+      baroque: 0,
+      rococo: 0,
+      realism: 0,
+      impressionism: 0,
     }
   }
 }
