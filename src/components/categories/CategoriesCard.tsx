@@ -79,6 +79,15 @@ export default function CategoriesCard(props: Iprops) {
           </p>
         </div>
         <img className='card_image' style={genreStats === 0 ? { filter: 'grayscale(100%)' } : {}} src={img} alt={title} />
+        {/* {
+          genreStats > 0 ? */}
+        <div className='card_btn'>
+          <span className='card_btn_again_img'></span>
+          <span className='card_btn_again_tetx'>Сыграть снова?</span>
+        </div>
+        {/* : null
+        } */}
+
       </div>
     </ NavLink>
   );

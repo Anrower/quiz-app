@@ -7,6 +7,43 @@
   z-index: 2;
 }
 
+.card:hover .card_btn {
+  opacity: 1;
+}
+
+.card_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 10px;
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  background-color: #1976d2;
+  width: 100%;
+  height: 50px;
+  opacity: 0;
+  border: 1px solid #1976d2;
+  border-radius: 0 0 20px 20px;
+  transition: all .4s ease;
+
+}
+
+.card_btn_again_tetx {
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.card_btn_again_img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  background-repeat: no-repeat;
+  background-image: url(../../images/ui_styles/again.svg);
+}
+
 .card_header {
   font-style: normal;
   font-weight: 500;
@@ -57,5 +94,20 @@
     width: 150px;
     height: 184px;
     margin-top: 1rem;
+  }
+
+  .card_btn {
+    justify-content: space-between;
+    padding: 4px 8px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .card_btn_again_tetx {
+    font-size: 0.85rem;
+    line-height: 0.85rem;
+  }
+
+  .card_btn_again_img {
+    transform: scale(0.8, 0.8);
   }
 }
