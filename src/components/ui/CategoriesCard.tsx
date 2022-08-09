@@ -1,17 +1,20 @@
-import './categoriesCard.css'
+import './categoriesCard.css';
 import { useDispatch, useSelector } from "react-redux";
 import { updateActiveGenre } from '../../store/slices/genreSlice';
 import { NavLink } from 'react-router-dom';
-import artist from '../../images/pictures/artist.jpg'
-import year from '../../images/pictures/108.jpg'
-import { RootState } from "../../store";
-import { updateAllRoundsData } from '../../store/slices/gameSlice'
-import { getTenUniqData } from '../../handler/dataWorker'
+import artist from '../../images/pictures/artist.jpg';
+import year from '../../images/pictures/108.jpg';
+import realism from '../../images/pictures/0.jpg';
+import impressionism from '../../images/pictures/1.jpg';
 
-interface Iprops {
-  title: string,
-  onClick?: () => void,
-}
+import symbolism from '../../images/pictures/88.jpg';
+import romanticism from '../../images/pictures/13.jpg';
+import baroque from '../../images/pictures/8.jpg';
+import rococo from '../../images/pictures/16.jpg';
+import { RootState } from "../../store";
+import { updateAllRoundsData } from '../../store/slices/gameSlice';
+import { getTenUniqData, getTenUniqDataByStyle, getRusTitle } from '../../handler/dataWorker';
+import { useEffect } from 'react';
 
 const getImg = (value: string) => {
   switch (value) {
@@ -19,21 +22,27 @@ const getImg = (value: string) => {
       return artist
     case 'year':
       return year
+    case 'realism':
+      return realism
+    case 'impressionism':
+      return impressionism
+    case 'symbolism':
+      return symbolism
+    case 'romanticism':
+      return romanticism
+    case 'baroque':
+      return baroque
+    case 'rococo':
+      return rococo
     default:
       return artist
   }
-}
+};
 
-const getRusTitle = (value: string) => {
-  switch (value) {
-    case 'artist':
-      return 'Художник'
-    case 'year':
-      return "Год"
-    default:
-      return
-  }
-}
+interface Iprops {
+  title: string,
+  onClick?: () => void,
+};
 
 export default function CategoriesCard(props: Iprops) {
 
@@ -47,11 +56,19 @@ export default function CategoriesCard(props: Iprops) {
   const img = getImg(title);
   const genreStats = genreStat[title as ObjectKey]
 
-
   const createGame = (title: string) => {
-    dispatch(updateActiveGenre(title))
-    const data = getTenUniqData()
-    dispatch(updateAllRoundsData(data))
+
+    dispatch(updateActiveGenre(title));
+    title = getRusTitle(title);
+
+    if ((title === 'Художник') || (title === 'Год')) {
+      const data = getTenUniqData();
+      dispatch(updateAllRoundsData(data));
+    } else {
+      const data = getTenUniqDataByStyle(title);
+      dispatch(updateAllRoundsData(data));
+    }
+
   }
 
   return (

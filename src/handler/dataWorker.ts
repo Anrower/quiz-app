@@ -12,6 +12,19 @@ export const getTenUniqData = () => {
   return gameContainer;
 }
 
+export const getTenUniqDataByStyle = (genre: string) => {
+  const filtredData = temp.filter((el) => {
+    return el.style === genre;
+  })
+  const gameContainer = [];
+  while (gameContainer.length < 10) {
+    const randomnumber = Math.floor(Math.random() * filtredData.length);
+    let removed = filtredData.splice(randomnumber, 1);
+    gameContainer.push(...removed);
+  }
+  return gameContainer;
+}
+
 const getUniqueAuthorNames = () => {
   let result = temp.map(function (el) {
     return el.author
@@ -66,6 +79,31 @@ export const createYearAnswerBtns = (exception: string) => {
   }
   return shuffle(result);
 }
+
+export const getRusTitle = (value: string) => {
+  switch (value) {
+    case 'artist':
+      return 'Художник'
+    case 'year':
+      return "Год"
+    case 'realism':
+      return "Реализм"
+    case 'impressionism':
+      return "Импрессионизм"
+    case 'symbolism':
+      return "Символизм"
+    case 'romanticism':
+      return "Романтизм"
+    case 'baroque':
+      return "Барокко"
+    case 'rococo':
+      return "Рококо"
+    default:
+      return 'Художник'
+  }
+};
+
+
 
 
 

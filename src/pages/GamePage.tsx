@@ -63,22 +63,24 @@ const GamePage = () => {
     //   dispatch(updateAllRoundsData(tenRoundsData))
     // }
     dispatch(updateCorrectInfo(data[round]))
-    if (activeGenre === 'artist') {
-      const rightAuthor = data[round].author
-      dispatch(updateRightAnswer(rightAuthor))
-      const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
-      dispatch(updateAnswerBtns(tempArrBtn))
-
-    } else if (activeGenre === 'year') {
+    if (activeGenre === 'year') {
       const rightYear = data[round].year
       dispatch(updateRightAnswer(rightYear))
       const tempArrBtn = createYearAnswerBtns(rightYear)
       dispatch(updateAnswerBtns(tempArrBtn))
+    } else {
+      const rightAuthor = data[round].author
+      dispatch(updateRightAnswer(rightAuthor))
+      const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
+      dispatch(updateAnswerBtns(tempArrBtn))
     }
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       dispatch(updateIsReady(true))
     }, 420)
+    return function cleanUP() {
+      clearTimeout(timer);
+    }
   }, [dispatch, round, activeGenre, data])
 
 

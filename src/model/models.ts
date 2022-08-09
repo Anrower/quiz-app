@@ -10,19 +10,22 @@ export interface ISetting {
 export interface Igenre {
   activeGenre: string,
   genreStat: {
-    portrait?: number,
-    nude?: number,
-    surrealism?: number,
-    landscape?: number,
+    romanticism?: number,
+    symbolism?: number,
+    impressionism?: number,
+    realism?: number,
     artist?: number,
     year?: number,
+    baroque?: number,
+    rococo?: number,
   }
 }
 export interface pictureJsonType {
   author: string,
   name: string,
   year: string,
-  imageNum: string
+  imageNum: string,
+  style: string,
 }
 export interface IGamge {
   allRoundsData: pictureJsonType[],

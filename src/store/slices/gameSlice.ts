@@ -19,7 +19,8 @@ const initialState: GameState = {
       author: '',
       name: '',
       year: '',
-      imageNum: ''
+      imageNum: '',
+      style: '',
     },
     popUpIsOpen: false,
     timerAnimation: 'running',
