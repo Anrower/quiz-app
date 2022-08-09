@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import GamePage from './pages/GamePage';
-import MainPage from './pages/MainPage';
-import SettingPage from './pages/SettingPage';
-import CategoriesPage from './pages/CategoriesPage';
+import GamePage from './pages/gamePage/GamePage';
+import MainPage from './pages/mainPage/MainPage';
+import SettingPage from './pages/settingPage/SettingPage';
+import CategoriesPage from './pages/categoriesPage/CategoriesPage';
 
 function App() {
   return (
