@@ -6,12 +6,12 @@ interface SettingState {
 
 const initialState: SettingState = {
   setting: {
-    volumeRange: '40',
-    isSound: true,
+    volumeRange: '0',
+    isSound: false,
     showTimer: true,
-    timeAnswerSec: 100,
+    timeAnswerSec: 20,
     timerActive: true,
-    timerCurrentSec: 100,
+    timerCurrentSec: 20,
     soundBtnActiveClass: 'sound-btn_active'
   }
 }
