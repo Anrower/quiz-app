@@ -31,6 +31,7 @@
 }
 
 .categories_cards {
+  margin: 0.5rem 1rem;
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -44,7 +45,7 @@
   }
 
   .card_header {
-    font-size: 14px;
+    font-size: 0.93rem;
     line-height: 16px;
   }
 

@@ -41,6 +41,8 @@ const CategoriesPage = () => {
   return (
     <div className="categories">
       < Navigation context={'categoriesPage'} />
+
+      <div className='categories_title'>Категории</div>
       <div className='categories_content flex flex-col mt-32 max-w-7xl gap-20'>
         <div className='categories_cards'>
           {categoriesArr.map(jenre => {

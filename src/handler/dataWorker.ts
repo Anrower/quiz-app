@@ -103,6 +103,16 @@ export const getRusTitle = (value: string) => {
   }
 };
 
+export const getPageName = (value: string) => {
+  switch (value) {
+    case 'settingPage':
+      return 'Настройки'
+    case 'categoriesPage':
+      return "Категории"
+    default:
+      return
+  }
+}
 
 
 

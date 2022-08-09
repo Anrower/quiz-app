@@ -158,9 +158,15 @@ const PopUp = () => {
     dispatch(updateIsQuitState(false))
   }
 
+  const hasWindow = typeof window !== 'undefined';
+  const windowHeight = hasWindow ? window.innerHeight : 600;
+  const windowWidth = hasWindow ? window.innerWidth : 520;
+  const popUpHeight = (windowWidth <= 551) ? 320 : 651
+  const popUpTop = ((windowHeight - popUpHeight) / 2.5)
+
   return (
     <div className='pop-up'>
-      <div className='pop-up_body'>
+      <div className='pop-up_body' style={windowWidth <= 551 ? { top: `${popUpTop}px` } : {}}>
         {totalAnswerCount === 9 ?
           <>
             <div className='pop-up_image_wrapper'>

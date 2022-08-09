@@ -94,6 +94,11 @@
       gap: 40px;
     }
 
+    .text_style {
+      font-size: 1.4rem;
+      line-height: 1.5rem;
+    }
+
     .sound_on:hover,
     .sound_off:hover {
       background: #1976d2;

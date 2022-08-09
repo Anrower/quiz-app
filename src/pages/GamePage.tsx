@@ -51,17 +51,7 @@ const GamePage = () => {
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
   const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
 
-  // const createGame = useCallback(() => {
-  //   const tenRounds = getTenUniqData()
-  //   return tenRounds
-  // }, [activeGenre, dispatch])
-
-
   useEffect(() => {
-    // if (round === 0) {
-    //   const tenRoundsData = createGame()
-    //   dispatch(updateAllRoundsData(tenRoundsData))
-    // }
     dispatch(updateCorrectInfo(data[round]))
     if (activeGenre === 'year') {
       const rightYear = data[round].year
@@ -85,18 +75,18 @@ const GamePage = () => {
 
 
   const exitGameHandler = () => {
-    dispatch(toggleTimerActive(false))
-    dispatch(updateTimerAnimation('paused'))
-    dispatch(updateIsQuitState(true))
-    dispatch(openPopup(true))
+    dispatch(toggleTimerActive(false));
+    dispatch(updateTimerAnimation('paused'));
+    dispatch(updateIsQuitState(true));
+    dispatch(openPopup(true));
   }
 
   const getVolumeValue = () => {
-    return Number(volumeValue) / 100
+    return Number(volumeValue) / 100;
   }
 
   const playSound = (sound: AudioType) => {
-    sound.play()
+    sound.play();
   }
 
   const checkAnswer = (answer: string) => {
@@ -111,7 +101,7 @@ const GamePage = () => {
       loop: false,
       volume: getVolumeValue(),
       preload: true,
-    })
+    });
     const clickSound = Audio({
       file: clickMusic,
       loop: false,
@@ -123,7 +113,7 @@ const GamePage = () => {
     if (rightAnswerValue === answer) {
       dispatch(updateCorrectAnswer(true));
       if (isSound) {
-        playSound(rightSound)
+        playSound(rightSound);
       }
 
     } else {

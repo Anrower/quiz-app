@@ -8,6 +8,8 @@
   min-height: 100vh;
 }
 
+
+
 .pop-up_body {
   display: flex;
   flex-direction: column;
@@ -143,7 +145,7 @@
   }
 }
 
-@media only screen and (max-width: 519px) {
+@media only screen and (max-width: 551px) {
   .pop-up_body {
     width: 300px;
     top: 10%;

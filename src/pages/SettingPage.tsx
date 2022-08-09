@@ -38,9 +38,6 @@ const SettingPage = () => {
     dispatch(decreaseTimeAnswer())
   }
 
-  const hasWindow = typeof window !== 'undefined';
-  const windowWidth = hasWindow ? window.innerWidth : 520;
-
   return (
     <div className="setting_page">
       <Navigation context={'settingPage'} />
@@ -95,7 +92,7 @@ const SettingPage = () => {
 
         </div>
       </div>
-      {windowWidth <= 519 ? <MobileNavigation context={'settingPage'} /> : null}
+      {/* {windowWidth <= 519 ? <MobileNavigation context={'settingPage'} /> : null} */}
     </div >
   )
 }
