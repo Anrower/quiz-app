@@ -6,7 +6,7 @@ import { RootState } from "../../store";
 import { updateAllRoundsData } from '../../store/slices/gameSlice';
 import { getTenUniqData, getTenUniqDataByStyle, getRusTitle } from '../../handler/dataWorker';
 
-import artist from '../../images/pictures/artist.jpg';
+import pellMell from '../../images/pictures/artist.jpg';
 import year from '../../images/pictures/108.jpg';
 import realism from '../../images/pictures/0.jpg';
 import impressionism from '../../images/pictures/1.jpg';
@@ -14,11 +14,12 @@ import symbolism from '../../images/pictures/88.jpg';
 import romanticism from '../../images/pictures/13.jpg';
 import baroque from '../../images/pictures/8.jpg';
 import rococo from '../../images/pictures/16.jpg';
+import renaissance from '../../images/pictures/26.jpg';
 
 const getImg = (value: string) => {
   switch (value) {
-    case 'artist':
-      return artist
+    case 'pell-mell':
+      return pellMell
     case 'year':
       return year
     case 'realism':
@@ -33,8 +34,10 @@ const getImg = (value: string) => {
       return baroque
     case 'rococo':
       return rococo
+    case 'renaissance':
+      return renaissance
     default:
-      return artist
+      return pellMell
   }
 };
 
@@ -61,7 +64,7 @@ export default function CategoriesCard(props: Iprops) {
     localStorage.setItem('activeGenre', localActiveGenre);
     title = getRusTitle(title);
 
-    if ((title === 'Художник') || (title === 'Год')) {
+    if (title === 'Вперемешку') {
       const data = getTenUniqData();
       dispatch(updateAllRoundsData(data));
       const localData = JSON.stringify(data);

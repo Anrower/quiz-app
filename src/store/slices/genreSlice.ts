@@ -9,7 +9,7 @@ const initialState: GenreState = {
   genre: {
     activeGenre: '',
     genreStat: {
-      artist: 0,
+      pellMell: 0,
       year: 0,
       romanticism: 0,
       symbolism: 0,
@@ -17,6 +17,7 @@ const initialState: GenreState = {
       rococo: 0,
       realism: 0,
       impressionism: 0,
+      renaissance: 0,
     }
   }
 }

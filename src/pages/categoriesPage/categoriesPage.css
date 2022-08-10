@@ -1,8 +1,14 @@
 @media only screen and (min-width: 800px) {
   .categories {
+    display: flex;
+    flex-direction: column;
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
+  }
+
+  .categories__wrapper {
+    flex: 1 0 auto
   }
 
   .categories_title {
@@ -14,6 +20,9 @@
   }
 
   .categories_cards {
+    padding: 5px 20px;
+    margin: 0 auto;
+    max-width: 1000px;
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
@@ -21,9 +30,15 @@
   }
 }
 
+@media only screen and (max-width: 908px) {
+  .categories_cards {
+    max-width: 560px;
+  }
+}
+
 @media only screen and (max-width: 799px) {
   .categories_title {
-    margin: 1.25rem 2rem;
+    margin: 1.25rem 2.5rem;
     color: #fff;
     font-weight: 500;
     font-size: 1.75rem;

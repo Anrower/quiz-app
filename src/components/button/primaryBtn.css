@@ -55,6 +55,12 @@
   background: #FFBCA2;
 }
 
+.setting-btn {
+  width: 200px;
+  font-size: 19px;
+  line-height: 19px;
+}
+
 .pop-up_btn-short {
   width: 210px;
 }
@@ -72,6 +78,12 @@
     width: 220px;
     height: 56px;
     border-radius: 56px;
+  }
+
+  .setting-btn {
+    width: 200px;
+    font-size: 18px;
+    line-height: 18px;
   }
 
   .round_btn {
@@ -120,6 +132,12 @@
     width: 165px;
     height: 48px;
     border-radius: 48px;
+  }
+
+  .setting-btn {
+    width: 140px;
+    font-size: 14px;
+    line-height: 14px;
   }
 
   .answer_btn {

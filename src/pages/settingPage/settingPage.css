@@ -1,7 +1,13 @@
   .setting_page {
+    display: flex;
+    flex-direction: column;
     max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
+  }
+
+  .setting_page__content {
+    flex: 1 0 auto;
   }
 
   .text_style {
@@ -54,10 +60,6 @@
     background: #1976d2;
   }
 
-  .setting_btn {
-    align-items: center;
-  }
-
 
   @media only screen and (max-width: 799px) {
     .setting_content {
@@ -90,8 +92,8 @@
     .setting_content {
       align-items: stretch;
       max-width: 300px;
-      margin: 20px auto;
-      gap: 40px;
+      margin: 10px auto;
+      gap: 35px;
     }
 
     .text_style {

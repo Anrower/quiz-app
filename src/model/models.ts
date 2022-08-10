@@ -14,10 +14,11 @@ export interface Igenre {
     symbolism?: number,
     impressionism?: number,
     realism?: number,
-    artist?: number,
+    pellMell?: number,
     year?: number,
     baroque?: number,
     rococo?: number,
+    renaissance?: number,
   }
 }
 export interface pictureJsonType {

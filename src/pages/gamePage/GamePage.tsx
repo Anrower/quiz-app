@@ -1,6 +1,7 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Image } from '../../components/game/GamePicture';
 import Timer from '../../components/timer/Timer';
+import Footer from '../../components/footer/Footer';
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateRightAnswer, updateAnswerBtns,
@@ -14,7 +15,7 @@ import Loader from '../../components/loader/Loader';
 import './gamePage.css'
 import '../../components/navigation/navigation.css'
 import Audio, { AudioType } from 'ts-audio';
-import { createAuthorAnswerBtns, createYearAnswerBtns, getTenUniqData, getRusTitle, getTenUniqDataByStyle } from '../../handler/dataWorker';
+import { createAuthorAnswerBtns, createYearAnswerBtns } from '../../handler/dataWorker';
 import { } from '../../handler/dataWorker'
 import AnswerBtn from '../../components/button/AnswerBtn';
 import PopUp from '../../components/popup/PopUp';
@@ -60,17 +61,10 @@ const GamePage = () => {
   useEffect(() => {
     try {
       dispatch(updateCorrectInfo(data[round]))
-      if (activeGenre === 'year') {
-        const rightYear = data[round].year
-        dispatch(updateRightAnswer(rightYear))
-        const tempArrBtn = createYearAnswerBtns(rightYear)
-        dispatch(updateAnswerBtns(tempArrBtn))
-      } else {
-        const rightAuthor = data[round].author
-        dispatch(updateRightAnswer(rightAuthor))
-        const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
-        dispatch(updateAnswerBtns(tempArrBtn))
-      }
+      const rightAuthor = data[round].author
+      dispatch(updateRightAnswer(rightAuthor))
+      const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
+      dispatch(updateAnswerBtns(tempArrBtn))
 
       const timer = setTimeout(() => {
         dispatch(updateIsReady(true))
@@ -150,38 +144,59 @@ const GamePage = () => {
 
   return (
     <div className='game' key={round}>
-      {
-        popUpIsOpen ?
-          <PopUp /> : null
-      }
-      {
-        showTimer ?
-          <Timer /> :
-          <div className='timer_plug close' onClick={exitGameHandler}></div>
-      }
-      <div className='game_content_wrapper'>
-        <div className='game_content'>
-          <h3 className='game_question'>{activeGenre === 'artist' ?
-            'Кто автор этой Картины?' :
-            'В каком году была нарисова эта картина?'}</h3>
-
-          <div className='game_picture_wrapper'>
-            <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
-              <Loader />
+      <div className='game-page__wrapper'>
+        {
+          popUpIsOpen ?
+            <PopUp /> : null
+        }
+        {
+          showTimer ?
+            <Timer /> :
+            <div className='timer_plug close' onClick={exitGameHandler}></div>
+        }
+        <div className='game_content_wrapper'>
+          <div className='game_content'>
+            <h3 className='game_question'>Кто автор этой Картины?</h3>
+            <div className='game_picture_wrapper'>
+              <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
+                <Loader />
+              </div>
+              <Image path={image} alt={pictureName} />
+              <div style={isReady ? { opacity: '1' } : { opacity: "0" }}
+                className='answer_tabs' >
+                {answerTabs.map((el, i) =>
+                  <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
+                )}
+              </div>
             </div>
-            <Image path={image} alt={pictureName} />
-            <div style={isReady ? { opacity: '1' } : { opacity: "0" }}
-              className='answer_tabs' >
-              {answerTabs.map((el, i) =>
-                <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
-              )}
+            <div className='answers_btn'>
+              {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
             </div>
-          </div>
-          <div className='answers_btn'>
-            {answerBtns.map(el => <AnswerBtn title={el} key={el} onClick={checkAnswer} />)}
           </div>
         </div>
+        {/* <div className='game_content_wrapper'>
+          <div className='game_content'>
+            <h3 className='game_question'>
+              {`Какую картину нарисовал ${round[author]}`}
+            </h3>
+            <div className='game_picture_wrapper'>
+              <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
+                <Loader />
+              </div>
+              <div className='answers_btn'>
+                {answerBtns.map(el => <Image path={image} alt={pictureName} key={image} onClick={checkAnswer} />)}
+              </div>
+              <div style={isReady ? { opacity: '1' } : { opacity: "0" }}
+                className='answer_tabs' >
+                {answerTabs.map((el, i) =>
+                  <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div> */}
       </div>
+      <Footer />
     </div>
   )
 }

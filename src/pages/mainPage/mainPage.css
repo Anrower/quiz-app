@@ -1,4 +1,6 @@
 .mainPage {
+  display: flex;
+  flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
@@ -6,6 +8,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0% 0%
+}
+
+.mainPage__content {
+  flex: 1 0 auto;
 }
 
 

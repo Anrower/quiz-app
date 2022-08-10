@@ -1,0 +1,44 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 27px 32px;
+  min-height: 80px;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.footer__school-logo {
+  width: 85px;
+  height: 31px;
+  background-image: url(../../images/ui_styles/rs_school_js_logo.svg);
+}
+
+.footer__text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+}
+
+.footer__text>span {
+  margin-left: 60px;
+}
+
+
+
+@media only screen and (max-width: 519px) {
+  .footer {
+    min-height: 45px;
+    padding: 10px;
+  }
+
+  .footer__school-logo {
+    transform: scale(0.8, 0.8);
+  }
+
+  .footer__text>span {
+    margin-left: 20px;
+  }
+
+}

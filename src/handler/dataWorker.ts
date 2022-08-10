@@ -82,8 +82,8 @@ export const createYearAnswerBtns = (exception: string) => {
 
 export const getRusTitle = (value: string) => {
   switch (value) {
-    case 'artist':
-      return 'Художник'
+    case 'pell-mell':
+      return 'Вперемешку'
     case 'year':
       return "Год"
     case 'realism':
@@ -98,8 +98,10 @@ export const getRusTitle = (value: string) => {
       return "Барокко"
     case 'rococo':
       return "Рококо"
+    case 'renaissance':
+      return "Возрождение"
     default:
-      return 'Художник'
+      return 'Вперемешку'
   }
 };
 

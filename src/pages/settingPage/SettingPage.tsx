@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Navigation from "../../components/navigation/Navigation";
 import VolumeRange from "../../components/settings/VolumeRange";
 import GameTimeSwitcher from "../../components/settings/GameTimeSwitcher";
+import Footer from "../../components/footer/Footer";
 import './settingPage.css'
 import { RootState } from "../../store";
 import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer, resetSettings } from "../../store/slices/settingSlice";
@@ -35,6 +36,11 @@ const SettingPage = () => {
     dispatch(resetSettings())
   }
 
+  const saveSettings = () => {
+    const localSettings = JSON.stringify(allSettings);
+    localStorage.setItem('settings', localSettings);
+  }
+
   const minusTimeHandler = () => {
     if (timeAnswerValue <= 5) {
       return
@@ -44,62 +50,71 @@ const SettingPage = () => {
 
   return (
     <div className="setting_page">
-      <Navigation context={'settingPage'} />
-      <div className='setting_content flex flex-col mt-32 ml-28 max-w-lg gap-20'>
-        <div className="volume flex flex-col gap-4">
+      <div className="setting_page__content">
+        <Navigation context={'settingPage'} />
+        <div className='setting_content flex flex-col mt-16 ml-28 max-w-lg gap-20'>
+          <div className="volume flex flex-col gap-4">
 
-          <label>
-            <span className="text_style">Звук:</span>
-            <span className='text_style_value'>
-              {volumeRangeValue}
-            </span>
-            <VolumeRange />
-          </label>
-          <div className="flex justify-between">
-            <input
-              className={
-                `sound_off ${!isSound ?
+            <div className="flex flex-col gap-3">
+              <p>
+                <span className="text_style">Звук:</span>
+                <span className='text_style_value'>
+                  {volumeRangeValue}
+                </span>
+              </p>
+              <VolumeRange />
+            </div>
+            <div className="flex justify-between">
+              <input
+                className={
+                  `sound_off ${!isSound ?
+                    soundBtnActive :
+                    ''}`
+                }
+                type='button'
+                onClick={soundOffHandler}>
+              </input>
+              <input className={
+                `sound_on ${isSound ?
                   soundBtnActive :
                   ''}`
               }
-              type='button'
-              onClick={soundOffHandler}>
-            </input>
-            <input className={
-              `sound_on ${isSound ?
-                soundBtnActive :
-                ''}`
-            }
-              type='button'
-              onClick={soundOnHandler}></input>
-          </div>
-        </div>
-        <div className="time flex flex-col gap-4">
-          <p className="text_style">Время игры:</p>
-          <div className="text_style_value">
-            <GameTimeSwitcher />
-          </div>
-        </div>
-        <div className="timeToAnswer flex flex-col gap-4">
-          <p className="text_style">Время ответа:</p>
-          <div className="flex gap-4 items-center">
-            <div className='setting_btn flex gap-6'>
-              <PrimaryBtn title='-'
-                classes={'round_btn '}
-                onClick={minusTimeHandler}
-              />
-              <span className='text_style_value'>{timeAnswerValue}s</span>
-              <PrimaryBtn title='+'
-                classes={'round_btn '}
-                onClick={plusTimeHandler} />
+                type='button'
+                onClick={soundOnHandler}></input>
             </div>
           </div>
-        </div>
-        <div className="setting_btn flex justify-center">
-          <PrimaryBtn title='По умолчанию'
-            onClick={defaultSettings} />
+          <div className="time flex flex-col gap-3">
+            <p className="text_style">Время игры:</p>
+            <div className="text_style_value">
+              <GameTimeSwitcher />
+            </div>
+          </div>
+          <div className="timeToAnswer flex flex-col gap-3">
+            <p className="text_style">Время ответа:</p>
+            <div className="flex gap-4 items-center">
+              <div className='setting_btn flex gap-6'>
+                <PrimaryBtn title='-'
+                  classes={'round_btn '}
+                  onClick={minusTimeHandler}
+                />
+                <span className='text_style_value'>{timeAnswerValue}s</span>
+                <PrimaryBtn title='+'
+                  classes={'round_btn '}
+                  onClick={plusTimeHandler} />
+              </div>
+            </div>
+          </div>
+          <div className="setting-btn__container flex justify-between">
+            <PrimaryBtn title='По умолчанию'
+              classes="setting-btn "
+              onClick={defaultSettings} />
+            <PrimaryBtn title='Сохранить'
+              classes="setting-btn "
+              onClick={saveSettings} />
+          </div>
         </div>
       </div>
+      <Footer />
     </div >
   )
 }
