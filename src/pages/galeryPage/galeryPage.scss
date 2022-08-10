@@ -1,0 +1,12 @@
+.galery-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+
+  &.__grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 5vw;
+  }
+}

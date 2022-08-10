@@ -6,12 +6,12 @@ import clickSound from '../../sounds/click.mp3'
 
 interface buttonProps {
   title: string,
-  classes: string,
+  classes?: string,
   onClick?: any,
 }
 
 const PrimaryBtn = (props: buttonProps) => {
-  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const volumeValue = useSelector<RootState, number>((state) => state.settings.setting.volumeRange);
 
   const defaultClick = () => {
     const getVolumeValue = () => {

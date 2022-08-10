@@ -11,13 +11,13 @@ function valuetext(value: number) {
 
 export default function VolumeRange() {
 
-  const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const volumeRangeValue = useSelector<RootState, number>((state) => state.settings.setting.volumeRange);
   const dispatch = useDispatch();
 
 
   const updateRangeHandler = (e: Event) => {
-    const value = String((e.target as HTMLTextAreaElement).value)
-    if (value === '0') {
+    const value = Number((e.target as HTMLTextAreaElement).value)
+    if (value === 0) {
       dispatch(updateVolumeSwitch(false));
       dispatch(updateVolumeRange(value))
     } else {
@@ -29,9 +29,9 @@ export default function VolumeRange() {
   return (
     <Box sx={{ width: '100%' }}>
       <Slider
-        value={Number(volumeRangeValue)}
+        value={volumeRangeValue}
         aria-label="Volume"
-        defaultValue={Number(volumeRangeValue)}
+        defaultValue={volumeRangeValue}
         getAriaValueText={valuetext}
         color="primary"
         onChange={(e) => updateRangeHandler(e)}

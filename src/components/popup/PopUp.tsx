@@ -37,11 +37,10 @@ const PopUp = () => {
   const resultAnswer = useSelector<RootState, string | JSX.Element>((state) => state.popup.popUp.resultAnswer);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
   const isQuitState = useSelector<RootState, boolean>((state) => state.popup.popUp.isQuit);
-  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const volumeValue = useSelector<RootState, number>((state) => state.settings.setting.volumeRange);
   const answerTabs = useSelector<RootState, number[]>((state) => state.game.game.roundTab);
   const rightAnswerCount = useSelector<RootState, number>((state) => state.game.game.rightAnswerCount);
   const totalAnswerCount = useSelector<RootState, number>((state) => state.game.game.totalAnswerCount);
-
   let genreStat = useSelector<RootState, object>((state) => state.genre.genre.genreStat);
 
   const updateGenStat = useCallback(() => {
@@ -49,7 +48,6 @@ const PopUp = () => {
     const genreStatResult = {
       ...genreStat, [activeGenre as ObjectKey]: rightAnswerCount
     }
-    console.log(genreStatResult);
     dispatch(updateGenreStat(genreStatResult))
     return
   }, [activeGenre, rightAnswerCount, dispatch, genreStat]);
@@ -67,13 +65,13 @@ const PopUp = () => {
           .reduce<number>((acc, cur) => acc + cur, 0);
         return number
       }
+
       const rightAC = answerCount(roundAnswers)
       const totalAC = answerCount(answerTabs)
-      console.log(rightAC)
       dispatch(updateTotalAnswerCount(totalAC))
       dispatch(updateRightAnswerCount(rightAC))
       updateGenStat()
-      console.log(rightAnswerCount);
+
       switch (rightAC) {
         case 10:
           dispatch(updateResulText('Grand result'))
@@ -117,6 +115,8 @@ const PopUp = () => {
   }
 
   const playAgainYes = () => {
+    const genre = JSON.stringify(genreStat);
+    localStorage.setItem('genre', genre);
     clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
@@ -128,6 +128,8 @@ const PopUp = () => {
   }
 
   const playAgainNo = () => {
+    const genre = JSON.stringify(genreStat);
+    localStorage.setItem('genre', genre);
     clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))
@@ -137,6 +139,8 @@ const PopUp = () => {
   }
 
   const playNextQuiz = () => {
+    const genre = JSON.stringify(genreStat);
+    localStorage.setItem('genre', genre);
     clickSound.play()
     dispatch(openPopup(false))
     dispatch(updateTimerCurrentSec(timerAnswerValue))

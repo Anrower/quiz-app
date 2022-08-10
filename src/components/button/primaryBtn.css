@@ -159,5 +159,7 @@
 
   .pop-up_btn-short {
     width: 120px;
+    font-size: 14px;
+    line-height: 14px;
   }
 }

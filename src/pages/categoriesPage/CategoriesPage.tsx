@@ -9,6 +9,7 @@ import { updateAllRoundsData } from '../../store/slices/gameSlice'
 import "./categoriesPage.css"
 import { RootState } from "../../store";
 import { toggleTimerActive, updateTimerCurrentSec } from '../../store/slices/settingSlice';
+import { updateGenreStat } from '../../store/slices/genreSlice';
 
 const CategoriesPage = () => {
   const dispatch = useDispatch()
@@ -16,6 +17,10 @@ const CategoriesPage = () => {
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
 
   useEffect(() => {
+    const genre = localStorage.getItem('genre');
+    if (genre !== null) {
+      dispatch(updateGenreStat(JSON.parse(genre)))
+    }
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(toggleTimerActive(true))
     dispatch(resetRound())

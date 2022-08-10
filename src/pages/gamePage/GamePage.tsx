@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateRightAnswer, updateAnswerBtns,
   updateCorrectInfo, updateCorrectAnswer,
-  openPopup, updateTimerAnimation, updateIsReady,
+  openPopup, updateTimerAnimation, updateIsReady, updateAllRoundsData
 } from '../../store/slices/gameSlice';
 import { updateIsQuitState } from "../../store/slices/popUpSlice";
 import { toggleTimerActive } from "../../store/slices/settingSlice"
@@ -14,7 +14,7 @@ import Loader from '../../components/loader/Loader';
 import './gamePage.css'
 import '../../components/navigation/navigation.css'
 import Audio, { AudioType } from 'ts-audio';
-import { createAuthorAnswerBtns, createYearAnswerBtns } from '../../handler/dataWorker';
+import { createAuthorAnswerBtns, createYearAnswerBtns, getTenUniqData, getRusTitle, getTenUniqDataByStyle } from '../../handler/dataWorker';
 import { } from '../../handler/dataWorker'
 import AnswerBtn from '../../components/button/AnswerBtn';
 import PopUp from '../../components/popup/PopUp';
@@ -22,10 +22,11 @@ import wrongMusic from '../../sounds/wrong.mp3'
 import rightMusic from '../../sounds/right.mp3'
 import clickMusic from '../../sounds/click.mp3'
 import { pictureJsonType } from '../../model/models';
-
+import { updateActiveGenre } from '../../store/slices/genreSlice';
+import { useNavigate } from 'react-router-dom';
 
 const GamePage = () => {
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const tab_btn = 'tab_btn';
   const answered_tab = tab_btn + ' right_answered_tab';
@@ -47,29 +48,7 @@ const GamePage = () => {
 
   //music
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
-  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
-
-  useEffect(() => {
-    dispatch(updateCorrectInfo(data[round]))
-    if (activeGenre === 'year') {
-      const rightYear = data[round].year
-      dispatch(updateRightAnswer(rightYear))
-      const tempArrBtn = createYearAnswerBtns(rightYear)
-      dispatch(updateAnswerBtns(tempArrBtn))
-    } else {
-      const rightAuthor = data[round].author
-      dispatch(updateRightAnswer(rightAuthor))
-      const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
-      dispatch(updateAnswerBtns(tempArrBtn))
-    }
-
-    const timer = setTimeout(() => {
-      dispatch(updateIsReady(true))
-    }, 420)
-    return function cleanUP() {
-      clearTimeout(timer);
-    }
-  }, [dispatch, round, activeGenre, data])
+  const volumeValue = useSelector<RootState, number>((state) => state.settings.setting.volumeRange);
 
   const exitGameHandler = () => {
     dispatch(toggleTimerActive(false));
@@ -77,6 +56,46 @@ const GamePage = () => {
     dispatch(updateIsQuitState(true));
     dispatch(openPopup(true));
   }
+
+  useEffect(() => {
+    try {
+      dispatch(updateCorrectInfo(data[round]))
+      if (activeGenre === 'year') {
+        const rightYear = data[round].year
+        dispatch(updateRightAnswer(rightYear))
+        const tempArrBtn = createYearAnswerBtns(rightYear)
+        dispatch(updateAnswerBtns(tempArrBtn))
+      } else {
+        const rightAuthor = data[round].author
+        dispatch(updateRightAnswer(rightAuthor))
+        const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
+        dispatch(updateAnswerBtns(tempArrBtn))
+      }
+
+      const timer = setTimeout(() => {
+        dispatch(updateIsReady(true))
+      }, 420)
+      return function cleanUP() {
+        clearTimeout(timer);
+      }
+    } catch (error) {
+      const activeGenreLocal = localStorage.getItem('activeGenre');
+      const activeData = localStorage.getItem('data')
+
+      if (activeGenreLocal !== null && activeData !== null) {
+        const lActiveData = JSON.parse(activeData);
+        const lActiveGenre = JSON.parse(activeGenreLocal);
+        dispatch(updateActiveGenre(lActiveGenre))
+        dispatch(updateAllRoundsData(lActiveData))
+        navigate('/categories/game')
+      } else {
+        navigate('/categories/')
+      }
+    }
+
+  }, [round, activeGenre, data, dispatch, navigate])
+
+
 
   const getVolumeValue = () => {
     return Number(volumeValue) / 100;

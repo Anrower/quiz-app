@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../store";
 import clickSound from '../../sounds/click.mp3'
 
+
 const MainPage = () => {
-  const volumeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const volumeValue = useSelector<RootState, number>((state) => state.settings.setting.volumeRange);
+
   const playClick = () => {
 
     const getVolumeValue = () => {

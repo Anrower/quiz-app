@@ -6,7 +6,7 @@ interface SettingState {
 
 const initialState: SettingState = {
   setting: {
-    volumeRange: '0',
+    volumeRange: 0,
     isSound: false,
     showTimer: true,
     timeAnswerSec: 20,
@@ -20,15 +20,20 @@ export const settingSlice = createSlice({
   name: 'setting',
   initialState,
   reducers: {
-    updateVolumeRange(state, action: PayloadAction<string>) {
+    updateVolumeRange(state, action: PayloadAction<number>) {
       state.setting.volumeRange = action.payload
+    },
+    resetSettings(state) {
+      state.setting = initialState.setting
+    },
+    updateAllSettingState(state, action: PayloadAction<ISetting>) {
+      state.setting = action.payload
     },
     updateVolumeSwitch(state, action: PayloadAction<boolean>) {
       state.setting.isSound = action.payload;
     },
     updateTimerSwitch(state, action: PayloadAction<boolean>) {
       state.setting.showTimer = action.payload
-
     },
     increaseTimeAnswer(state) {
       state.setting.timeAnswerSec = state.setting.timeAnswerSec + 5
@@ -37,6 +42,9 @@ export const settingSlice = createSlice({
     decreaseTimeAnswer(state) {
       state.setting.timeAnswerSec = state.setting.timeAnswerSec - 5
       state.setting.timerCurrentSec -= 5
+    },
+    updateTimeAnswer(state, action: PayloadAction<number>) {
+      state.setting.timeAnswerSec = action.payload
     },
     toggleTimerActive(state, action: PayloadAction<boolean>) {
       state.setting.timerActive = action.payload
@@ -60,4 +68,7 @@ export const {
   toggleTimerActive,
   decrementTimerCurrentSec,
   updateTimerCurrentSec,
+  resetSettings,
+  updateAllSettingState,
+  updateTimeAnswer
 } = settingSlice.actions

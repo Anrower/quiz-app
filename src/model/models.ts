@@ -1,5 +1,5 @@
 export interface ISetting {
-  volumeRange: string,
+  volumeRange: number,
   isSound: boolean,
   showTimer: boolean,
   timeAnswerSec: number,

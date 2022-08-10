@@ -4,30 +4,35 @@ import VolumeRange from "../../components/settings/VolumeRange";
 import GameTimeSwitcher from "../../components/settings/GameTimeSwitcher";
 import './settingPage.css'
 import { RootState } from "../../store";
-import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer } from "../../store/slices/settingSlice";
+import { updateVolumeRange, updateVolumeSwitch, increaseTimeAnswer, decreaseTimeAnswer, resetSettings } from "../../store/slices/settingSlice";
 import PrimaryBtn from "../../components/button/PrimaryBtn";
 
 const SettingPage = () => {
 
-  const volumeRangeValue = useSelector<RootState, string>((state) => state.settings.setting.volumeRange);
+  const volumeRangeValue = useSelector<RootState, number>((state) => state.settings.setting.volumeRange);
   const isSound = useSelector<RootState, boolean>((state) => state.settings.setting.isSound);
   const timeAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
   const soundBtnActive = useSelector<RootState, string>((state) => state.settings.setting.soundBtnActiveClass);
+  const allSettings = useSelector<RootState, object>((state) => state.settings);
 
   const dispatch = useDispatch();
 
   const soundOffHandler = () => {
     dispatch(updateVolumeSwitch(false));
-    dispatch(updateVolumeRange('0'));
+    dispatch(updateVolumeRange(0));
   }
 
   const soundOnHandler = () => {
     dispatch(updateVolumeSwitch(true));
-    dispatch(updateVolumeRange('40'));
+    dispatch(updateVolumeRange(40));
   }
 
   const plusTimeHandler = () => {
     dispatch(increaseTimeAnswer())
+  }
+
+  const defaultSettings = () => {
+    dispatch(resetSettings())
   }
 
   const minusTimeHandler = () => {
@@ -89,7 +94,10 @@ const SettingPage = () => {
                 onClick={plusTimeHandler} />
             </div>
           </div>
-
+        </div>
+        <div className="setting_btn flex justify-center">
+          <PrimaryBtn title='По умолчанию'
+            onClick={defaultSettings} />
         </div>
       </div>
     </div >

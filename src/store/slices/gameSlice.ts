@@ -60,7 +60,6 @@ export const gameSlice = createSlice({
     },
     resetRound(state) {
       state.game = initialState.game
-
     },
     openPopup(state, action: PayloadAction<boolean>) {
       state.game.popUpIsOpen = action.payload
