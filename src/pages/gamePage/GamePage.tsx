@@ -62,18 +62,17 @@ const GamePage = () => {
   useLayoutEffect(() => {
     try {
       dispatch(updateCorrectInfo(data[round]))
-      if (gameType === 'byArtist') {
-        const rightAuthor = data[round].author
+      const rightAuthor = data[round].author
+
+      if (`${gameType}` === 'byArtist') {
         dispatch(updateRightAnswer(rightAuthor))
         const tempArrBtn = createAuthorAnswerBtns(rightAuthor)
         dispatch(updateAnswerBtns(tempArrBtn))
       } else {
-        const rightAuthor = data[round].author
         const rightImage = data[round].imageNum;
         dispatch(updateRightAnswer(rightImage));
         const tempArrImage = createImageAnswerBtns(rightImage, rightAuthor)
         dispatch(updateAnswerBtns(tempArrImage))
-        console.log(tempArrImage)
       }
 
 
@@ -172,7 +171,7 @@ const GamePage = () => {
             <Timer /> :
             <div className='timer_plug close' onClick={exitGameHandler}></div>
         }
-        {gameType === 'byArist' ?
+        {gameType === 'byArtist' ?
           <div className='game_content_wrapper'>
             <div className='game_content'>
               <h3 className='game_question'>Кто автор этой Картины?</h3>
