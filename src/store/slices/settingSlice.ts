@@ -6,6 +6,7 @@ interface SettingState {
 
 const initialState: SettingState = {
   setting: {
+    gameType: 'byArtist',
     volumeRange: 0,
     isSound: false,
     showTimer: true,
@@ -22,6 +23,9 @@ export const settingSlice = createSlice({
   reducers: {
     updateVolumeRange(state, action: PayloadAction<number>) {
       state.setting.volumeRange = action.payload
+    },
+    updateGameType(state, action: PayloadAction<string>) {
+      state.setting.gameType = action.payload
     },
     resetSettings(state) {
       state.setting = initialState.setting
@@ -70,5 +74,6 @@ export const {
   updateTimerCurrentSec,
   resetSettings,
   updateAllSettingState,
-  updateTimeAnswer
+  updateTimeAnswer,
+  updateGameType,
 } = settingSlice.actions

@@ -88,6 +88,13 @@
   justify-content: space-around;
 }
 
+.answers_image {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
 @media only screen and (max-width: 875px) {
   .answers_btn {
     justify-content: center;
@@ -159,6 +166,7 @@
     background-color: #000;
   }
 
+
   .answer_tabs {
     width: 250px;
     height: 23px;
@@ -177,6 +185,13 @@
 
   .right_answered_tab {
     background-color: #1976d2;
+  }
+
+  .answers_image {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
   }
 }
 

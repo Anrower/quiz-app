@@ -50,11 +50,13 @@ function shuffle(array: string[]) {
   return array
 }
 
+
+
 export const createAuthorAnswerBtns = (exception: string) => {
   const result: string[] = [];
   let uniqAuthors = getUniqueAuthorNames();
   const exeptPosition = uniqAuthors.indexOf(exception);
-  const removeExteption = uniqAuthors.splice(exeptPosition, 1)
+  uniqAuthors.splice(exeptPosition, 1)
   result.push(exception)
 
   while (result.length < 4) {
@@ -65,11 +67,42 @@ export const createAuthorAnswerBtns = (exception: string) => {
   return shuffle(result);
 }
 
+
+const getImageByAuthor = (name: string) => {
+  let result = '';
+  const filtredData = temp.filter((el) => {
+    return el.author === name;
+  })
+  if (filtredData.length > 1) {
+    const randomnumber = Math.floor(Math.random() * filtredData.length);
+    result = filtredData[randomnumber].imageNum;
+  } else {
+    result = filtredData[0].imageNum
+  }
+  return result
+}
+
+
+export const createImageAnswerBtns = (exceptionImg: string, exceptionArtist: string) => {
+  const result: string[] = [];
+  let uniqAuthors = getUniqueAuthorNames();
+  const exeptPosition = uniqAuthors.indexOf(exceptionArtist);
+  uniqAuthors.splice(exeptPosition, 1)
+  result.push(exceptionImg)
+  while (result.length < 4) {
+    const randomnumber = Math.floor(Math.random() * uniqAuthors.length);
+    let removed: string[] = uniqAuthors.splice(randomnumber, 1)
+    let image = getImageByAuthor(removed[0])
+    result.push(image)
+  }
+  return shuffle(result);
+}
+
 export const createYearAnswerBtns = (exception: string) => {
   const result: string[] = [];
   let uniqYears = getUniqueYears();
   const exeptPosition = uniqYears.indexOf(exception);
-  const removeExteption = uniqYears.splice(exeptPosition, 1)
+  uniqYears.splice(exeptPosition, 1)
   result.push(exception)
 
   while (result.length < 4) {

@@ -4,3 +4,7 @@
   border-radius: 20px;
   margin: 0 auto;
 }
+
+.answer_image {
+  cursor: pointer;
+}

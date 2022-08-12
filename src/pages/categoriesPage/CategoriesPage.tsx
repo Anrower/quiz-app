@@ -17,6 +17,7 @@ const CategoriesPage = () => {
   const timerAnswerValue = useSelector<RootState, number>((state) => state.settings.setting.timeAnswerSec);
   const activeGenre = useSelector<RootState, string>((state) => state.genre.genre.activeGenre);
 
+
   useEffect(() => {
     const genre = localStorage.getItem('genre');
     if (genre !== null) {

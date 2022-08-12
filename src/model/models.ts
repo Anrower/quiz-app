@@ -1,4 +1,5 @@
 export interface ISetting {
+  gameType: string,
   volumeRange: number,
   isSound: boolean,
   showTimer: boolean,
