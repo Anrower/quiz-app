@@ -26,7 +26,7 @@ const CategoriesPage = () => {
     dispatch(updateTimerCurrentSec(timerAnswerValue))
     dispatch(toggleTimerActive(true))
     dispatch(resetRound())
-    if ((activeGenre === 'pell-mell') || (activeGenre === '')) {
+    if ((activeGenre === 'pellMell') || (activeGenre === '')) {
       const data = getTenUniqData();
       dispatch(updateAllRoundsData(data));
     } else {

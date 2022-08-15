@@ -4,8 +4,7 @@ import GamePage from './pages/gamePage/GamePage';
 import MainPage from './pages/mainPage/MainPage';
 import SettingPage from './pages/settingPage/SettingPage';
 import CategoriesPage from './pages/categoriesPage/CategoriesPage';
-
-// import GaleryPage from './pages/galeryPage/GaleryPage';
+import GaleryPage from './pages/galleryPage/GalleryPage';
 
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
         <Route path='/' element={<MainPage />}></Route>
         <Route path='setting' element={<SettingPage />} />
         <Route path='categories' element={<CategoriesPage />}></Route>
-        {/* <Route path='galery' element={<GaleryPage />}></Route> */}
+        <Route path='gallery' element={<GaleryPage />}></Route>
         <Route path='/categories/game' element={<GamePage />} ></Route>
       </Routes>
     </div>

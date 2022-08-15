@@ -1,6 +1,6 @@
 import { pictureJsonType } from '../model/models';
 import data from '../picture.json';
-const temp: pictureJsonType[] = [...data]
+export const temp: pictureJsonType[] = [...data]
 
 export const getTenUniqData = () => {
   const gameContainer = []

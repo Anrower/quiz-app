@@ -174,7 +174,7 @@ const GamePage = () => {
         {gameType === 'byArtist' ?
           <div className='game_content_wrapper'>
             <div className='game_content'>
-              <h3 className='game_question' key={'who is artist'}>Кто автор этой Картины?</h3>
+              <h3 className='game_question'>Кто автор этой Картины?</h3>
               <div className='game_picture_wrapper'>
                 <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
                   <Loader />
