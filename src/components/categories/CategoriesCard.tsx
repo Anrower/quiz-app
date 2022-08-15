@@ -18,7 +18,7 @@ import renaissance from '../../images/pictures/26.jpg';
 
 const getImg = (value: string) => {
   switch (value) {
-    case 'pell-mell':
+    case 'pellMell':
       return pellMell
     case 'year':
       return year

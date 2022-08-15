@@ -41,20 +41,6 @@
   border-radius: 20px;
 }
 
-.loader_wrapper {
-  position: absolute;
-  width: 180%;
-  top: auto;
-  background-color: #000;
-  z-index: 1;
-}
-
-@media only screen and (max-width: 905px) {
-  .loader_wrapper {
-    width: 175%;
-  }
-}
-
 .answer_tabs {
   display: flex;
   justify-content: space-between;
@@ -66,6 +52,24 @@
   padding: 6px;
   border: 1px solid rgba(128, 128, 128, 0.4);
   border-radius: 30px;
+}
+
+.loader_wrapper {
+  position: absolute;
+  width: 180%;
+  top: auto;
+  background-color: #000;
+  z-index: 1;
+}
+
+.answer_tabs_byImages {
+  bottom: -50px;
+}
+
+@media only screen and (max-width: 905px) {
+  .loader_wrapper {
+    width: 175%;
+  }
 }
 
 .tab_btn {

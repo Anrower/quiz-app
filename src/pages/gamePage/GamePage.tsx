@@ -168,13 +168,13 @@ const GamePage = () => {
         }
         {
           showTimer ?
-            <Timer /> :
+            <Timer key={'timer'} /> :
             <div className='timer_plug close' onClick={exitGameHandler}></div>
         }
         {gameType === 'byArtist' ?
           <div className='game_content_wrapper'>
             <div className='game_content'>
-              <h3 className='game_question'>Кто автор этой Картины?</h3>
+              <h3 className='game_question' key={'who is artist'}>Кто автор этой Картины?</h3>
               <div className='game_picture_wrapper'>
                 <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
                   <Loader />
@@ -206,7 +206,7 @@ const GamePage = () => {
                   {answerBtns.map(el => <Image path={el} alt={el} key={el} onClick={checkAnswer} addClass={'answer_image'} />)}
                 </div>
                 <div style={isReady ? { opacity: '1' } : { opacity: "0" }}
-                  className='answer_tabs' >
+                  className='answer_tabs answer_tabs_byImages' >
                   {answerTabs.map((el, i) =>
                     <div className={el ? answered_tab : tab_btn} key={i + 1}></div>
                   )}
@@ -215,7 +215,6 @@ const GamePage = () => {
             </div>
           </div>
         }
-
 
       </div>
       <Footer />

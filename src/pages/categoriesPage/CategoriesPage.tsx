@@ -37,7 +37,7 @@ const CategoriesPage = () => {
   }, [dispatch, activeGenre, timerAnswerValue])
 
 
-  const categoriesArr = ['pell-mell', 'romanticism', 'symbolism',
+  const categoriesArr = ['pellMell', 'romanticism', 'symbolism',
     'baroque', 'rococo', 'realism', 'impressionism', 'renaissance']
 
   const hasWindow = typeof window !== 'undefined';
