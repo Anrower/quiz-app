@@ -176,7 +176,7 @@ const GamePage = () => {
             <div className='game_content'>
               <h3 className='game_question'>Кто автор этой Картины?</h3>
               <div className='game_picture_wrapper'>
-                <div style={isReady ? { display: 'none' } : { display: 'contents' }} className='loader_wrapper'>
+                <div style={isReady ? { display: 'none' } : { display: 'content' }} className='loader_wrapper'>
                   <Loader />
                 </div>
                 <Image path={image} alt={pictureName} />

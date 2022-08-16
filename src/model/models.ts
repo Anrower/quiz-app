@@ -8,6 +8,14 @@ export interface ISetting {
   timerCurrentSec: number,
   soundBtnActiveClass: string,
 }
+
+export interface IGallery {
+  filter: string,
+  paginationStartValue: number,
+  paginationEndValue: number,
+  currentLoadedCards: pictureJsonType[],
+}
+
 export interface Igenre {
   activeGenre: string,
   genreStat: {

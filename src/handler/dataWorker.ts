@@ -1,6 +1,23 @@
 import { pictureJsonType } from '../model/models';
 import data from '../picture.json';
-export const temp: pictureJsonType[] = [...data]
+export const temp: pictureJsonType[] = [...data];
+
+export const filterByStyle = (style: string) => {
+  const filtredData = temp.filter((el) => {
+    return el.style === style
+  })
+  return filtredData;
+}
+
+export const initialData = () => {
+  const slice = temp.slice(0, 8);
+  return slice;
+}
+
+export const loadMore = (start: number, end: number) => {
+  const slice = temp.slice(start, end);
+  return slice;
+}
 
 export const getTenUniqData = () => {
   const gameContainer = []

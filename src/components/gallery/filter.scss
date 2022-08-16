@@ -1,0 +1,40 @@
+.filter {
+  margin: 0 auto;
+
+  div {
+    label {}
+
+    label:active {
+      border: none;
+    }
+
+    div:active {
+      border: none;
+
+      input {}
+
+      div {
+        color: red;
+      }
+
+      fieldset {}
+    }
+
+    div:hover,
+    div:active,
+    div:focus-visible {
+      border: none;
+      border-radius: 28px;
+      background-color: #fff;
+    }
+  }
+}
+
+.filter:hover {
+  border: none;
+  border-radius: 28px;
+}
+
+.filter:focus {
+  border: none;
+}

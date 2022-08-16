@@ -74,7 +74,7 @@ export const gameSlice = createSlice({
       state.game.isReady = action.payload
     },
     updateAllRoundsData(state, action: PayloadAction<pictureJsonType[]>) {
-      state.game.allRoundsData = { ...action.payload }
+      state.game.allRoundsData = [...action.payload]
     },
   }
 })
